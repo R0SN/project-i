@@ -1,6 +1,7 @@
 .container {
   padding: 50px;
   z-index: 1;
+  color: rgb(43, 45, 66);
 }
 
 .container p {
@@ -16,7 +17,6 @@
   border: none;
   cursor: pointer;
 }
-
 .logo {
   max-width: 100px;
   max-height: 50px;
@@ -37,12 +37,12 @@ img {
 }
 
 .img2 {
-  margin: 350px 0 0 300px;
+  margin: 250px 0 0 300px;
   transform: rotate(-10deg);
 }
 
 .img3 {
-  margin: 90px 0 0 800px;
+  margin: 90px 0 0 890px;
   transform: rotate(20deg);
 }
 

@@ -26,10 +26,18 @@ nav a:link,
 nav a:visited {
   text-decoration: none;
 }
-nav .logo-container{
+.logo-container{
   position: absolute;
-  left: 17%;
+  margin: 0 200px;
 }
 .logo{
   max-height: 50px;
+}
+.profile-icon{
+  position: absolute;
+  display: inline-block;
+  margin: 0 80px;
+}
+.profile{
+  max-height: 49px;
 }
