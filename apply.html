@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkillSprint</title>
+    <link rel="stylesheet" href="nav.css" />
+    <link rel="stylesheet" href="apply.css" />
+  </head>
+  <body>
+    <!-- ------------------- NAVIGATION BAR ---------------------------- -->
+    <nav>
+      <div class="logo-container">
+        <img src="images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo">
+      </div>
+      <a href="home.html" >Home</a>
+      <a href="service.html" >Services</a>
+      <a href="contact.html" >Contact</a>
+      <a href="apply.html" >Apply as a Worker</a>
+      <a href="signin.html" >Sign In</a>
+      <a href="signout.html" >Sign Out</a>
+    </nav>
+    <!-- ------------------- NAVIGATION BAR ---------------------------- -->
+
+    <div class="apply-container">
+      <h1>Apply as Skill Worker</h1>
+      <form action="process_application.php" method="post" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="skills">Skills:</label>
+        <input type="text" id="skills" name="skills" required>
+
+        <label for="certificate">Upload Certificate:</label>
+        <input type="file" id="certificate" name="certificate" accept=".pdf, .doc, .docx" required>
+
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+  </body>
+</html>
