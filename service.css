@@ -8,6 +8,7 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .card {
   height: 400px;
   width: 500px;
@@ -19,6 +20,7 @@
   z-index: 1;
   object-fit: cover;
 }
+
 .service-text {
   height: 405px;
   width: 500px;
@@ -27,7 +29,7 @@
   position: relative;
   background-color: rgba(0, 0, 0, 0.633);
   color: white;
-  margin: -405px 0 ;
+  margin: -405px 0;
   font-size: 30px;
   display: none;
   z-index: 2;
