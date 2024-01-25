@@ -22,11 +22,20 @@
     <a href="signin.html">Sign In</a>
     <a href="signout.html">Sign Out</a>
 
-    <div class="profile-icon">
+    <div class="profile-icon" onclick="toggleProfileContainer()">
       <img src="images/profile-user.png" alt="profile" class="profile" style="z-index: 1" />
     </div>
   </nav>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
+  <!-- Profile Container -->
+  <div class="profile-container" id="profileContainer">
+    <img src="images/profile-user.png" alt="profile" class="profile" />
+    <p>User Name</p>
+    <a href="#">Profile</a>
+    <a href="#">Settings</a>
+    <a href="#">Sign Out</a>
+  </div>
+  <!-- Profile Container -->
 
   <img src="images/home/david-pisnoy-46juD4zY1XA-unsplash.jpg" class="img1" height="400px" />
   <img src="images/home/frames-for-your-heart-iOLHAIaxpDA-unsplash.jpg" class="img2" height="400px" />
@@ -50,8 +59,6 @@
   <script>
     function goToPage() {
       var destinationPage = "service.html";
-
-      // Navigate to the specified page
       window.location.href = destinationPage;
     }
     function change(element) {
@@ -61,6 +68,10 @@
     function unchange(element) {
       element.style.backgroundColor = "#333";
       element.style.color = "white";
+    }
+    function toggleProfileContainer() {
+      var profileContainer = document.getElementById("profileContainer");
+      profileContainer.style.display = profileContainer.style.display === "none" ? "block" : "none";
     }
   </script>
 </body>
