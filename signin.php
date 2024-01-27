@@ -1,5 +1,5 @@
 <?php
-// signin.php
+// signup.php
 
 // Database connection parameters
 $servername = "localhost";
@@ -16,23 +16,21 @@ if ($conn->connect_error) {
 }
 
 // Get form data
+$username = $_POST['username'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-// Validate user credentials
-$sql = "SELECT * FROM serviceuser WHERE email = '$email'";
-$result = $conn->query($sql);
+// Hash the password
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    if (password_verify($password, $row['password'])) {
-        echo "Sign in successful. Welcome, " . $row['username'];
-        // Redirect to the user's dashboard or another page
-    } else {
-        echo "Invalid password. Please try again.";
-    }
+// Insert user data into the database
+$sql = "INSERT INTO serviceuser (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Sign up successful. Welcome, $username!";
+    // Redirect to the sign-in page or another page
 } else {
-    echo "User not found. Please check your email or password and try again.";
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
 // Close connection
