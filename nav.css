@@ -33,7 +33,7 @@ nav a:visited {
 
 .logo-container {
   position: absolute;
-  margin: 0 200px;
+  margin: 0 350px;
 }
 
 .logo {
@@ -43,7 +43,7 @@ nav a:visited {
 .profile-icon {
   position: absolute;
   display: inline-block;
-  margin: 0 80px;
+  margin: 0 100px;
 }
 
 .profile {

@@ -17,7 +17,6 @@
     </div>
     <a href="home.html">Home</a>
     <a href="service.html">Services</a>
-    <a href="contact.html">Contact</a>
     <a href="apply.html">Apply as a Worker</a>
     <a href="signin.html">Sign In</a>
     <a href="signout.html">Sign Out</a>
@@ -28,12 +27,9 @@
   </nav>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
   <!-- Profile Container -->
-  <div class="profile-container" id="profileContainer">
-    <img src="images/profile-user.png" alt="profile" class="profile" />
-    <p>User Name</p>
-    <a href="#">Profile</a>
-    <a href="#">Settings</a>
-    <a href="#">Sign Out</a>
+  <div class="profile-container" id="profileContainer" >
+    <!-- Empty profile container -->
+    <button onclick="redirectToSignIn()" onmouseover="change(this)" onmouseout="unchange(this)">Sign In</button>
   </div>
   <!-- Profile Container -->
 
@@ -61,17 +57,25 @@
       var destinationPage = "service.html";
       window.location.href = destinationPage;
     }
+
     function change(element) {
       element.style.backgroundColor = "white";
       element.style.color = "#333";
     }
+
     function unchange(element) {
       element.style.backgroundColor = "#333";
       element.style.color = "white";
     }
+
     function toggleProfileContainer() {
       var profileContainer = document.getElementById("profileContainer");
       profileContainer.style.display = profileContainer.style.display === "none" ? "block" : "none";
+    }
+
+    function redirectToSignIn() {
+      var signInPage = "signin.html";
+      window.location.href = signInPage;
     }
   </script>
 </body>

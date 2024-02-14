@@ -1,52 +1,86 @@
 <?php
-// Database connection parameters
-$servername = "localhost"; // Change if your MySQL server is on a different host
-$username = "root"; // Change if you have a different MySQL username
-$password = ""; // Change if you have set a password for your MySQL server
-$dbname = "home service";
+$server = "localhost";
+$username = "root";
+$password = "";
+$database = "home_service";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$con = mysqli_connect($server, $username, $password, $database);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!$con) {
+    die("Connection to database failed: " . mysqli_connect_error());
 }
 
-// Get form data
-$username = $_POST['username'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-$confirmPassword = $_POST['confirm-password'];
+$name = $_POST["username"];
+$email = $_POST["email"];
+$password = $_POST["password"];
+$confirm_password = $_POST["confirm-password"];
+if($password!==$confirm_password){
+echo "the password do not match";
+}
 
-// Check if the passwords match
-if ($password != $confirmPassword) {
-    echo "Password and Confirm Password do not match. Please try again.";
+$sql = "INSERT INTO serviceuser (name, email, password) VALUES ('$name', '$email', '$password')";
+
+if ($con->query($sql) === true) {
+    echo "Account created successfully!";
 } else {
-    // Hash the password for security
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-    // Check if the email already exists in the database
-    $checkEmailQuery = "SELECT * FROM serviceuser WHERE email = '$email'";
-    $result = $conn->query($checkEmailQuery);
-
-    if ($result->num_rows > 0) {
-        echo "Email already exists. Please use a different email address.";
-    } else {
-        // Insert data into the database
-        $sql = "INSERT INTO serviceuser (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "Account created successfully. Redirecting to sign-in page...";
-            
-            // Redirect to sign-in page after a short delay
-            header("refresh:2;url=signin.html");
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    }
+    echo "There was an error: " . $con->error;
 }
 
-// Close connection
-$conn->close();
+mysqli_close($con); 
 ?>
+<!-- backend backend backend backend backend backend backend backend backend backend backend backend backend backend backend backend  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillSprint - Sign Up</title>
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="signup.css" />
+</head>
+
+<body>
+  <!-- ------------------- NAVIGATION BAR ---------------------------- -->
+  <nav>
+    <div class="logo-container">
+      <img src="images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
+    </div>
+    <a href="home.html">Home</a>
+    <a href="service.html">Services</a>
+    <a href="apply.html">Apply as a Worker</a>
+    <a href="signin.html">Sign In</a>
+    <a href="signout.html">Sign Out</a>
+
+    <div class="profile-icon">
+      <img src="images/profile-user.png" alt="profile" class="profile" style="z-index: 1">
+    </div>
+  </nav>
+  <!-- ------------------- NAVIGATION BAR ---------------------------- -->
+
+  <!-- ------------------- SIGN UP FORM ---------------------------- -->
+  <div class="signup-container">
+    <h1>Sign Up</h1>
+    <form action="signup.php" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" name="confirm-password" required>
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p>Already have an account? <a href="signin.html">Sign In</a></p>
+  </div>
+  <!-- ------------------- SIGN UP FORM ---------------------------- -->
+
+</body>
+
+</html>
