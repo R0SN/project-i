@@ -1,33 +1,38 @@
 <?php
-$server = "localhost";
-$username = "root";
-$password = "";
-$database = "home_service";
+if(isset($_POST['username'])){
+    $server = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "home_service";
 
-$con = mysqli_connect($server, $username, $password, $database);
+    $con = mysqli_connect($server, $username, $password, $database);
 
-if (!$con) {
-    die("Connection to database failed: " . mysqli_connect_error());
+    if (!$con) {
+        die("Connection to database failed: ");
+    }
+  
+    $uname = $_POST["username"];
+    $umail = $_POST["email"];
+    $upw = $_POST["password"];
+    $upwc = $_POST["confirm-password"];
+    $accCheck = "SELECT * FROM serviceuser WHERE email = '$umail'";
+    $result = $con->query($accCheck);
+    if($result->num_rows   > 0) {
+        echo "Account already exists!";
+    } elseif($upw !== $upwc) {
+        echo "The passwords do not match";
+    } else {
+        $sql = "INSERT INTO 'serviceuser' ('username', 'email', 'password') VALUES ('$uname', '$umail', '$upwc')";
+        if($con->query($sql) === true) {
+            echo "Success";
+        } else {
+            echo "Failure: ";
+        }
+    }
+    $con->close();
 }
-
-$name = $_POST["username"];
-$email = $_POST["email"];
-$password = $_POST["password"];
-$confirm_password = $_POST["confirm-password"];
-if($password!==$confirm_password){
-echo "the password do not match";
-}
-
-$sql = "INSERT INTO serviceuser (name, email, password) VALUES ('$name', '$email', '$password')";
-
-if ($con->query($sql) === true) {
-    echo "Account created successfully!";
-} else {
-    echo "There was an error: " . $con->error;
-}
-
-mysqli_close($con); 
 ?>
+
 <!-- backend backend backend backend backend backend backend backend backend backend backend backend backend backend backend backend  -->
 <!DOCTYPE html>
 <html lang="en">
