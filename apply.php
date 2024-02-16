@@ -1,3 +1,45 @@
+<?php
+if(isset($_POST['submit'])){
+    $server = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "home_service";
+
+    $con = mysqli_connect($server, $username, $password, $database);
+
+    if (!$con) {
+        die("Connection to database failed: ");
+    } 
+
+    $wname = $_POST["name"];
+    $wmail = $_POST["email"];
+    $wphone = $_POST["phone"];
+    $wskill = $_POST["skills"];
+    $wphoto = $_POST["photo"];
+    $wc = $_POST["certificate"];
+    $accCheck = "SELECT * FROM workapplication WHERE email = '$wmail' OR phone='$wphone'";
+    $result = $con->query($accCheck);
+    if($result->num_rows > 0) {
+        echo "Account already exists!";   
+    }else if(strlen($wname)<3){
+      echo "Enter a valid name!";
+    }else if(!preg_match('/^(98|97)\d{8}$/',$wphone)){
+      echo "Enter a valid phone number!!";
+    }
+    else {
+        $sql = "INSERT INTO workapplication (name,phone,email,skill,photo,certificate) VALUES ('$wname', '$wphone', '$wmail', '$wskill','$wphoto','$wc')";
+        if($con->query($sql) === true) {
+            echo "Success";
+        } else {
+            echo "Failure: ";
+        }
+    }
+    $con->close();
+}
+?>
+
+
+<!-- backend backend backend backend backend backend backend backend backend backend backend backend backend backend backend backend  -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +90,7 @@
       <label for="certificate">Upload Certificate:</label>
       <input type="file" id="certificate" name="certificate" accept=".pdf, .doc, .docx,.png, .jpg, .jpeg" required>
 
-      <button type="submit" onmouseover="change(this)" onmouseout="unchange(this)">Submit Application</button>
+      <button type="submit" name="submit" onmouseover="change(this)" onmouseout="unchange(this)">Submit Application</button>
     </form>
   </div>
 
