@@ -30,7 +30,7 @@ if(isset($_POST['submit'])){
       echo "Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!";
     }
     else {
-        $sql = "INSERT INTO serviceuser (username, email, password, phone) VALUES ('$uname', '$umail', '$upw', '$uphone')"; // Fixing SQL syntax
+        $sql = "INSERT INTO  serviceuser (username, email, password, phone) VALUES ('$uname', '$umail', '$upw', '$uphone')"; // Fixing SQL syntax
         if($con->query($sql) === true) {
             echo "Success";
         } else {
@@ -62,9 +62,9 @@ if(isset($_POST['submit'])){
     </div>
     <a href="home.html">Home</a>
     <a href="service.html">Services</a>
-    <a href="apply.html">Apply as a Worker</a>
-    <a href="signin.html">Sign In</a>
-    <a href="signout.html">Sign Out</a>
+    <a href="apply.php">Apply as a Worker</a>
+    <a href="signin.php">Sign In</a>
+    <a href="signout.php">Sign Out</a>
 
     <div class="profile-icon">
       <img src="images/profile-user.png" alt="profile" class="profile" style="z-index: 1">
@@ -93,7 +93,7 @@ if(isset($_POST['submit'])){
     <button type="submit" name="submit">Sign Up</button>
   </form>
 
-  <p>Already have an account? <a href="signin.html">Sign In</a></p>
+  <p>Already have an account? <a href="signin.php">Sign In</a></p>
 </div>
 <!-- ------------------- SIGN UP FORM ---------------------------- -->
 
