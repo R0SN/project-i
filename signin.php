@@ -1,47 +1,44 @@
 <?php
 session_start();
 
-if(isset($_SESSION['user_id'])) {
-    header("Location: home.html");
-
+if (isset($_SESSION['user_id'])) {
+  header("Location: home.html");
 }
 
-if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $server = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "home_service";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+  $server = "localhost";
+  $username = "root";
+  $password = "";
+  $database = "home_service";
 
-    $con = mysqli_connect($server, $username, $password, $database);
+  $con = mysqli_connect($server, $username, $password, $database);
 
-    if (!$con) {
-        die("Connection to database failed: ");
-    }
+  if (!$con) {
+    die("Connection to database failed: ");
+  }
 
-    $umail = $_POST["email"];
-    $upw = $_POST["password"];
+  $umail = $_POST["email"];
+  $upw = $_POST["password"];
 
-    $accCheck = "SELECT id, password FROM serviceuser WHERE email = '$umail'";
-    $result = $con->query($accCheck);
+  $accCheck = "SELECT id, password FROM serviceuser WHERE email = '$umail'";
+  $result = $con->query($accCheck);
 
-    if($result->num_rows == 0) {
-        echo "Account does not exist!";
+  if ($result->num_rows == 0) {
+    echo "Account does not exist!";
+  } else {
+    $user = $result->fetch_assoc();
+    $pw = $user['password'];
+    echo $user['password'];
+
+    if ($upw == $pw) {
+      $_SESSION['user_id'] = $user['id'];
+      header("Location: home.html");
     } else {
-        $user = $result->fetch_assoc();
-        $pw = $user['password']; 
-        echo $user['password'];
-        
-        if($upw == $pw) {
-            $_SESSION['user_id'] = $user['id'];
-            header("Location: home.html"); 
-            
-        } else {
-            echo "Invalid password!";
-        }
+      echo "Invalid password!";
     }
+  }
 
-    $con->close();
-    
+  $con->close();
 }
 ?>
 

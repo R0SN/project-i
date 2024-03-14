@@ -1,43 +1,42 @@
 <?php
-if(isset($_POST['submit'])){
-    $server = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "home_service";
+if (isset($_POST['submit'])) {
+  $server = "localhost";
+  $username = "root";
+  $password = "";
+  $database = "home_service";
 
-    $con = mysqli_connect($server, $username, $password, $database);
+  $con = mysqli_connect($server, $username, $password, $database);
 
-    if (!$con) {
-        die("Connection to database failed: ");
-    }
+  if (!$con) {
+    die("Connection to database failed: ");
+  }
 
-    $uname = $_POST["username"];
-    $umail = $_POST["email"];
-    $uphone = $_POST["phone"];
-    $upw = $_POST["password"];
-    $upwc = $_POST["confirm-password"];
-    $accCheck = "SELECT * FROM serviceuser WHERE email = '$umail' OR phone='$uphone'";
-    $result = $con->query($accCheck);
-    if($result->num_rows > 0) {
-        echo "Account already exists!";   
-    } elseif($upw !== $upwc) {
-        echo "The passwords do not match";
-    } else if(strlen($uname)<3){
-      echo "Enter a valid name!";
-    }else if(!preg_match('/^(98|97)\d{8}/',$uphone)){
-      echo "Enter a valid phone number!!";
-    }else if (strlen($upwc) < 6 || !preg_match('/[A-Z]/', $upwc) || !preg_match('/[0-9]/', $upwc)) {
-      echo "Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!";
+  $uname = $_POST["username"];
+  $umail = $_POST["email"];
+  $uphone = $_POST["phone"];
+  $upw = $_POST["password"];
+  $upwc = $_POST["confirm-password"];
+  $accCheck = "SELECT * FROM serviceuser WHERE email = '$umail' OR phone='$uphone'";
+  $result = $con->query($accCheck);
+  if ($result->num_rows > 0) {
+    echo "Account already exists!";
+  } elseif ($upw !== $upwc) {
+    echo "The passwords do not match";
+  } else if (strlen($uname) < 3) {
+    echo "Enter a valid name!";
+  } else if (!preg_match('/^(98|97)\d{8}/', $uphone)) {
+    echo "Enter a valid phone number!!";
+  } else if (strlen($upwc) < 6 || !preg_match('/[A-Z]/', $upwc) || !preg_match('/[0-9]/', $upwc)) {
+    echo "Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!";
+  } else {
+    $sql = "INSERT INTO  serviceuser (username, email, password, phone) VALUES ('$uname', '$umail', '$upw', '$uphone')"; // Fixing SQL syntax
+    if ($con->query($sql) === true) {
+      echo "Success";
+    } else {
+      echo "Failure: ";
     }
-    else {
-        $sql = "INSERT INTO  serviceuser (username, email, password, phone) VALUES ('$uname', '$umail', '$upw', '$uphone')"; // Fixing SQL syntax
-        if($con->query($sql) === true) {
-            echo "Success";
-        } else {
-            echo "Failure: ";
-        }
-    }
-    $con->close();
+  }
+  $con->close();
 }
 ?>
 
@@ -71,31 +70,31 @@ if(isset($_POST['submit'])){
     </div>
   </nav>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
-<!-- ------------------- SIGN UP FORM ---------------------------- -->
-<div class="signup-container">
-  <h1>Sign Up</h1>
-  <form action="signup.php" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
+  <!-- ------------------- SIGN UP FORM ---------------------------- -->
+  <div class="signup-container">
+    <h1>Sign Up</h1>
+    <form action="signup.php" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
 
-    <label for="phone">Phone Number:</label>
-    <input type="number" id="phone" name="phone" required>
+      <label for="phone">Phone Number:</label>
+      <input type="number" id="phone" name="phone" required>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
 
-    <label for="confirm-password">Confirm Password:</label>
-    <input type="password" id="confirm-password" name="confirm-password" required>
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" name="confirm-password" required>
 
-    <button type="submit" name="submit">Sign Up</button>
-  </form>
+      <button type="submit" name="submit">Sign Up</button>
+    </form>
 
-  <p>Already have an account? <a href="signin.php">Sign In</a></p>
-</div>
-<!-- ------------------- SIGN UP FORM ---------------------------- -->
+    <p>Already have an account? <a href="signin.php">Sign In</a></p>
+  </div>
+  <!-- ------------------- SIGN UP FORM ---------------------------- -->
 
 
 </body>

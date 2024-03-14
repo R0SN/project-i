@@ -1,40 +1,39 @@
 <?php
-if(isset($_POST['submit'])){
-    $server = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "home_service";
+if (isset($_POST['submit'])) {
+  $server = "localhost";
+  $username = "root";
+  $password = "";
+  $database = "home_service";
 
-    $con = mysqli_connect($server, $username, $password, $database);
+  $con = mysqli_connect($server, $username, $password, $database);
 
-    if (!$con) {
-        die("Connection to database failed: ");
-    } 
+  if (!$con) {
+    die("Connection to database failed: ");
+  }
 
-    $wname = $_POST["name"];
-    $wmail = $_POST["email"];
-    $wphone = $_POST["phone"];
-    $wskill = $_POST["skills"];
-    $wphoto = $_POST["photo"];
-    $wc = $_POST["certificate"];
-    $accCheck = "SELECT * FROM workapplication WHERE email = '$wmail' OR phone='$wphone'";
-    $result = $con->query($accCheck);
-    if($result->num_rows > 0) {
-        echo "Account already exists!";   
-    }else if(strlen($wname)<3){
-      echo "Enter a valid name!";
-    }else if(!preg_match('/^(98|97)\d{8}$/',$wphone)){
-      echo "Enter a valid phone number!!";
+  $wname = $_POST["name"];
+  $wmail = $_POST["email"];
+  $wphone = $_POST["phone"];
+  $wskill = $_POST["skills"];
+  $wphoto = $_POST["photo"];
+  $wc = $_POST["certificate"];
+  $accCheck = "SELECT * FROM workapplication WHERE email = '$wmail' OR phone='$wphone'";
+  $result = $con->query($accCheck);
+  if ($result->num_rows > 0) {
+    echo "Account already exists!";
+  } else if (strlen($wname) < 3) {
+    echo "Enter a valid name!";
+  } else if (!preg_match('/^(98|97)\d{8}$/', $wphone)) {
+    echo "Enter a valid phone number!!";
+  } else {
+    $sql = "INSERT INTO workapplication (name,phone,email,skill,photo,certificate) VALUES ('$wname', '$wphone', '$wmail', '$wskill','$wphoto','$wc')";
+    if ($con->query($sql) === true) {
+      echo "Success";
+    } else {
+      echo "Failure: ";
     }
-    else {
-        $sql = "INSERT INTO workapplication (name,phone,email,skill,photo,certificate) VALUES ('$wname', '$wphone', '$wmail', '$wskill','$wphoto','$wc')";
-        if($con->query($sql) === true) {
-            echo "Success";
-        } else {
-            echo "Failure: ";
-        }
-    }
-    $con->close();
+  }
+  $con->close();
 }
 ?>
 
@@ -95,7 +94,7 @@ if(isset($_POST['submit'])){
   </div>
 
   <script>
-        function change(element) {
+    function change(element) {
       element.style.backgroundColor = "white";
       element.style.color = "#333";
     }
