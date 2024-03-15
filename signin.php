@@ -16,28 +16,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
   if (!$con) {
     die("Connection to database failed: ");
   }
-
+else{
   $umail = $_POST["email"];
   $upw = $_POST["password"];
 
-  $accCheck = "SELECT id, password FROM serviceuser WHERE email = '$umail'";
+  $accCheck = "SELECT * FROM user WHERE email = '$umail'";
   $result = $con->query($accCheck);
+  $user = $result->fetch_assoc();
 
   if ($result->num_rows == 0) {
     echo "Account does not exist!";
   } else {
-    $user = $result->fetch_assoc();
-    $pw = $user['password'];
-    echo $user['password'];
 
-    if ($upw == $pw) {
+    if ($upw==$user['password']){
       $_SESSION['user_id'] = $user['id'];
       header("Location: home.html");
     } else {
       echo "Invalid password!";
     }
   }
-
+}
   $con->close();
 }
 ?>

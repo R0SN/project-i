@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
   $wskill = $_POST["skills"];
   $wphoto = $_POST["photo"];
   $wc = $_POST["certificate"];
-  $accCheck = "SELECT * FROM workapplication WHERE email = '$wmail' OR phone='$wphone'";
+  $accCheck = "SELECT * FROM worker WHERE email = '$wmail' OR phone='$wphone'";
   $result = $con->query($accCheck);
   if ($result->num_rows > 0) {
     echo "Account already exists!";
@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
   } else if (!preg_match('/^(98|97)\d{8}$/', $wphone)) {
     echo "Enter a valid phone number!!";
   } else {
-    $sql = "INSERT INTO workapplication (name,phone,email,skill,photo,certificate) VALUES ('$wname', '$wphone', '$wmail', '$wskill','$wphoto','$wc')";
+    $sql = "INSERT INTO worker (name,phone,email,skill,photo,certificate) VALUES ('$wname', '$wphone', '$wmail', '$wskill','$wphoto','$wc')";
     if ($con->query($sql) === true) {
       echo "Success";
     } else {

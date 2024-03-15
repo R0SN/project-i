@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
   $uphone = $_POST["phone"];
   $upw = $_POST["password"];
   $upwc = $_POST["confirm-password"];
-  $accCheck = "SELECT * FROM serviceuser WHERE email = '$umail' OR phone='$uphone'";
+  $accCheck = "SELECT * FROM user WHERE email = '$umail' OR phone='$uphone'";
   $result = $con->query($accCheck);
   if ($result->num_rows > 0) {
     echo "Account already exists!";
@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
   } else if (strlen($upwc) < 6 || !preg_match('/[A-Z]/', $upwc) || !preg_match('/[0-9]/', $upwc)) {
     echo "Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!";
   } else {
-    $sql = "INSERT INTO  serviceuser (username, email, password, phone) VALUES ('$uname', '$umail', '$upw', '$uphone')"; // Fixing SQL syntax
+    $sql = "INSERT INTO  user (username, email, password, phone) VALUES ('$uname', '$umail', '$upw', '$uphone')"; // Fixing SQL syntax
     if ($con->query($sql) === true) {
       echo "Success";
     } else {
@@ -39,6 +39,7 @@ if (isset($_POST['submit'])) {
   $con->close();
 }
 ?>
+
 
 
 <!-- backend backend backend backend backend backend backend backend backend backend backend backend backend backend backend backend  -->
