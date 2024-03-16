@@ -1,16 +1,6 @@
 <?php
 if (isset($_POST['submit'])) {
-  $server = "localhost";
-  $username = "root";
-  $password = "";
-  $database = "home_service";
-
-  $con = mysqli_connect($server, $username, $password, $database);
-
-  if (!$con) {
-    die("Connection to database failed: ");
-  }
-
+  include_once "../connect.php";
   $uname = $_POST["username"];
   $umail = $_POST["email"];
   $uphone = $_POST["phone"];
@@ -60,7 +50,7 @@ if (isset($_POST['submit'])) {
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
   <nav>
     <div class="logo-container">
-      <img src="images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
+      <img src="../images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
     </div>
     <a href="home.html">Home</a>
     <a href="service.html">Services</a>
@@ -69,14 +59,14 @@ if (isset($_POST['submit'])) {
     <a href="signout.php">Sign Out</a>
 
     <div class="profile-icon">
-      <img src="images/profile-user.png" alt="profile" class="profile" style="z-index: 1">
+      <img src="../images/profile-user.png" alt="profile" class="profile" style="z-index: 1">
     </div>
   </nav>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
   <!-- ------------------- SIGN UP FORM ---------------------------- -->
   <div class="signup-container">
     <h1>Sign Up</h1>
-    <form action="signup.php" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
 

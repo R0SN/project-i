@@ -6,16 +6,8 @@ if (isset($_SESSION['user_id'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-  $server = "localhost";
-  $username = "root";
-  $password = "";
-  $database = "home_service";
+  include "../connect.php";
 
-  $con = mysqli_connect($server, $username, $password, $database);
-
-  if (!$con) {
-    die("Connection to database failed: ");
-  } else {
     $umail = $_POST["email"];
     $upw = $_POST["password"];
     $accCheck = "SELECT * FROM user WHERE email = '$umail'";
@@ -33,9 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         echo "Invalid password!";
       }
     }
+    $con->close();
   }
-  $con->close();
-}
+  
+
 ?>
 
 
@@ -54,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
   <nav>
     <div class="logo-container">
-      <img src="images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
+      <img src="../images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
     </div>
     <a href="home.html">Home</a>
     <a href="service.html">Services</a>
@@ -63,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <a href="signout.php">Sign Out</a>
 
     <div class="profile-icon">
-      <img src="images/profile-user.png" alt="profile" class="profile" style="z-index: 1">
+      <img src="../images/profile-user.png" alt="profile" class="profile" style="z-index: 1">
     </div>
   </nav>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->

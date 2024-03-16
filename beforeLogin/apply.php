@@ -1,15 +1,6 @@
 <?php
 if (isset($_POST['submit'])) {
-  $server = "localhost";
-  $username = "root";
-  $password = "";
-  $database = "home_service";
-
-  $con = mysqli_connect($server, $username, $password, $database);
-
-  if (!$con) {
-    die("Connection to database failed: ");
-  }
+  include_once "../connect.php";
 
   $wname = $_POST["name"];
   $wmail = $_POST["email"];
@@ -17,7 +8,7 @@ if (isset($_POST['submit'])) {
   $wskill = $_POST["skills"];
   $wphoto = $_POST["photo"];
   $wc = $_POST["certificate"];
-  $accCheck = "SELECT * FROM worker WHERE email = '$wmail' OR phone='$wphone'";
+  $accCheck = "SELECT * FROM applications WHERE email = '$wmail' OR phone='$wphone'";
   $result = $con->query($accCheck);
   if ($result->num_rows > 0) {
     echo "Account already exists!";
@@ -26,7 +17,7 @@ if (isset($_POST['submit'])) {
   } else if (!preg_match('/^(98|97)\d{8}$/', $wphone)) {
     echo "Enter a valid phone number!!";
   } else {
-    $sql = "INSERT INTO worker (name,phone,email,skill,photo,certificate) VALUES ('$wname', '$wphone', '$wmail', '$wskill','$wphoto','$wc')";
+    $sql = "INSERT INTO applications (name,phone,email,skill,photo,certificate) VALUES ('$wname', '$wphone', '$wmail', '$wskill','$wphoto','$wc')";
     if ($con->query($sql) === true) {
       echo "Success";
     } else {
@@ -54,7 +45,7 @@ if (isset($_POST['submit'])) {
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
   <nav>
     <div class="logo-container">
-      <img src="images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
+      <img src="../images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
     </div>
     <a href="home.html">Home</a>
     <a href="service.html">Services</a>
@@ -63,7 +54,7 @@ if (isset($_POST['submit'])) {
     <a href="signout.php">Sign Out</a>
 
     <div class="profile-icon">
-      <img src="images/profile-user.png" alt="profile" class="profile" style="z-index: 1">
+      <img src="../images/profile-user.png" alt="profile" class="profile" style="z-index: 1">
     </div>
   </nav>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
@@ -84,7 +75,7 @@ if (isset($_POST['submit'])) {
       <input type="text" id="skills" name="skills" required>
 
       <label for="photo">Upload Photo:</label>
-      <input type="file" id="photo" name="photo" accept=".png, .jpg, .jpeg" required>
+      <input type="file" id="photo" name="photo" accept=".jpg, .jpeg" required>
 
       <label for="certificate">Upload Certificate:</label>
       <input type="file" id="certificate" name="certificate" accept=".pdf, .doc, .docx,.png, .jpg, .jpeg" required>
