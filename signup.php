@@ -29,7 +29,9 @@ if (isset($_POST['submit'])) {
   } else if (strlen($upwc) < 6 || !preg_match('/[A-Z]/', $upwc) || !preg_match('/[0-9]/', $upwc)) {
     echo "Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!";
   } else {
-    $sql = "INSERT INTO  user (username, email, password, phone) VALUES ('$uname', '$umail', '$upw', '$uphone')"; // Fixing SQL syntax
+    // Hash the password before storing
+    $hpw = password_hash($upw,PASSWORD_DEFAULT);
+    $sql = "INSERT INTO  user (username,email,password,phone) VALUES ('$uname', '$umail', '$hpw', '$uphone')"; 
     if ($con->query($sql) === true) {
       echo "Success";
     } else {

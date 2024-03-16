@@ -15,27 +15,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
   if (!$con) {
     die("Connection to database failed: ");
-  }
-else{
-  $umail = $_POST["email"];
-  $upw = $_POST["password"];
-
-  $accCheck = "SELECT * FROM user WHERE email = '$umail'";
-  $result = $con->query($accCheck);
-  $user = $result->fetch_assoc();
-
-  if ($result->num_rows == 0) {
-    echo "Account does not exist!";
   } else {
+    $umail = $_POST["email"];
+    $upw = $_POST["password"];
+    $accCheck = "SELECT * FROM user WHERE email = '$umail'";
+    $result = $con->query($accCheck);
 
-    if ($upw==$user['password']){
-      $_SESSION['user_id'] = $user['id'];
-      header("Location: home.html");
+    if ($result->num_rows == 0) {
+      echo "Account does not exist!";
     } else {
-      echo "Invalid password!";
+      $user = $result->fetch_assoc();
+      if (password_verify($upw, $user['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        header("Location: home.html");
+        exit(); 
+      } else {
+        echo "Invalid password!";
+      }
     }
   }
-}
   $con->close();
 }
 ?>
@@ -73,7 +71,7 @@ else{
   <div class="signin-container">
     <h1>Sign In</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <label for="emial">Email:</label>
+      <label for="email">Email:</label>
       <input type="email" id="email" name="email" required>
 
       <label for="password">Password:</label>
