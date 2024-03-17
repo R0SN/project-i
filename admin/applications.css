@@ -8,10 +8,18 @@ table {
 th,
 td {
     border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+    text-align: center;
+    width: auto;
 }
-
+td a{
+    text-decoration: none;
+}
 th {
     background-color: #f2f2f2;
+}
+.c{
+    width: 120px;
+}
+.p{
+    width: 100px;
 }

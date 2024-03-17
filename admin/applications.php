@@ -33,6 +33,7 @@
         <th>Skill</th>
         <th>Photo</th>
         <th>Certificate</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -50,31 +51,37 @@
           echo "<td>" . $row['phone'] . "</td>";
           echo "<td>" . $row['email'] . "</td>";
           echo "<td>" . $row['skill'] . "</td>";
-          echo "<td>" . $row['photo'] . "</td>";
-          echo "<td>" . $row['certificate'] . "</td>";
+          $photoPath = "../images/wphoto/{$row['photo']}";
+          echo "<td class='p'><a href='$photoPath' target='_blank'><img src='{$photoPath}' alt='{$row['name']}' style='height: 80px;'></a></td>";
+          // Display the certificate
+          $certificatePath = "../images/wcerti/{$row['certificate']}";
+          $certificateExtension = pathinfo($certificatePath, PATHINFO_EXTENSION);
+          if (in_array($certificateExtension, ['jpg', 'jpeg', 'png'])) {
+            echo "<td><a href='$certificatePath' target='_blank'><img src='{$certificatePath}' alt='{$row['name']}' style='height: 80px; '></a></td>";
+          } elseif ($certificateExtension === 'pdf') {
+            echo "<td class='c'><embed src='{$certificatePath}'  height='80' ><a href='{$certificatePath}' target='_blank'>view</a></td>";
+          } else {
+            echo "<td>Unsupported file format</td>";
+          }
 
+          // Display action buttons
           echo "<td>
-          <form action='approve.php' method='post'>
-          <input type='hidden' name='id' value='" .$row['id'] . "'>
-          <input type='hidden' name='name' value='" .$row['name'] . "'>
-          <input type='hidden' name='phone' value='" .$row['phone'] . "'>
-          <input type='hidden' name='email' value='" .$row['email'] . "'>
-          <input type='hidden' name='skill' value='" .$row['skill'] . "'>
-          <input type='hidden' name='photo' value='" .$row['photo'] . "'>
-          <input type='hidden' name='certificate' value='" .$row['certificate'] . "'>
-          <button type='submit' name='approve'>Approve</button>
-          </form></td>";
-
-          echo "<td>
+            <form action='approve.php' method='post'>
+              <input type='hidden' name='id' value='{$row['id']}'>
+              <button type='submit' name='approve'>Approve</button>
+            </form>
+            <br>
             <form action='decline.php' method='post'>
-            <input type='hidden' name='id' value='" .$row['id'] . "'>
-            <button type='submit' name='decline'>Decline</button>
-            </form></td>";
+              <input type='hidden' name='id' value='{$row['id']}'>
+              <button type='submit' name='decline'>Decline</button>
+            </form>
+          </td>";
+          
+          echo "</tr>";
         }
-  
       } else {
         // No data found in the database
-        echo "<tr><td colspan='7'>No applications found</td></tr>";
+        echo "<tr><td colspan='8'>No applications found</td></tr>";
       }
 
       // Close the database connection

@@ -6,7 +6,7 @@ if (isset($_POST['submit'])) {
   $uphone = $_POST["phone"];
   $upw = $_POST["password"];
   $upwc = $_POST["confirm-password"];
-  $accCheck = "SELECT * FROM user WHERE email = '$umail' OR phone='$uphone'";
+  $accCheck = "SELECT * FROM users WHERE email = '$umail' OR phone='$uphone'";
   $result = $con->query($accCheck);
   if ($result->num_rows > 0) {
     echo "Account already exists!";
@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
   } else {
     // Hash the password before storing
     $hpw = password_hash($upw,PASSWORD_DEFAULT);
-    $sql = "INSERT INTO  user (username,email,password,phone) VALUES ('$uname', '$umail', '$hpw', '$uphone')"; 
+    $sql = "INSERT INTO  users (username,email,password,phone) VALUES ('$uname', '$umail', '$hpw', '$uphone')"; 
     if ($con->query($sql) === true) {
       echo "Success";
     } else {
@@ -47,20 +47,15 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-  <!-- ------------------- NAVIGATION BAR ---------------------------- -->
-  <nav>
+   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
+   <nav>
     <div class="logo-container">
-      <img src="../images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
+      <img src="../images\logo\house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
     </div>
     <a href="home.html">Home</a>
     <a href="service.html">Services</a>
     <a href="apply.php">Apply as a Worker</a>
     <a href="signin.php">Sign In</a>
-    <a href="signout.php">Sign Out</a>
-
-    <div class="profile-icon">
-      <img src="../images/profile-user.png" alt="profile" class="profile" style="z-index: 1">
-    </div>
   </nav>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
   <!-- ------------------- SIGN UP FORM ---------------------------- -->

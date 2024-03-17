@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['user_id'])) {
-  header("Location: home.html");
+  header("Location: ../afterLogin/home.html");
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
@@ -10,27 +10,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
     $umail = $_POST["email"];
     $upw = $_POST["password"];
-    $accCheck = "SELECT * FROM user WHERE email = '$umail'";
+    $accCheck = "SELECT * FROM users WHERE email = '$umail'";
+    $accCheck1 = "SELECT * FROM workers WHERE email = '$umail'";
     $result = $con->query($accCheck);
+    $result1 = $con->query($accCheck1);
+    
+        $user = $result->fetch_assoc();
+        $worker = $result1->fetch_assoc();
+        
+        if ($result->num_rows == 0 && $result1->num_rows == 0 ) {
+          echo "Account does not exist!";
+        } else {
+          if (password_verify($upw, $user['password'])) {
+            $_SESSION['user_id'] = $user['id'];
+            header("Location: ../afterLogin/home.html");
+            exit(); 
+          }
+          else if (password_verify($upw, $worker['password'])) {
+            $_SESSION['user_id'] = $worker['id'];
+            header("Location: ../afterLogin/home.html");
+            exit(); 
+          } else {
+            echo "Invalid password!";
+          }
+        }
+    
 
-    if ($result->num_rows == 0) {
-      echo "Account does not exist!";
-    } else {
-      $user = $result->fetch_assoc();
-      if (password_verify($upw, $user['password'])) {
-        $_SESSION['user_id'] = $user['id'];
-        header("Location: home.html");
-        exit(); 
-      } else {
-        echo "Invalid password!";
-      }
-    }
     $con->close();
-  }
-  
-
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,17 +55,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
   <nav>
     <div class="logo-container">
-      <img src="../images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
+      <img src="../images\logo\house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
     </div>
     <a href="home.html">Home</a>
     <a href="service.html">Services</a>
     <a href="apply.php">Apply as a Worker</a>
     <a href="signin.php">Sign In</a>
-    <a href="signout.php">Sign Out</a>
-
-    <div class="profile-icon">
-      <img src="../images/profile-user.png" alt="profile" class="profile" style="z-index: 1">
-    </div>
   </nav>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
   <!-- ------------------- SIGN IN FORM ---------------------------- -->

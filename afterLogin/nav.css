@@ -40,3 +40,12 @@ body {
     max-height: 50px;
   }
   
+  .profile-icon {
+    position: absolute;
+    display: inline-block;
+    margin: 0 100px;
+  }
+  
+  .profile {
+    max-height: 49px;
+  }

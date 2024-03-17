@@ -1,0 +1,36 @@
+.main-container {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 40px;
+  background-color: #f4f4f4;
+  color: rgb(43, 45, 66);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  height: 400px;
+  width: 500px;
+  border: 2px rgb(43, 45, 66);
+  border-radius: 20%;
+  margin: 20px 40px;
+  box-shadow: 0 0 0 5px #9fa0c3;
+  overflow: hidden;
+  z-index: 1;
+  object-fit: cover;
+}
+
+.service-text {
+  height: 405px;
+  width: 500px;
+  text-align: center;
+  line-height: 400px;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.633);
+  color: white;
+  margin: -405px 0;
+  font-size: 30px;
+  display: none;
+  z-index: 2;
+}
