@@ -5,6 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit'])) {
     $id = $_POST['id'];
     $username = $_POST['name'];
     $email = $_POST['email'];
+    $location = $_POST['location'];
     $phone = $_POST['phone'];
     $password = $_POST['password'];
 
@@ -33,6 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit'])) {
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="change_email" value="<?php echo $email ?>"><br>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="change_location" value="<?php echo $location ?>"><br>
 
             <label for="phone">Phone:</label>
             <input type="number" id="phone" name="change_phone" value="<?php echo $phone ?>"><br>

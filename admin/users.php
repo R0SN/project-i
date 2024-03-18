@@ -36,6 +36,7 @@ $result = mysqli_query($con, $query);
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Loation</th>
                 <th>Password</th>
                 <th>Phone</th>
             </tr>
@@ -49,6 +50,7 @@ $result = mysqli_query($con, $query);
                         <td>" . $row['id'] . "</td>
                         <td>" . $row['username'] . "</td>
                         <td>" . $row['email'] . "</td>
+                        <td>" . $row['location'] . "</td>
                         <td>" . $row['password'] . "</td>
                         <td>" . $row['phone'] . "</td>
                     <td>
@@ -56,6 +58,7 @@ $result = mysqli_query($con, $query);
                         <input type='hidden' name='id' value='" . $row['id'] . "'>
                         <input type='hidden' name='name' value='" . $row['username'] . "'>
                         <input type='hidden' name='email' value='" . $row['email'] . "'>
+                        <input type='hidden' name='location' value='" . $row['location'] . "'>
                         <input type='hidden' name='password' value='" . $row['password'] . "'>
                         <input type='hidden' name='phone' value='" . $row['phone'] . "'>
                         <button type='submit' name='edit'>Edit</button>

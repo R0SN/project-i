@@ -5,26 +5,27 @@
     $wmail = $_POST["email"];
     $wphone = $_POST["phone"];
     $wskill = $_POST["skills"];
+    $warea = $_POST['service_area'];
     $wphoto = $_FILES['photo']['name'];
     $wphoto_temp = $_FILES['photo']['tmp_name'];
     $wphoto_folder = '../images/wphoto/' . $wphoto;
     $wc = $_FILES['certificate']['name'];
     $wc_temp = $_FILES['certificate']['tmp_name'];
     $wc_folder = '../images/wcerti/' . $wc;
-    $accCheck = "SELECT * FROM applications WHERE email = '$wmail' OR phone='$wphone'";
+    $accCheck = "SELECT * FROM workers WHERE email = '$wmail' OR phone='$wphone'";
     $result = $con->query($accCheck);
     if ($result->num_rows > 0) {
       echo "Account already exists!";
-    } 
-    else if($wskill=="Select a skill"){
+    } else if ($wskill == "Select a skill") {
       echo "Select a skill!!";
-    }
-      else if (strlen($wname) < 3) {
+    } else if (strlen($wname) < 3) {
       echo "Enter a valid name!";
+    } else if (strlen($warea) < 5) {
+      echo "Enter a valid working area!!";
     } else if (!preg_match('/^(98|97)\d{8}$/', $wphone)) {
       echo "Enter a valid phone number!!";
     } else {
-      $sql = "INSERT INTO applications (name,phone,email,skill,photo,certificate) VALUES ('$wname', '$wphone', '$wmail', '$wskill','$wphoto','$wc')";
+      $sql = "INSERT INTO applications (name, phone, email, skill, service_area, photo, certificate) VALUES ('$wname', '$wphone', '$wmail', '$wskill', '$warea', '$wphoto', '$wc')";
       if ($con->query($sql) === true) {
         move_uploaded_file($wphoto_temp, $wphoto_folder);
         move_uploaded_file($wc_temp, $wc_folder);
@@ -85,6 +86,8 @@
           <option value="carpenter">Carpenter</option>
         </select>
 
+        <label for="service_area">Service Area:</label>
+        <input type="text" id="service_area" name="service_area" required>
 
         <label for="photo">Upload Photo:</label>
         <input type="file" id="photo" name="photo" accept=".jpg, .jpeg" required>

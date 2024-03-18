@@ -31,6 +31,7 @@
         <th>Phone</th>
         <th>Email</th>
         <th>Skill</th>
+        <th>Service Area</th>
         <th>Photo</th>
         <th>Certificate</th>
         <th>Actions</th>
@@ -51,6 +52,7 @@
           echo "<td>" . $row['phone'] . "</td>";
           echo "<td>" . $row['email'] . "</td>";
           echo "<td>" . $row['skill'] . "</td>";
+          echo "<td>" . $row['service_area'] . "</td>";
           $photoPath = "../images/wphoto/{$row['photo']}";
           echo "<td class='p'><a href='$photoPath' target='_blank'><img src='{$photoPath}' alt='{$row['name']}' style='height: 80px;'></a></td>";
           // Display the certificate

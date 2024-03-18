@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['approve'])) {
         $wemail = $data["email"];
         $wphone = $data["phone"];
         $wskill = $data["skill"];
+        $warea = $data["service_area"];
         $wphoto = $data['photo'];
         $wcertificate = $data['certificate'];
 
@@ -33,8 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['approve'])) {
 
         } else {
             // Insert data into the workers table
-            $query = "INSERT INTO workers (name, phone, email, skill, photo, certificate) 
-                      VALUES ('$wname','$wphone','$wemail','$wskill','$wphoto','$wcertificate')";
+            $query = "INSERT INTO workers (name, phone, email, skill,service_area, photo, certificate) 
+                      VALUES ('$wname','$wphone','$wemail','$wskill','$warea','$wphoto','$wcertificate')";
 
             if ($con->query($query) === true) {
                 // Delete the record from the applications table

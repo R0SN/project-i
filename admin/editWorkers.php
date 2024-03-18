@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit'])) {
     $phone = $_POST['phone'];
     $password = $_POST['password'];
     $skill = $_POST['skill'];
+    $warea = $_POST['service_area'];
     $photo = $_POST['photo'];
     $certificate = $_POST['certificate'];
     
@@ -40,6 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit'])) {
 
             <label for="phone">Phone:</label>
             <input type="number" id="phone" name="change_phone" value="<?php echo $phone ?>"><br>
+
+            <label for="warea">Service area:</label>
+            <input type="text" id="warea" name="warea" value="<?php echo $warea ?>"><br>
 
             <label for="password">Password:</label>
             <input type="text" id="password" name="change_password" value="<?php echo $password ?>"><br>

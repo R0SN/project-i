@@ -6,10 +6,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm'])) {
     $cid = $_POST['change_id'];
     $cusername = $_POST['change_username'];
     $cemail = $_POST['change_email'];
+    $clocation = $_POST['change_location'];
     $cphone = $_POST['change_phone'];
     $cpassword = $_POST['change_password'];
 
-    $query = "UPDATE users SET username='$cusername', email='$cemail', phone='$cphone', password='$cpassword' WHERE id=$cid";
+    $query = "UPDATE users SET username='$cusername', email='$cemail', phone='$cphone', location='$clocation', password='$cpassword' WHERE id=$cid";
     $result = mysqli_query($con, $query);
 
     if ($result) {

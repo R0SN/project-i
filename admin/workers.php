@@ -1,10 +1,3 @@
-<?php
-include "../connect.php"; // Include your database connection file
-
-$query = "SELECT * FROM workers"; // Query to fetch workers from the database
-$result = mysqli_query($con, $query);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +31,7 @@ $result = mysqli_query($con, $query);
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Skill</th>
+                <th>Service Area</th>
                 <th>Photo</th>
                 <th>Certificate</th>
                 <th>Password</th>
@@ -46,6 +40,11 @@ $result = mysqli_query($con, $query);
         </thead>
         <tbody>
             <?php
+            include "../connect.php"; // Include your database connection file
+
+            $query = "SELECT * FROM workers"; // Query to fetch workers from the database
+            $result = mysqli_query($con, $query);
+            
             if (mysqli_num_rows($result) > 0) {
                 // Loop through each row of data
                 while ($row = mysqli_fetch_assoc($result)) {
@@ -54,7 +53,8 @@ $result = mysqli_query($con, $query);
                         <td>{$row['name']}</td>
                         <td>{$row['email']}</td>
                         <td>{$row['phone']}</td>
-                        <td>{$row['skill']}</td>";
+                        <td>{$row['skill']}</td>
+                        <td>{$row['service_area']}</td>";
                     
                     // Display the photo
                     $photoPath = "../images/workers/photo/{$row['photo']}";
@@ -79,13 +79,13 @@ $result = mysqli_query($con, $query);
                                 <input type='hidden' name='email' value='{$row['email']}'>
                                 <input type='hidden' name='phone' value='{$row['phone']}'>
                                 <input type='hidden' name='skill' value='{$row['skill']}'>
+                                <input type='hidden' name='service_area' value='{$row['service_area']}'>
                                 <input type='hidden' name='photo' value='{$row['photo']}'>
                                 <input type='hidden' name='certificate' value='{$row['certificate']}'>
                                 <input type='hidden' name='password' value='{$row['password']}'>
                                 <button type='submit' name='edit'>Edit</button>
                             </form>
-                        </td>
-                        <td>
+                        <br>
                             <form action='deleteWorker.php' method='post'>
                                 <input type='hidden' name='id' value='{$row['id']}'>
                                 <button type='submit' name='delete'>Delete</button>

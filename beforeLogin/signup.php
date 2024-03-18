@@ -4,6 +4,7 @@ if (isset($_POST['submit'])) {
   $uname = $_POST["username"];
   $umail = $_POST["email"];
   $uphone = $_POST["phone"];
+  $ulocation = $_POST['location'];
   $upw = $_POST["password"];
   $upwc = $_POST["confirm-password"];
   $accCheck = "SELECT * FROM users WHERE email = '$umail' OR phone='$uphone'";
@@ -16,12 +17,14 @@ if (isset($_POST['submit'])) {
     echo "Enter a valid name!";
   } else if (!preg_match('/^(98|97)\d{8}/', $uphone)) {
     echo "Enter a valid phone number!!";
-  } else if (strlen($upwc) < 6 || !preg_match('/[A-Z]/', $upwc) || !preg_match('/[0-9]/', $upwc)) {
+  } else if (strlen($ulocation) < 5) {
+    echo "Enter a valid location!!";
+  }else if (strlen($upwc) < 6 || !preg_match('/[A-Z]/', $upwc) || !preg_match('/[0-9]/', $upwc)) {
     echo "Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!";
   } else {
     // Hash the password before storing
     $hpw = password_hash($upw,PASSWORD_DEFAULT);
-    $sql = "INSERT INTO  users (username,email,password,phone) VALUES ('$uname', '$umail', '$hpw', '$uphone')"; 
+    $sql = "INSERT INTO users (username, email, location, password, phone) VALUES ('$uname', '$umail', '$ulocation', '$hpw', '$uphone')";
     if ($con->query($sql) === true) {
       echo "Success";
     } else {
@@ -70,6 +73,9 @@ if (isset($_POST['submit'])) {
 
       <label for="phone">Phone Number:</label>
       <input type="number" id="phone" name="phone" required>
+
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location" required>
 
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
