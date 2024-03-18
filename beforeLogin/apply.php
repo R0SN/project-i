@@ -15,15 +15,19 @@
     $result = $con->query($accCheck);
     if ($result->num_rows > 0) {
       echo "Account already exists!";
-    } else if (strlen($wname) < 3) {
+    } 
+    else if($wskill=="Select a skill"){
+      echo "Select a skill!!";
+    }
+      else if (strlen($wname) < 3) {
       echo "Enter a valid name!";
     } else if (!preg_match('/^(98|97)\d{8}$/', $wphone)) {
       echo "Enter a valid phone number!!";
     } else {
       $sql = "INSERT INTO applications (name,phone,email,skill,photo,certificate) VALUES ('$wname', '$wphone', '$wmail', '$wskill','$wphoto','$wc')";
       if ($con->query($sql) === true) {
-        move_uploaded_file($wphoto_temp,$wphoto_folder);
-        move_uploaded_file($wc_temp,$wc_folder);
+        move_uploaded_file($wphoto_temp, $wphoto_folder);
+        move_uploaded_file($wc_temp, $wc_folder);
         echo "Success";
       } else {
         echo "Failure: ";
@@ -72,7 +76,15 @@
         <input type="number" id="phone" name="phone" required>
 
         <label for="skills">Skills:</label>
-        <input type="text" id="skills" name="skills" required>
+        <select id="skills" name="skills" required>
+          <option value="">Select a skill</option>
+          <option value="plumber">Plumber</option>
+          <option value="electrician">Electrician</option>
+          <option value="interior_design">Interior Design</option>
+          <option value="painter">Painter</option>
+          <option value="carpenter">Carpenter</option>
+        </select>
+
 
         <label for="photo">Upload Photo:</label>
         <input type="file" id="photo" name="photo" accept=".jpg, .jpeg" required>
