@@ -9,8 +9,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm'])) {
     $clocation = $_POST['change_location'];
     $cphone = $_POST['change_phone'];
     $cpassword = $_POST['change_password'];
+    $hcpassword = password_hash($cpassword,PASSWORD_DEFAULT);
 
-    $query = "UPDATE users SET username='$cusername', email='$cemail', phone='$cphone', location='$clocation', password='$cpassword' WHERE id=$cid";
+
+    $query = "UPDATE users SET username='$cusername', email='$cemail', phone='$cphone', location='$clocation', password='$hcpassword' WHERE id=$cid";
     $result = mysqli_query($con, $query);
 
     if ($result) {

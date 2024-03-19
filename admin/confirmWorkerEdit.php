@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm'])) {
 
     if ($result) {
         echo "Details updated successfully.";
-        header("refresh:2;url=workers.php");
+        header("refresh:1;url=workers.php");
         exit;
     } else {
         echo "Error updating details: " . mysqli_error($con);

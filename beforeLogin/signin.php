@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-if (isset($_SESSION['user_id'])) {
-  header("Location: ../afterLogin/home.html");
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
   include "../connect.php";
@@ -12,23 +9,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $upw = $_POST["password"];
     $accCheck = "SELECT * FROM users WHERE email = '$umail'";
     $accCheck1 = "SELECT * FROM workers WHERE email = '$umail'";
+    $accCheck2 = "SELECT * FROM admin WHERE email = '$umail'";
     $result = $con->query($accCheck);
     $result1 = $con->query($accCheck1);
+    $result2 = $con->query($accCheck2);
     
         $user = $result->fetch_assoc();
         $worker = $result1->fetch_assoc();
+        $admin = $result2->fetch_assoc();
         
-        if ($result->num_rows == 0 && $result1->num_rows == 0 ) {
+        if ($result->num_rows == 0 && $result1->num_rows == 0 && $result2->num_rows == 0) {
           echo "Account does not exist!";
         } else {
-          if (password_verify($upw, $user['password'])) {
+          if ( password_verify($upw, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
-            header("Location: ../afterLogin/home.html");
+            header("Location: ../afterLogin/home.php");
             exit(); 
           }
-          else if (password_verify($upw, $worker['password'])) {
+          else if ( password_verify($upw, $worker['password'])) {
             $_SESSION['user_id'] = $worker['id'];
-            header("Location: ../afterLogin/home.html");
+            header("Location: ../afterLogin/home.php");
+            exit(); 
+          }
+          else if (password_verify($upw, $admin['password'])) {
+            $_SESSION['user_id'] = $admin['id'];
+            header("Location: ../admin/applications.php");
             exit(); 
           } else {
             echo "Invalid password!";

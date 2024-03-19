@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,8 +19,8 @@
     <div class="logo-container">
       <img src="../images\logo\house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
     </div>
-    <a href="home.html">Home</a>
-    <a href="service.html">Services</a>
+    <a href="home.php">Home</a>
+    <a href="service.php">Services</a>
     <a href="signout.php">Sign Out</a>
 
     <div class="profile-icon" onclick="toggleProfileContainer()">
