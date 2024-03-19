@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 ?>
 
@@ -19,21 +19,17 @@ session_start();
     <div class="logo-container">
       <img src="../images\logo\house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
     </div>
-    <a href="home.php">Home</a>
-    <a href="service.php">Services</a>
-    <a href="signout.php">Sign Out</a>
+    <a href="home.php" class="hovers">Home</a>
+    <a href="service.php" class="hovers">Services</a>
+    <a href="signout.php" class="hovers">Sign Out</a>
 
-    <div class="profile-icon" onclick="toggleProfileContainer()">
-      <img src="../images/profile-user.png" alt="profile" class="profile" style="z-index: 1" />
+    <div class="profile-icon">
+      <a href="profile.php"> <img src="../images/profile-user.png" alt="profile" class="profile" style="z-index: 1" />
+      </a>
     </div>
   </nav>
-  <!-- ------------------- NAVIGATION BAR ---------------------------- -->
-  <!-- Profile Container -->
-  <div class="profile-container" id="profileContainer" >
-    <!-- Empty profile container -->
-    <button onclick="redirectToSignIn()" onmouseover="change(this)" onmouseout="unchange(this)">Sign In</button>
-  </div>
-  <!-- Profile Container -->
+  <!-- ------------------- NAVIGATION BAR -----------------
+     -->
 
   <img src="../images/homeImages/david-pisnoy-46juD4zY1XA-unsplash.jpg" class="img1" height="400px" />
   <img src="../images/homeImages/frames-for-your-heart-iOLHAIaxpDA-unsplash.jpg" class="img2" height="400px" />
@@ -68,16 +64,6 @@ session_start();
     function unchange(element) {
       element.style.backgroundColor = "#333";
       element.style.color = "white";
-    }
-
-    function toggleProfileContainer() {
-      var profileContainer = document.getElementById("profileContainer");
-      profileContainer.style.display = profileContainer.style.display === "none" ? "block" : "none";
-    }
-
-    function redirectToSignIn() {
-      var signInPage = "signin.html";
-      window.location.href = signInPage;
     }
   </script>
 </body>

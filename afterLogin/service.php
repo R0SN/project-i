@@ -19,12 +19,13 @@ session_start();
     <div class="logo-container">
       <img src="../images\logo\house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
     </div>
-    <a href="home.php">Home</a>
-    <a href="service.php">Services</a>
-    <a href="signout.php">Sign Out</a>
+    <a href="home.php" class="hovers">Home</a>
+    <a href="service.php" class="hovers">Services</a>
+    <a href="signout.php" class="hovers">Sign Out</a>
 
-    <div class="profile-icon" onclick="toggleProfileContainer()">
-      <img src="../images/profile-user.png" alt="profile" class="profile" style="z-index: 1" />
+    <div class="profile-icon">
+      <a href="profile.php"> <img src="../images/profile-user.png" alt="profile" class="profile" style="z-index: 1" />
+      </a>
     </div>
   </nav>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->

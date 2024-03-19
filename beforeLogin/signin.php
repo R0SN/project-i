@@ -1,9 +1,8 @@
 <?php
 session_start();
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-  include "../connect.php";
+    include "../connect.php";
 
     $umail = $_POST["email"];
     $upw = $_POST["password"];
@@ -13,38 +12,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $result = $con->query($accCheck);
     $result1 = $con->query($accCheck1);
     $result2 = $con->query($accCheck2);
-    
+
+    if ($result && $result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        $worker = $result1->fetch_assoc();
-        $admin = $result2->fetch_assoc();
-        
-        if ($result->num_rows == 0 && $result1->num_rows == 0 && $result2->num_rows == 0) {
-          echo "Account does not exist!";
-        } else {
-          if ( password_verify($upw, $user['password'])) {
+        if (password_verify($upw, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
+            $_SESSION['semail'] = $user['email'];
             header("Location: ../afterLogin/home.php");
-            exit(); 
-          }
-          else if ( password_verify($upw, $worker['password'])) {
-            $_SESSION['user_id'] = $worker['id'];
-            header("Location: ../afterLogin/home.php");
-            exit(); 
-          }
-          else if (password_verify($upw, $admin['password'])) {
-            $_SESSION['user_id'] = $admin['id'];
-            header("Location: ../admin/applications.php");
-            exit(); 
-          } else {
-            echo "Invalid password!";
-          }
+            exit();
         }
-    
+    } elseif ($result1 && $result1->num_rows > 0) {
+        $worker = $result1->fetch_assoc();
+        if (password_verify($upw, $worker['password'])) {
+            $_SESSION['user_id'] = $worker['id'];
+            $_SESSION['semail'] = $worker['email'];
+            header("Location: ../afterLogin/home.php");
+            exit();
+        }
+    } elseif ($result2 && $result2->num_rows > 0) {
+        $admin = $result2->fetch_assoc();
+        if (password_verify($upw, $admin['password'])) {
+            $_SESSION['user_id'] = $admin['id'];
+            $_SESSION['semail'] = $admin['email'];
+            header("Location: ../admin/applications.php");
+            exit();
+        }
+    }
+
+    // If none of the conditions above are met, it means the email or password is invalid
+    echo "Invalid email or password!";
 
     $con->close();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

@@ -21,7 +21,7 @@ body {
     margin: 0 10px;
   }
   
-  nav a:hover {
+  nav .hovers:hover {
     background-color: #ddd;
     color: black;
   }
@@ -43,7 +43,7 @@ body {
   .profile-icon {
     position: absolute;
     display: inline-block;
-    margin: 0 100px;
+    margin: -15px 0 0 100px;
   }
   
   .profile {
