@@ -21,7 +21,7 @@ nav a {
   margin: 0 10px;
 }
 
-nav a:hover {
+nav .hovers:hover {
   background-color: #ddd;
   color: black;
 }
@@ -38,4 +38,14 @@ nav a:visited {
 
 .logo {
   max-height: 50px;
+}
+
+.profile-icon {
+  position: absolute;
+  display: inline-block;
+  margin: -15px 0 0 100px;
+}
+
+.profile {
+  max-height: 49px;
 }

@@ -1,7 +1,6 @@
 <?php
 session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,23 +13,41 @@ session_start();
 </head>
 
 <body>
+<?php
+include "../connect.php";
+if (!isset($_SESSION['user_id'])) {
+  echo "
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
   <nav>
-    <div class="logo-container">
-      <img src="../images\logo\house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
+    <div class='logo-container'>
+      <img src='../images\logo\house-cleaning.png' alt='SkillSprint Logo' class='logo' style='z-index: 1' />
     </div>
-    <a href="home.php" class="hovers">Home</a>
-    <a href="service.php" class="hovers">Services</a>
-    <a href="signout.php" class="hovers">Sign Out</a>
+    <a href='home.php'>Home</a>
+    <a href='service.php'>Services</a>
+    <a href='apply.php'>Apply as a Worker</a>
+    <a href='signin.php'>Sign In</a>
+  </nav>
+  <!-- ------------------- NAVIGATION BAR ---------------------------- -->";
+} 
+ else {
+  echo "
+  <!-- ------------------- NAVIGATION BAR ---------------------------- -->
+  <nav>
+    <div class='logo-container'>
+      <img src='../images\logo\house-cleaning.png' alt='SkillSprint Logo' class='logo' style='z-index: 1' />
+    </div>
+    <a href='home.php'>Home</a>
+    <a href='service.php'>Services</a>
+    <a href='signout.php' class='hovers'>Sign Out</a>
 
-    <div class="profile-icon">
-      <a href="profile.php"> <img src="../images/profile-user.png" alt="profile" class="profile" style="z-index: 1" />
+    <div class='profile-icon'>
+      <a href='profile.php'> <img src='../images/profile-user.png' alt='profile' class='profile' style='z-index: 1' />
       </a>
     </div>
   </nav>
-  <!-- ------------------- NAVIGATION BAR -----------------
-     -->
-
+  <!-- ------------------- NAVIGATION BAR ---------------------------- -->";
+ }
+?>
   <img src="../images/homeImages/david-pisnoy-46juD4zY1XA-unsplash.jpg" class="img1" height="400px" />
   <img src="../images/homeImages/frames-for-your-heart-iOLHAIaxpDA-unsplash.jpg" class="img2" height="400px" />
   <img src="../images/homeImages/spacejoy-h2_3dL9yLpU-unsplash.jpg" class="img3" height="500px" />
@@ -52,7 +69,7 @@ session_start();
 
   <script>
     function goToPage() {
-      var destinationPage = "service.html";
+      var destinationPage = "service.php";
       window.location.href = destinationPage;
     }
 
@@ -65,6 +82,7 @@ session_start();
       element.style.backgroundColor = "#333";
       element.style.color = "white";
     }
+
   </script>
 </body>
 

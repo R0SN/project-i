@@ -1,0 +1,29 @@
+
+button {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+
+  .img_container{
+    background-image: url(../images/profile-user.png);
+    background-size: 150px;
+    filter: blur(2%);
+    height: 150px;
+    width: 100vw;
+    position: absolute;
+    margin-top: -5px;
+    z-index: -1;
+   
+}
+.profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    z-index: 1;
+}
+

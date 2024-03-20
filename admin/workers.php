@@ -71,7 +71,7 @@
                         echo "<td>Unsupported file format</td>";
                       }
                                 
-                    echo "<td>{$row['password']}</td>
+                    echo "<td id='pw'>{$row['password']}</td>
                         <td>
                             <form action='editWorkers.php' method='post'>
                                 <input type='hidden' name='id' value='{$row['id']}'>

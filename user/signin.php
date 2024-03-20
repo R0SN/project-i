@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         if (password_verify($upw, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['semail'] = $user['email'];
-            header("Location: ../afterLogin/home.php");
+            header("Location:home.php");
             exit();
         }
     } elseif ($result1 && $result1->num_rows > 0) {
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         if (password_verify($upw, $worker['password'])) {
             $_SESSION['user_id'] = $worker['id'];
             $_SESSION['semail'] = $worker['email'];
-            header("Location: ../afterLogin/home.php");
+            header("Location:home.php");
             exit();
         }
     } elseif ($result2 && $result2->num_rows > 0) {
@@ -62,8 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <div class="logo-container">
       <img src="../images\logo\house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
     </div>
-    <a href="home.html">Home</a>
-    <a href="service.html">Services</a>
+    <a href="home.php">Home</a>
+    <a href="service.php">Services</a>
     <a href="apply.php">Apply as a Worker</a>
     <a href="signin.php">Sign In</a>
   </nav>

@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
       <img src="../images\logo\house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
     </div>
     <a href="home.html">Home</a>
-    <a href="service.html">Services</a>
+    <a href="service.php">Services</a>
     <a href="apply.php">Apply as a Worker</a>
     <a href="signin.php">Sign In</a>
   </nav>
