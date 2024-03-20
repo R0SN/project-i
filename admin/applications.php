@@ -42,12 +42,8 @@
       include "../connect.php";
       $currentDateTime = date("Y-m-d H:i:s");
       // ----------------------- expired booking deletion ---------------------
-      $sql = "DELETE FROM bookings WHERE booking_datetime < '$currentDateTime'";
-      if (mysqli_query($conn, $sql)) {
-        echo "Records deleted successfully";
-      } else {
-        echo "Error deleting records: " . mysqli_error($conn);
-      }
+      $sql = "DELETE FROM bookings WHERE dateTime < '$currentDateTime'";
+      mysqli_query($con, $sql);
       // ----------------------- expired booking deletion ---------------------
 
       $query = "SELECT * FROM applications";

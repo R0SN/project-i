@@ -26,3 +26,16 @@
     border-radius: 50%;
     z-index: 1;
 }
+.certiImg{
+    position: absolute;
+     top: 50px; 
+     left: 1100px;
+}
+.certiImg img, embed{
+  height: 90vh;
+  width: 420px;
+}
+table{
+  border: 1px solid #333;
+  border-collapse: collapse;
+}

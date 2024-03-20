@@ -8,8 +8,9 @@ session_start();
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>User Profile</title>
-    <link rel='stylesheet' href='profile.css'>
     <link rel='stylesheet' href='nav.css'>
+    <link rel="stylesheet" href="profile.css" />
+
 </head>
 
 <body>
@@ -43,10 +44,12 @@ session_start();
 
         $result = $con->query($qry);
         $result1 = $con->query($qry1);
+
+        //===================user profile================== 
         if ($result->num_rows > 0) {
             $row = mysqli_fetch_assoc($result);
+            $id = $row['id'];
             $name = $row['username'];
-
             $email = $row['email'];
             $location = $row['location'];
             $phone = $row['phone'];
@@ -60,15 +63,12 @@ session_start();
                     <p>Phone Number: " . $phone . " </p>
                     <p>Location: " . $location . "</p>
                     <h2>Bookings</h2>
-                    <div class='booking'>
-                        <p>Booking 1: Date and Time</p>
-                        <p>Booking 2: Date and Time</p>
-                        <!-- Add more bookings as needed -->
-                    </div>
-                </div>
             </center>";
-        } else if ($result1->num_rows > 0) {
+        }
+        // =============worker profile=================
+        else if ($result1->num_rows > 0) {
             $row1 = mysqli_fetch_assoc($result1);
+            $id = $row1['id'];
             $name = $row1['name'];
             $email = $row1['email'];
             $location = $row1['service_area'];
@@ -84,28 +84,90 @@ session_start();
                     <center>
                     <div class='img_container'></div>
                     <img src='$photoImg' alt='Profile Picture' class='profileImage' height='100px'>
-                    <p>Name: " . $name . "</p>
-                    <p>Email: " . $email . "</p>
-                    <p>Phone Number:  " . $phone . "</p>
-                    <p>Service Area: " . $location . "</p>
-                    <p>Skill:  " . $skill . "</p>
-                        </center>";
+                    <p>Name: $name</p>
+                    <p>Email: $email</p>
+                    <p>Phone Number: $phone</p>
+                    <p>Service Area: $location</p>
+                    <p>Skill: $skill</p>
+                    </center>";
             if (in_array($certificateExtension, ['jpg', 'jpeg', 'png'])) {
-                echo "<div class='certiImg' style='position: absolute; top: 50px; left: 900px;'>Certificate:<a href='$certiImg' target='_blank'><img src='$certiImg' alt='$name' style='height: 90vh; width:400px;'></a></div>";
+                echo "<div class='certiImg'><img src='$certiImg' alt='$name'></div>";
             } elseif ($certificateExtension === 'pdf') {
-                echo "<div class='certiImg' style='position: absolute; top: 50px; left: 900px;'>Certificate:<embed src='$certiImg' style='height: 90vh;width:400px;'></div>";
+                echo "<div class='certiImg'><embed src='$certiImg'></div>";
             } else {
                 echo "Unsupported file format";
             }
             echo "
-                   <center>
+            <div class'books'>
                     <h2>Bookings</h2>
-                    <div class='booking'>
-                        <p>Booking 1: Date and Time</p>
-                        <p>Booking 2: Date and Time</p>
-                        <!-- Add more bookings as needed -->
-                    </center>";
+                    <table border='1'>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Location</th>
+                        <th>Date and Time</th>
+                        <th colspan='2'>Status</th>
+                      </tr>
+                    </thead>";
+            $getBooking = "SELECT * FROM bookings WHERE worker_id=$id";
+            $result2 = $con->query($getBooking);
+
+            if (mysqli_num_rows($result2) > 0) {
+                // Loop through each row of data
+                while ($row2 = mysqli_fetch_assoc($result2)) {
+                    $userId = $row2['user_id'];
+                    $status = $row2['status'];
+                    $dnt = $row2['dateTime'];
+
+                    $getUserDetail = "SELECT * FROM users WHERE id=$userId";
+                    $result3 = $con->query($getUserDetail);
+                    $row3 = mysqli_fetch_assoc($result3);
+                    $uname = $row3['username'];
+                    $umail = $row3['email'];
+                    $uphone = $row3['phone'];
+                    $ulocation = $row3['location'];
+                    echo "<tr>
+                        <td> $uname </td>
+                        <td>$umail</td>
+                        <td>$uphone </td>
+                        <td>$ulocation </td>
+                        <td>$dnt </td>";
+                    if ($status == 1) {
+                        echo "<td>Declined</td>";
+                    } else if ($status == 2) {
+                        echo "<td>Approved</td>";
+                    } else {
+                        echo "<td >
+                            <form action='profile.php' method='post'>
+                            <button type='submit' name='approve'>Approve</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action='profile.php' method='post'>
+                            <button type='submit' name='decline'>Decline</button>
+                            </form>
+                        </td>";
+                    }
+                }
+                echo "</tr></table>";
+            } else {
+                // No data found in the database
+                echo "<tr><td colspan='4'>No Bookings</td></tr>";
+            }
         }
+    }
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['approve'])) {
+        $q = "UPDATE bookings SET status=2 WHERE user_id=$userId";
+        $con->query($q);
+        header("refresh: 0");
+    }
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['decline'])) {
+        $q1 = "UPDATE bookings SET status=1 WHERE user_id=$userId";
+        $con->query($q1);
+        header("refresh: 0");
     }
     ?>
 </body>

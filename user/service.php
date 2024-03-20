@@ -22,10 +22,10 @@ if (!isset($_SESSION['user_id'])) {
     <div class='logo-container'>
       <img src='../images\logo\house-cleaning.png' alt='SkillSprint Logo' class='logo' style='z-index: 1' />
     </div>
-    <a href='home.php'>Home</a>
-    <a href='service.php'>Services</a>
-    <a href='apply.php'>Apply as a Worker</a>
-    <a href='signin.php'>Sign In</a>
+    <a href='home.php' class='hovers'>Home</a>
+    <a href='service.php' class='hovers'>Services</a>
+    <a href='apply.php' class='hovers'>Apply as a Worker</a>
+    <a href='signin.php' class='hovers'>Sign In</a>
   </nav>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->";
 } 
@@ -36,8 +36,8 @@ else {
     <div class='logo-container'>
       <img src='../images\logo\house-cleaning.png' alt='SkillSprint Logo' class='logo' style='z-index: 1' />
     </div>
-    <a href='home.php'>Home</a>
-    <a href='service.php'>Services</a>
+    <a href='home.php' class='hovers'>Home</a>
+    <a href='service.php' class='hovers'>Services</a>
     <a href='signout.php' class='hovers'>Sign Out</a>
 
     <div class='profile-icon'>
@@ -81,19 +81,30 @@ else {
         </div>
       </div>";
       } else {
-        
-        echo "<a href='aboutWorker.php'><form action='aboutWorker.php' method='post'>
-        <input type='hidden' name='id' value='$id'>
+        $sid = $_SESSION['user_id'];
+        $semail = $_SESSION['semail'];
+        $check = "SELECT * FROM users WHERE id=$sid AND email='$semail'";
+        $qry = $con->query($check);
+        if(mysqli_num_rows($qry)>0){
+          echo "<a href='aboutWorker.php'><form action='aboutWorker.php' method='post'>
+          <input type='hidden' name='id' value='$id'>
+         <button type='submit' name='about'>more</button>
+        </form></a>
+          </div>
+        </div>";
+        }
+        else{
+          echo "
        <button type='submit' name='about'>more</button>
-      </form></a>
         </div>
       </div>";
+        }
       }
     }
   }
      else {
       // No data found in the database
-      echo "No workers found";
+      echo "No workers found";  
     }
 
     // Close the database connection

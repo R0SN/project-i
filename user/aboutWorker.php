@@ -9,7 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skill workers</title>
     <link rel="stylesheet" href="nav.css" />
-    <link rel="stylesheet" href="aboutWorker.css" />
+    <link rel="stylesheet" href="profile.css" />
 </head>
 
 <body>
@@ -63,9 +63,9 @@ session_start();
                         <p>Skill:  " . $skill . "</p>
                             </center>";
                 if (in_array($certificateExtension, ['jpg', 'jpeg', 'png'])) {
-                    echo "<div class='certiImg' style='position: absolute; top: 50px; left: 900px;'>Certificate:<a href='$certiImg' target='_blank'><img src='$certiImg' alt='$name' style='height: 90vh; width:400px;'></a></div>";
+                    echo "<div class='certiImg'><a href='$certiImg' target='_blank'><img src='$certiImg' alt='$name' style='height: 90vh; width:400px;'></a></div>";
                 } elseif ($certificateExtension === 'pdf') {
-                    echo "<div class='certiImg' style='position: absolute; top: 50px; left: 900px;'>Certificate:<embed src='$certiImg' style='height: 90vh;width:400px;'></div>";
+                    echo "<div class='certiImg'><embed src='$certiImg' style='height: 90vh;width:400px;'></div>";
                 } else {
                     echo "Unsupported file format";
                 }

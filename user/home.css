@@ -35,19 +35,20 @@ img {
 
 .img1 {
   transform: rotate(30deg);
+  margin:0 0 0 50px;
 }
 
 .img2 {
-  margin: 200px 0 0 300px;
+  margin: 200px 0 0 350px;
   transform: rotate(-10deg);
 }
 
 .img3 {
-  margin: 90px 0 0 700px;
+  margin: 90px 0 0 750px;
   transform: rotate(20deg);
 }
 
 .img4 {
-  margin: 300px 0 0 1100px;
+  margin: 300px 0 0 1150px;
   transform: rotate(-30deg);
 }

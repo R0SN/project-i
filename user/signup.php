@@ -55,10 +55,10 @@ if (isset($_POST['submit'])) {
     <div class="logo-container">
       <img src="../images\logo\house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
     </div>
-    <a href="home.html">Home</a>
-    <a href="service.php">Services</a>
-    <a href="apply.php">Apply as a Worker</a>
-    <a href="signin.php">Sign In</a>
+    <a href="home.php" class='hovers'>Home</a>
+    <a href="service.php" class='hovers'>Services</a>
+    <a href="apply.php" class='hovers'>Apply as a Worker</a>
+    <a href="signin.php" class='hovers'>Sign In</a>
   </nav>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
   <!-- ------------------- SIGN UP FORM ---------------------------- -->
