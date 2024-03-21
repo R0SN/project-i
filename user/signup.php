@@ -13,11 +13,11 @@ if (isset($_POST['submit'])) {
     echo "Account already exists!";
   } elseif ($upw !== $upwc) {
     echo "The passwords do not match";
-  } else if (strlen($uname) < 3) {
+  } else if (strlen($uname) < 3 || strlen($uname)>20) {
     echo "Enter a valid name!";
   } else if (!preg_match('/^(98|97)\d{8}/', $uphone)) {
     echo "Enter a valid phone number!!";
-  } else if (strlen($ulocation) < 5) {
+  } else if (strlen($ulocation) < 5 || strlen($ulocation)>30) {
     echo "Enter a valid location!!";
   }else if (strlen($upwc) < 6 || !preg_match('/[A-Z]/', $upwc) || !preg_match('/[0-9]/', $upwc)) {
     echo "Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!";

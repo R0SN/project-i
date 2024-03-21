@@ -8,7 +8,7 @@ $_SESSION = array();
 session_destroy();
 
 // Redirect the user to the sign-in page or any other desired page
-header("Location: ../beforeLogin/home.html");
+header("Location: ../user/home.php");
 exit;
 ?>
 
