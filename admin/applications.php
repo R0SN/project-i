@@ -23,6 +23,7 @@
   <!-- End Navigation Bar -->
 
   <!-- Table for Applications -->
+  <h3>Applications</h3>
   <table>
     <thead>
       <tr>

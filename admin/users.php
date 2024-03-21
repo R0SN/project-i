@@ -28,7 +28,7 @@ $result = mysqli_query($con, $query);
         <a href="signout.php">Sign Out</a>
     </nav>
     <!-- End Navigation Bar -->
-
+    <h3>Users</h3>  
     <!-- Table for Users -->
     <table>
         <thead>

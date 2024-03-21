@@ -50,7 +50,7 @@ if (!isset($_SESSION['user_id'])) {
 ?>
   <img src="../images/homeImages/david-pisnoy-46juD4zY1XA-unsplash.jpg" class="img1" height="400px" />
   <img src="../images/homeImages/frames-for-your-heart-iOLHAIaxpDA-unsplash.jpg" class="img2" height="400px" />
-  <img src="../images/homeImages/spacejoy-h2_3dL9yLpU-unsplash.jpg" class="img3" height="500px" />
+  <img src="../images/homeImages/spacejoy-h2_3dL9yLpU-unsplash.jpg" class="img3" height="470px" />
   <img src="../images/homeImages/valentin-petkov-z06oDT-8pKQ-unsplash.jpg" class="img4" height="300px" />
 
   <center>
