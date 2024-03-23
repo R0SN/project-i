@@ -14,8 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
     unlink($photoPath);
     unlink($certiPath);
 
+    $query1 = "DELETE FROM bookings WHERE worker_id = '$id'";
     $query = "DELETE FROM workers WHERE id = '$id'";
     $result = mysqli_query($con, $query);
+    $result1 = mysqli_query($con, $query1);
     if ($con->query($query) === false) {
         echo "User deletion failed";
     } else header("Refresh:0; url=workers.php");
