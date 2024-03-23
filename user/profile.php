@@ -62,8 +62,66 @@ session_start();
                     <p>Email: " . $email . "</p>
                     <p>Phone Number: " . $phone . " </p>
                     <p>Location: " . $location . "</p>
+                    <div class='books'>
                     <h2>Bookings</h2>
+                    <table border='1'>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Location</th>
+                        <th>Skill</th>
+                        <th>Date and Time</th>
+                        <th >Status</th>
+                      </tr>
+                    </thead>
             </center>";
+            $getBooking = "SELECT * FROM bookings WHERE user_id=$id";
+            $result2 = $con->query($getBooking);
+
+            if (mysqli_num_rows($result2) > 0) {
+                // Loop through each row of data
+                while ($row2 = mysqli_fetch_assoc($result2)) {
+                    $workerId = $row2['worker_id'];
+                    $status = $row2['status'];
+                    $dnt = $row2['dateTime'];
+                    $bid = $row2['id'];
+
+                    $getUserDetail = "SELECT * FROM workers WHERE id=$workerId";
+                    $result3 = $con->query($getUserDetail);
+                    $row3 = mysqli_fetch_assoc($result3);
+                    $wname = $row3['name'];
+                    $wmail = $row3['email'];
+                    $wphone = $row3['phone'];
+                    $wlocation = $row3['service_area'];
+                    $wskill = $row3['skill'];
+                    echo "<tr>
+                        <td> $wname </td>
+                        <td>$wmail</td>
+                        <td>$wphone </td>
+                        <td>$wlocation </td>
+                        <td>$wskill </td>
+                        <td>$dnt </td>";
+                    if ($status == 1) {
+                        echo "<td>Declined</td>";
+                    } else if ($status == 2) {
+                        echo "<td>Approved</td>";
+                    } else {
+                        echo "
+                        <td>
+                            <form action='profile.php' method='post'>
+                            <input type='hidden' name='bid' value='$bid'>
+                            <button type='submit' name='cancel'>Cancel</button>
+                            </form>
+                        </td>";
+                    }
+                }
+                echo "</tr></table></div>";
+            } else {
+                // No data found in the database
+                echo "<tr><td colspan='7'>No Bookings</td></tr>";
+            }
         }
         // =============worker profile=================
         else if ($result1->num_rows > 0) {
@@ -98,7 +156,7 @@ session_start();
                 echo "Unsupported file format";
             }
             echo "
-            <div class'books'>
+            <div class='books'>
                     <h2>Bookings</h2>
                     <table border='1'>
                     <thead>
@@ -120,6 +178,7 @@ session_start();
                     $userId = $row2['user_id'];
                     $status = $row2['status'];
                     $dnt = $row2['dateTime'];
+                    $bid = $row2['id'];
 
                     $getUserDetail = "SELECT * FROM users WHERE id=$userId";
                     $result3 = $con->query($getUserDetail);
@@ -141,31 +200,41 @@ session_start();
                     } else {
                         echo "<td >
                             <form action='profile.php' method='post'>
+                            <input type='hidden' name='bid' value='$bid'>
                             <button type='submit' name='approve'>Approve</button>
                             </form>
                         </td>
                         <td>
                             <form action='profile.php' method='post'>
+                            <input type='hidden' name='bid' value='$bid'>
                             <button type='submit' name='decline'>Decline</button>
                             </form>
                         </td>";
                     }
                 }
-                echo "</tr></table>";
+                echo "</tr></table></div>";
             } else {
                 // No data found in the database
-                echo "<tr><td colspan='4'>No Bookings</td></tr>";
+                echo "<tr><td colspan='6'>No Bookings</td></tr>";
             }
         }
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['approve'])) {
-        $q = "UPDATE bookings SET status=2 WHERE user_id=$userId";
+        $bid = $_POST['bid'];
+        $q = "UPDATE bookings SET status=2 WHERE id=$bid";
         $con->query($q);
         header("refresh: 0");
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['decline'])) {
-        $q1 = "UPDATE bookings SET status=1 WHERE user_id=$userId";
+        $bid = $_POST['bid'];
+        $q1 = "UPDATE bookings SET status=1 WHERE  id=$bid";
+        $con->query($q1);
+        header("refresh: 0");
+    }
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cancel'])) {
+        $bid = $_POST['bid'];
+        $q1 = "DELETE FROM bookings WHERE  id=$bid";
         $con->query($q1);
         header("refresh: 0");
     }

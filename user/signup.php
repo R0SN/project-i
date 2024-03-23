@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
     echo "The passwords do not match";
   } else if (strlen($uname) < 3 || strlen($uname)>20) {
     echo "Enter a valid name!";
-  }else if (!filter_var($wmail, FILTER_VALIDATE_EMAIL)) {
+  }else if (!filter_var($umail, FILTER_VALIDATE_EMAIL)) {
     echo "Invalid email format!";
   } else if (!preg_match('/^(98|97)\d{8}/', $uphone)) {
     echo "Enter a valid phone number!!";

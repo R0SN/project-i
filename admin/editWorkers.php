@@ -6,13 +6,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit'])) {
     $username = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-    $password = $_POST['password'];
     $skill = $_POST['skill'];
     $warea = $_POST['service_area'];
-    $photo = $_POST['photo'];
-    $certificate = $_POST['certificate'];
-    
-
 }
 ?>
 

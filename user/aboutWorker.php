@@ -93,8 +93,7 @@ session_start();
                     VALUES ('$userId', '$workerId', '$bookingDateTime')";
         
             if (mysqli_query($con, $sql)) {
-                echo "Booked Succesfully";
-                header("refresh:1;url=profile.php");
+                header("refresh:0;url=profile.php");
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($con);
             }

@@ -8,7 +8,6 @@ th,
 td {
     border: 1px solid #ddd;
     text-align: center;
-    
 }
 td a{
     text-decoration: none;
@@ -24,4 +23,8 @@ th {
 }
 #pw{
     word-break: break-all;
+    width: 150px;
+}
+.main{
+    padding: 0 50px 0 50px;
 }

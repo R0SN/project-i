@@ -21,6 +21,7 @@
         <a href="signout.php">Sign Out</a>
     </nav>
     <!-- End Navigation Bar -->
+    <div class="main">
     <h3>Workers</h3>
     <!-- Table for Workers -->
     <table>
@@ -104,6 +105,7 @@
         </tbody>
     </table>
     <!-- End Table for Workers -->
+    </div>
 </body>
 
 </html>

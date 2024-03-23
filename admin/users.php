@@ -28,6 +28,7 @@ $result = mysqli_query($con, $query);
         <a href="signout.php">Sign Out</a>
     </nav>
     <!-- End Navigation Bar -->
+    <div class="main">
     <h3>Users</h3>  
     <!-- Table for Users -->
     <table>
@@ -37,8 +38,9 @@ $result = mysqli_query($con, $query);
                 <th>Name</th>
                 <th>Email</th>
                 <th>Loation</th>
-                <th>Password</th>
                 <th>Phone</th>
+                <th>Action</th>
+
             </tr>
         </thead>
         <tbody>
@@ -51,7 +53,6 @@ $result = mysqli_query($con, $query);
                         <td>" . $row['username'] . "</td>
                         <td>" . $row['email'] . "</td>
                         <td>" . $row['location'] . "</td>
-                        <td>" . $row['password'] . "</td>
                         <td>" . $row['phone'] . "</td>
                     <td>
                         <form action='editUser.php' method='post'>
@@ -59,12 +60,10 @@ $result = mysqli_query($con, $query);
                         <input type='hidden' name='name' value='" . $row['username'] . "'>
                         <input type='hidden' name='email' value='" . $row['email'] . "'>
                         <input type='hidden' name='location' value='" . $row['location'] . "'>
-                        <input type='hidden' name='password' value='" . $row['password'] . "'>
                         <input type='hidden' name='phone' value='" . $row['phone'] . "'>
                         <button type='submit' name='edit'>Edit</button>
                         </form>
-                    </td>
-                    <td>
+                    <br>
                         <form action='delete.php' method='post'>
                         <input type='hidden' name='id' value='" . $row['id'] . "'>
                         <button type='submit' name='delete'>Delete</button>
@@ -83,6 +82,7 @@ $result = mysqli_query($con, $query);
         </tbody>
     </table>
     <!-- End Table for Users -->
+    </div>
 </body>
 
 </html>

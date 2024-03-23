@@ -23,7 +23,9 @@
   <!-- End Navigation Bar -->
 
   <!-- Table for Applications -->
+  <div class="main">
   <h3>Applications</h3>
+
   <table>
     <thead>
       <tr>
@@ -99,6 +101,8 @@
     </tbody>
   </table>
   <!-- End Table for Applications -->
+  </div>
+
 </body>
 
 </html>
