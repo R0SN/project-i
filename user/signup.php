@@ -7,13 +7,14 @@ if (isset($_POST['submit'])) {
   $ulocation = $_POST['location'];
   $upw = $_POST["password"];
   $upwc = $_POST["confirm-password"];
+  
   $accCheck = "SELECT * FROM users WHERE email = '$umail' OR phone='$uphone'";
   $result = $con->query($accCheck);
   if ($result->num_rows > 0) {
     echo "Account already exists!";
   } elseif ($upw !== $upwc) {
     echo "The passwords do not match";
-  } else if (strlen($uname) < 3 || strlen($uname)>20) {
+  } else if (strlen($name) < 3 || strlen($name) > 20 || !preg_match('/^[a-zA-Z]$/', $name)) {
     echo "Enter a valid name!";
   }else if (!filter_var($umail, FILTER_VALIDATE_EMAIL)) {
     echo "Invalid email format!";

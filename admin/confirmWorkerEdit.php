@@ -27,3 +27,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm'])) {
     header("Location: workers.php");
     exit;
 }
+mysqli_close($con);
+?>

@@ -57,11 +57,12 @@ session_start();
             <center>
                 <div class='container'>
                     <div class='img_container'> </div>
-                    <img src='../images/Black-profile-user.png' alt='Profile Picture' class='profileImage' height='100px'>
+                    <img src='../images/Black-profile-user.png' alt='Profile Picture' class='profileImage'><a href='edit.php'><img src='../images/editIcon.png' class='edit'></a>
                     <p>Name: " . $name . "</p>
                     <p>Email: " . $email . "</p>
                     <p>Phone Number: " . $phone . " </p>
                     <p>Location: " . $location . "</p>
+
                     <div class='books'>
                     <h2>Bookings</h2>
                     <table border='1'>
@@ -141,7 +142,7 @@ session_start();
             echo "
                     <center>
                     <div class='img_container'></div>
-                    <img src='$photoImg' alt='Profile Picture' class='profileImage' height='100px'>
+                    <img src='$photoImg' alt='Profile Picture' class='profileImage' height='100px'><a href='edit.php'><img src='../images/editIcon.png' class='edit'></a>
                     <p>Name: $name</p>
                     <p>Email: $email</p>
                     <p>Phone Number: $phone</p>

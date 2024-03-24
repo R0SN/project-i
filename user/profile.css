@@ -42,3 +42,9 @@ table{
 .books{
   margin: 10px;
 }
+.edit{
+  height: 20px;
+  position: relative;
+  left: 10px;
+}
+
