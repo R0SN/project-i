@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     echo "Account already exists!";
   } elseif ($upw !== $upwc) {
     echo "The passwords do not match";
-  } else if (strlen($name) < 3 || strlen($name) > 20 || !preg_match('/^[a-zA-Z]$/', $name)) {
+  } else if (strlen($uname) < 3 || strlen($uname) > 20 || !preg_match('/^[a-zA-Z]+$/', $uname)) {
     echo "Enter a valid name!";
   }else if (!filter_var($umail, FILTER_VALIDATE_EMAIL)) {
     echo "Invalid email format!";
