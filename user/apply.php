@@ -54,10 +54,6 @@
   </head>
 
   <body>
-  <?php
-include "../connect.php";
-if (!isset($_SESSION['user_id'])) {
-  echo "
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
   <nav>
     <div class='logo-container'>
@@ -68,28 +64,10 @@ if (!isset($_SESSION['user_id'])) {
     <a href='apply.php' class='hovers'>Apply as a Worker</a>
     <a href='signin.php' class='hovers'>Sign In</a>
   </nav>
-  <!-- ------------------- NAVIGATION BAR ---------------------------- -->";
-} 
- else {
-  echo "
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
-  <nav>
-    <div class='logo-container'>
-      <img src='../images\logo\house-cleaning.png' alt='SkillSprint Logo' class='logo' style='z-index: 1' />
-    </div>
-    <a href='home.php' class='hovers'>Home</a>
-    <a href='service.php' class='hovers'>Services</a>
-    <a href='signout.php' class='hovers'>Sign Out</a>
 
-    <div class='profile-icon'>
-      <a href='profile.php'> <img src='../images/profile-user.png' alt='profile' class='profile' style='z-index: 1' />
-      </a>
-    </div>
-  </nav>
-  <!-- ------------------- NAVIGATION BAR ---------------------------- -->";
- }
-?>
-    <div class="apply-container">
+  
+      <div class="apply-container">
       <h1>Apply as Skill Worker</h1>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
         <label for="name">Name:</label>
