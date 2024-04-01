@@ -14,18 +14,27 @@
     $wc_folder = '../images/wcerti/' . $wc;
     $accCheck = "SELECT * FROM workers WHERE email = '$wmail' OR phone='$wphone'";
     $result = $con->query($accCheck);
+    if (empty($wname) || empty($wmail) || empty($wphone) || empty($wskill) || empty($warea) || empty($wphoto) || empty($wc)){
+      echo "One or more required fields are empty, Please fill in all the fields.";
+    }else{
     if ($result->num_rows > 0) {
       echo "Account already exists!";
     } else if ($wskill == "Select a skill") {
       echo "Select a skill!!";
     } else if (strlen($wname) < 3 || strlen($wname)>20) {
       echo "Enter a valid name!";
-    }else if (!filter_var($wmail, FILTER_VALIDATE_EMAIL)) {
-      echo "Invalid email format!";
+    }else if (!preg_match('/^(98|97)\d{8}$/', $wphone)) {
+      echo "Enter a valid phone number!!";
+    }else if ($wskill==null) {
+      echo "Choose a skill type!";
+    }else if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $wmail)) {
+      echo "Invalid email format!  ";
     } else if (strlen($warea) < 5 || strlen($warea)>30) {
       echo "Enter a valid working area!!";
-    } else if (!preg_match('/^(98|97)\d{8}$/', $wphone)) {
-      echo "Enter a valid phone number!!";
+    }else if ($wphoto==null) {
+      echo "Choose a photo!!";
+    }else if ($wc==null) {
+      echo "Choose a certificate!!";
     } else {
       $sql = "INSERT INTO applications (name, phone, email, skill, service_area, photo, certificate) VALUES ('$wname', '$wphone', '$wmail', '$wskill', '$warea', '$wphoto', '$wc')";
       if ($con->query($sql) === true) {
@@ -36,6 +45,7 @@
         echo "Failure: ";
       }
     }
+  }
     $con->close();
   }
   ?>
@@ -71,16 +81,16 @@
       <h1>Apply as Skill Worker</h1>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name" >
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" >
 
         <label for="phone">Phone Number:</label>
-        <input type="number" id="phone" name="phone" required>
+        <input type="number" id="phone" name="phone" >
 
         <label for="skills">Skills:</label>
-        <select id="skills" name="skills" required>
+        <select id="skills" name="skills">
           <option value="">Select a skill</option>
           <option value="plumber">Plumber</option>
           <option value="electrician">Electrician</option>
@@ -90,13 +100,13 @@
         </select>
 
         <label for="service_area">Service Area:</label>
-        <input type="text" id="service_area" name="service_area" required>
+        <input type="text" id="service_area" name="service_area">
 
         <label for="photo">Upload Photo:</label>
-        <input type="file" id="photo" name="photo" accept=".jpg, .jpeg" required>
+        <input type="file" id="photo" name="photo" accept=".jpg, .jpeg">
 
         <label for="certificate">Upload Certificate:</label>
-        <input type="file" id="certificate" name="certificate" accept=".pdf,.png, .jpg, .jpeg" required>
+        <input type="file" id="certificate" name="certificate" accept=".pdf,.png, .jpg, .jpeg">
 
         <button type="submit" name="submit" onmouseover="change(this)" onmouseout="unchange(this)">Submit Application</button>
       </form>
