@@ -26,8 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         if (password_verify($upw, $worker['password'])) {
             $_SESSION['user_id'] = $worker['id'];
             $_SESSION['semail'] = $worker['email'];
+            if($worker["firstLogin"]==1){
+              header("Location:changePw.php");
+              exit();
+            }
+            else{
             header("Location:home.php");
             exit();
+            }
         }
     } elseif ($result2 && $result2->num_rows > 0) {
         $admin = $result2->fetch_assoc();

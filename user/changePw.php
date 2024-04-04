@@ -65,6 +65,8 @@ elseif ($result1->num_rows > 0) {
                     $result2 = $con->query($query);
                     if ($result2) {
                         echo "Password changed Successfully";
+                        $firstLoginFalse = 2;
+                        mysqli_query($con, "UPDATE workers SET firstLogin='$firstLoginFalse' WHERE id='$userId'") or die(mysqli_error($con));
                         header("refresh:1;url=profile.php");
                         exit;
                     }
