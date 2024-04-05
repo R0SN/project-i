@@ -65,7 +65,7 @@
 
   <body>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->
-  <nav>
+  <nav >
     <div class='logo-container'>
       <img src='../images\logo\house-cleaning.png' alt='SkillSprint Logo' class='logo' style='z-index: 1' />
     </div>
@@ -92,11 +92,11 @@
         <label for="skills">Skills:</label>
         <select id="skills" name="skills">
           <option value="">Select a skill</option>
-          <option value="plumber">Plumber</option>
-          <option value="electrician">Electrician</option>
-          <option value="interior_design">Interior Design</option>
-          <option value="painter">Painter</option>
-          <option value="carpenter">Carpenter</option>
+          <option value="Plumber">Plumber</option>
+          <option value="Electrician">Electrician</option>
+          <option value="Interior_design">Interior Design</option>
+          <option value="Cainter">Painter</option>
+          <option value="Carpenter">Carpenter</option>
         </select>
 
         <label for="service_area">Service Area:</label>

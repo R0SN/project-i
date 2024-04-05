@@ -1,9 +1,9 @@
 .main {
   display: flex;
+  flex-wrap: wrap;
   padding: 50px;
-  justify-content: space-around;
+  margin-left: 200px;
 }
-
 .card {
   max-width: 300px;
   border-radius: 0.5rem;
@@ -11,6 +11,8 @@
   box-shadow: none;
   border: none;
   padding: 20px;
+  margin-top: 50px;
+  margin-left: 50px;
 }
 
 .card .image {
@@ -33,4 +35,48 @@ button{
   font-weight: bolder;
   font-size: larger;
   color: rgb(43, 43, 165);
+}
+.sidebar {
+  width: 200px;
+  height: 100%;
+  background-color: #747474;
+  text-align: center;
+  color: #ddd;
+  position: fixed;
+  margin-top: 48px;
+}
+
+
+.sidebar div {
+  margin-right: 10px; 
+  margin-bottom: 10px;
+}
+
+.sidebar input[type="checkbox"] {
+  display: none;
+}
+
+.sidebar label {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.sidebar label:hover {
+  background-color: #d4d4d4;
+  color: #333;
+}
+
+/* Style for checked checkboxes */
+.sidebar input[type="checkbox"]:checked + label {
+  background-color: #d4d4d4;
+  color: white;
+}
+
+/* Style for checked checkboxes on hover */
+.sidebar input[type="checkbox"]:checked + label:hover {
+  background-color: #d4d4d4;
 }

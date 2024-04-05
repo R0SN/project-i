@@ -6,6 +6,7 @@ body {
 }
 
 nav {
+  width: 100vw;
   background-color: #333;
   overflow: hidden;
   text-align: center;

@@ -1,15 +1,6 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-  color: rgb(43, 45, 66);
-  scroll-behavior: smooth;
-}
 
 .signin-container {
   text-align: center;
-  margin-top: 50px;
 }
 
 .signin-container h1 {
