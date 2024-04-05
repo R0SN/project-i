@@ -17,18 +17,17 @@ $result = mysqli_query($con, $query);
     <link rel="stylesheet" href="applications.css" />
 
 <body>
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="logo-container">
-            <img src="../images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
-        </div>
-        <a href="applications.php">Applications</a>
-        <a href="users.php">Users</a>
-        <a href="workers.php">Workers</a>
-        <a href="signout.php">Sign Out</a>
-    </nav>
-    <!-- End Navigation Bar -->
-    <div class="main">
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo-container">
+      <a href="dash.php"><img src="../images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" /></a>
+    </div>
+    <a href="applications.php" class="hover" >Applications</a>
+    <a href="users.php" class="hover">Users</a>
+    <a href="workers.php" class="hover">Workers</a>
+    <a href="signout.php" class="hover">Sign Out</a>
+  </nav>
+  <!-- End Navigation Bar -->    <div class="main">
     <h3>Users</h3>  
     <!-- Table for Users -->
     <table>
@@ -63,7 +62,7 @@ $result = mysqli_query($con, $query);
                         <input type='hidden' name='phone' value='" . $row['phone'] . "'>
                         <button type='submit' name='edit'>Edit</button>
                         </form>
-                    <br>
+
                         <form action='delete.php' method='post'>
                         <input type='hidden' name='id' value='" . $row['id'] . "'>
                         <button type='submit' name='delete'>Delete</button>
@@ -73,7 +72,7 @@ $result = mysqli_query($con, $query);
                 }
             } else {
                 // No data found in the database
-                echo "<tr><td colspan='4'>No users found</td></tr>";
+                echo "<tr><td colspan='6'>No users found</td></tr>";
             }
 
             // Close the database connection

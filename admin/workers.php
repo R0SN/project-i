@@ -10,18 +10,18 @@
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="logo-container">
-            <img src="../images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
-        </div>
-        <a href="applications.php">Applications</a>
-        <a href="users.php">Users</a>
-        <a href="workers.php">Workers</a>
-        <a href="signout.php">Sign Out</a>
-    </nav>
-    <!-- End Navigation Bar -->
-    <div class="main">
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo-container">
+      <a href="dash.php"><img src="../images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" /></a>
+    </div>
+    <a href="applications.php" class="hover" >Applications</a>
+    <a href="users.php" class="hover">Users</a>
+    <a href="workers.php" class="hover">Workers</a>
+    <a href="signout.php" class="hover">Sign Out</a>
+  </nav>
+  <!-- End Navigation Bar -->
+  <div class="main">
     <h3>Workers</h3>
     <!-- Table for Workers -->
     <table>

@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         if (password_verify($upw, $admin['password'])) {
             $_SESSION['user_id'] = $admin['id'];
             $_SESSION['semail'] = $admin['email'];
-            header("Location: ../admin/applications.php");
+            header("Location: ../admin/dash.php");
             exit();
         }
     }

@@ -6,14 +6,16 @@ table {
 
 th,
 td {
-    border: 1px solid #ddd;
+    border: 3px solid #484B70;
     text-align: center;
+    background-color: #CDCDDF;
 }
 td a{
     text-decoration: none;
 }
 th {
-    background-color: #f2f2f2;
+    background-color: #9B9BBF;
+    height: 50px;
 }
 .c{
     width: 120px;

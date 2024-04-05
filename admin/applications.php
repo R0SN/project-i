@@ -13,12 +13,12 @@
   <!-- Navigation Bar -->
   <nav>
     <div class="logo-container">
-      <img src="../images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" />
+      <a href="dash.php"><img src="../images/logo/house-cleaning.png" alt="SkillSprint Logo" class="logo" style="z-index: 1" /></a>
     </div>
-    <a href="applications.php">Applications</a>
-    <a href="users.php">Users</a>
-    <a href="workers.php">Workers</a>
-    <a href="signout.php">Sign Out</a>
+    <a href="applications.php" class="hover" >Applications</a>
+    <a href="users.php" class="hover">Users</a>
+    <a href="workers.php" class="hover">Workers</a>
+    <a href="signout.php" class="hover">Sign Out</a>
   </nav>
   <!-- End Navigation Bar -->
 
@@ -92,7 +92,7 @@
         }
       } else {
         // No data found in the database
-        echo "<tr><td colspan='8'>No applications found</td></tr>";
+        echo "<tr><td colspan='9'>No applications found</td></tr>";
       }
 
       // Close the database connection

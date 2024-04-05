@@ -80,3 +80,7 @@ button{
 .sidebar input[type="checkbox"]:checked + label:hover {
   background-color: #d4d4d4;
 }
+
+h2{
+  color: white;
+}
