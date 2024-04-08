@@ -35,6 +35,7 @@ button{
   font-weight: bolder;
   font-size: larger;
   color: rgb(43, 43, 165);
+  cursor: pointer;
 }
 .sidebar {
   width: 200px;

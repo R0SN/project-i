@@ -95,7 +95,7 @@
           <option value="Plumber">Plumber</option>
           <option value="Electrician">Electrician</option>
           <option value="Interior_design">Interior Design</option>
-          <option value="Cainter">Painter</option>
+          <option value="Painter">Painter</option>
           <option value="Carpenter">Carpenter</option>
         </select>
 

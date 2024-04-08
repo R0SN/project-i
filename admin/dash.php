@@ -22,7 +22,10 @@ $totalApplications = mysqli_num_rows($res3);
 </head>
 
 <body>
-    <center> <img src="../images/logo/house-cleaning.png" alt="logo" height="250"></center>
+<button class="lbtn">Log Out</button>
+    <center> 
+    <img src="../images/logo/house-cleaning.png" alt="logo" height="250">
+    </center>
     <div class="container">
         <h1>Welcome to Home Service Booking Admin Dashboard</h1>
         <div class="stats-container">
