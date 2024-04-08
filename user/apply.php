@@ -21,7 +21,7 @@
       echo "Account already exists!";
     } else if ($wskill == "Select a skill") {
       echo "Select a skill!!";
-    } else if (strlen($wname) < 3 || strlen($wname)>20) {
+    } else if (strlen($wname) < 3 || strlen($wname) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $wname)) {
       echo "Enter a valid name!";
     }else if (!preg_match('/^(98|97)\d{8}$/', $wphone)) {
       echo "Enter a valid phone number!!";

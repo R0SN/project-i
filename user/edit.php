@@ -29,7 +29,7 @@ if ($result->num_rows > 0) {
                 echo "Enter a valid phone number!";
             } else {
                 // Check if the new email or phone already exists
-                $accCheck = "SELECT * FROM workers WHERE (email = '$email' OR phone='$phone') AND id != $userId";
+                $accCheck = "SELECT * FROM users WHERE (email = '$email' OR phone='$phone') AND id != $userId";
                 $result_1 = $con->query($accCheck);
                 if ($result_1->num_rows > 0) {
                     echo "An account with the given email or phone already exists!";
