@@ -96,7 +96,7 @@
                 }
             } else {
                 // No data found in the database
-                echo "<tr><td colspan='8'>No Workers found</td></tr>";
+                echo "<tr><td colspan='10'>No Workers found</td></tr>";
             }
 
             // Close the database connection

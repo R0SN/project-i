@@ -18,11 +18,13 @@ if ($result->num_rows > 0) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $location = $_POST['location'];
-
+        if (empty($name) || empty($email) || empty($phone) || empty($location)) {
+            echo "One or more required fields are empty, Please fill in all the fields.";
+        }
         // Validate email and phone only if they have changed
         if ($email != $semail || $phone != $row['phone']) {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                echo "Invalid email format!";
+            if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
+                echo "Invalid email format!  ";
             } else if (!preg_match('/^(98|97)\d{8}/', $phone)) {
                 echo "Enter a valid phone number!";
             } else {
@@ -75,11 +77,13 @@ else if ($result1->num_rows > 0) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $location = $_POST['location'];
-
+        if (empty($name) || empty($email) || empty($phone) || empty($location)) {
+            echo "One or more required fields are empty, Please fill in all the fields.";
+        }
         // Validate email and phone only if they have changed
         if ($email != $semail || $phone != $row1['phone']) {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                echo "Invalid email format!";
+            if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
+                echo "Invalid email format!  ";
             } else if (!preg_match('/^(98|97)\d{8}/', $phone)) {
                 echo "Enter a valid phone number!";
             } else {

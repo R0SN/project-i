@@ -22,7 +22,7 @@ $totalApplications = mysqli_num_rows($res3);
 </head>
 
 <body>
-<button class="lbtn">Log Out</button>
+<button class="lbtn">Sign Out</button>
     <center> 
     <img src="../images/logo/house-cleaning.png" alt="logo" height="250">
     </center>

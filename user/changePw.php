@@ -18,8 +18,10 @@ if ($result->num_rows > 0) {
         $cpw = $_POST['cpw'];
         $npw = $_POST['npw'];
         $cnpw = $_POST['cnpw'];
-
         $password = $row['password'];
+        if (empty($cpw) || empty($npw) || empty($cnpw)) {
+            echo "One or more required fields are empty, Please fill in all the fields.";
+        }
 
         if (password_verify($cpw, $password)) {
             if ($npw === $cnpw) {
@@ -54,8 +56,11 @@ elseif ($result1->num_rows > 0) {
         $cpw = $_POST['cpw'];
         $npw = $_POST['npw'];
         $cnpw = $_POST['cnpw'];
-
         $password = $row['password'];
+        if (empty($cpw) || empty($npw) || empty($cnpw)) {
+            echo "One or more required fields are empty, Please fill in all the fields.";
+        }
+
 
         if (password_verify($cpw, $password)) {
             if ($npw === $cnpw) {
@@ -105,15 +110,15 @@ mysqli_close($con);
             <h2>Change Password</h2>
             <div class='form-group'>
                 <label for='cpw'>Current Password:</label>
-                <input type='password' id='cpw' name='cpw' <?php echo isset($_POST['change']) ? 'required' : ''; ?>>
+                <input type='password' id='cpw' name='cpw'>
             </div>
             <div class='form-group'>
                 <label for='npw'>New Password:</label>
-                <input type='password' id='npw' name='npw' <?php echo isset($_POST['change']) ? 'required' : ''; ?>>
+                <input type='password' id='npw' name='npw'>
             </div>
             <div class='form-group'>
                 <label for='cnpw'>Confirm New Password:</label>
-                <input type='password' id='cnpw' name='cnpw' <?php echo isset($_POST['change']) ? 'required' : ''; ?>>
+                <input type='password' id='cnpw' name='cnpw'>
             </div>
 
             <div class='form-group'>
