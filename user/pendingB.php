@@ -14,7 +14,7 @@
     <div class="sidebar">
         <h2>Filters</h2>
         <div>
-            <input type="checkbox" id="pending" name="filter" value="0" onclick="handlePending()">
+            <input type="checkbox" id="pending" name="filter" value="0" onclick="handlePending()" checked>
             <label for="pending">Pending Bookings</label>
         </div>
         <div>
@@ -53,7 +53,7 @@
             session_start();
             include "../connect.php"; // Include your database connection script
             $userId = $_SESSION['user_id'];
-            $getBooking = "SELECT * FROM bookings WHERE worker_id=$userId";
+            $getBooking = "SELECT * FROM bookings WHERE worker_id=$userId && status=0";
             $result2 = $con->query($getBooking);
 
             if (mysqli_num_rows($result2) > 0) {
@@ -89,13 +89,13 @@
                         echo "<td colspan='2' class='green'>Approved</td>";
                     } else {
                         echo "<td>
-                                <form action='books.php' method='post'>
+                                <form action='pendingB.php' method='post'>
                                     <input type='hidden' name='bid' value='$bid'>
                                     <button type='submit' name='approve'>Approve</button>
                                 </form>
                             </td>
                             <td>
-                                <form action='books.php' method='post'>
+                                <form action='pendingB.php' method='post'>
                                     <input type='hidden' name='bid' value='$bid'>
                                     <button type='submit' name='decline'>Decline</button>
                                 </form>
@@ -113,19 +113,20 @@
                 $bid = $_POST['bid'];
                 $q = "UPDATE bookings SET status=2 WHERE id=$bid";
                 $con->query($q);
-                header("location:books.php");
+                header("location:pendingB.php");
             }
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['decline'])) {
                 $bid = $_POST['bid'];
                 $q1 = "UPDATE bookings SET status=1 WHERE  id=$bid";
                 $con->query($q1);
-                header("location:books.php");
+                header("location:pendingB.php");
             }
+        
             ?>
     </div>
     <script>
     function handlePending() {
-        window.location.href="pendingB.php";
+        window.location.href="books.php";
         }
     function handleAccepted() {
         window.location.href="acceptedB.php";

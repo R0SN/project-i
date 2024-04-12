@@ -45,7 +45,7 @@ if(!empty($bio)){
 echo"<button onclick='redirect()'>Sign Out</button></div>";
 
 echo "<div class='recent_books'>
-        <h2>Recent Bookings</h2>
+        <h2>Incoming Bookings</h2>
         <table border='1'>
         <thead>
           <tr>
@@ -99,7 +99,7 @@ if ($countRecent > 0) {
                 </td></tr>";
             $countRes++;
             if($countRes>5){
-                echo "<td colspan='7'><a href='books.php'>More Recent Books</a></td>";
+                echo "<td colspan='7'><a href='pendingB.php'>More incomming Bookings</a></td>";
                 break;
             }
         }
@@ -154,7 +154,7 @@ if ($countAccept > 0) {
                 </tr>";
         $countAcc++;
         if($countAcc>5){
-            echo "<td colspan='6'><a href='books.php'>More Accepted Bookings</a></td>";
+            echo "<td colspan='6'><a href='acceptedB.php'>More Accepted Bookings</a></td>";
             break;
         }
     }

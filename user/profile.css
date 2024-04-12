@@ -1,4 +1,9 @@
+body{
+  background-color: #f4f4f4;
+  background-image: url("../images/logo/house-cleaning.png");
+  background-size:100px;
 
+}
   button {
     background-color: #333;
     color: white;
@@ -47,4 +52,23 @@ table{
   position: relative;
   left: 10px;
 }
-
+table{
+  width: 900px;
+}
+th{
+  border: 2px solid #333;
+  font-size: larger;
+  padding: 10px 15px;
+  text-align: center; 
+}
+td{
+  border: 2px solid #333;
+  text-align: center;
+  padding: 3px 0px;
+}
+.green{
+  color: rgb(97, 213, 97);
+}
+.red{
+  color: rgb(255, 46, 46);
+}

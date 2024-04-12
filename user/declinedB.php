@@ -14,15 +14,15 @@
     <div class="sidebar">
         <h2>Filters</h2>
         <div>
-            <input type="checkbox" id="pending" name="filter" value="0" onclick="handlePending()">
+            <input type="checkbox" id="pending" name="filter" value="0" onclick="handlePending()" >
             <label for="pending">Pending Bookings</label>
         </div>
         <div>
-            <input type="checkbox" id="accepted" name="filter" value="2" onclick="handleAccepted()">
+            <input type="checkbox" id="accepted" name="filter" value="2" onclick="handleAccepted()" >
             <label for="accepted">Accepted Bookings</label>
         </div>
         <div>
-            <input type="checkbox" id="declined" name="filter" value="1" onclick="handleDeclined()">
+            <input type="checkbox" id="declined" name="filter" value="1" onclick="handleDeclined()" checked>
             <label for="declined">Declined Bookings</label>
         </div>
 
@@ -53,7 +53,7 @@
             session_start();
             include "../connect.php"; // Include your database connection script
             $userId = $_SESSION['user_id'];
-            $getBooking = "SELECT * FROM bookings WHERE worker_id=$userId";
+            $getBooking = "SELECT * FROM bookings WHERE worker_id=$userId && status=1";
             $result2 = $con->query($getBooking);
 
             if (mysqli_num_rows($result2) > 0) {
@@ -89,13 +89,13 @@
                         echo "<td colspan='2' class='green'>Approved</td>";
                     } else {
                         echo "<td>
-                                <form action='books.php' method='post'>
+                                <form action='booksA_D.php' method='post'>
                                     <input type='hidden' name='bid' value='$bid'>
                                     <button type='submit' name='approve'>Approve</button>
                                 </form>
                             </td>
                             <td>
-                                <form action='books.php' method='post'>
+                                <form action='booksA_D.php' method='post'>
                                     <input type='hidden' name='bid' value='$bid'>
                                     <button type='submit' name='decline'>Decline</button>
                                 </form>
@@ -109,18 +109,6 @@
                 // No data found in the database
                 echo "<tr><td colspan='6'>No Bookings</td></tr>";
             }
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['approve'])) {
-                $bid = $_POST['bid'];
-                $q = "UPDATE bookings SET status=2 WHERE id=$bid";
-                $con->query($q);
-                header("location:books.php");
-            }
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['decline'])) {
-                $bid = $_POST['bid'];
-                $q1 = "UPDATE bookings SET status=1 WHERE  id=$bid";
-                $con->query($q1);
-                header("location:books.php");
-            }
             ?>
     </div>
     <script>
@@ -131,7 +119,7 @@
         window.location.href="acceptedB.php";
         }
     function handleDeclined() {
-        window.location.href="declinedB.php";
+        window.location.href="books.php";
         }
     function back() {
         window.location.href = 'Wprofile.php';

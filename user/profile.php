@@ -14,7 +14,6 @@ session_start();
 </head>
 
 <body>
-    <!-- Navigation Bar -->
     <nav>
         <div class='logo-container'>
             <img src='../images/logo/house-cleaning.png' alt='SkillSprint Logo' class='logo' style='z-index: 1' />
@@ -105,9 +104,9 @@ session_start();
                         <td>$wskill </td>
                         <td>$dnt </td>";
                     if ($status == 1) {
-                        echo "<td>Declined</td>";
+                        echo "<td class='red'>Declined</td>";
                     } else if ($status == 2) {
-                        echo "<td>Approved</td>";
+                        echo "<td class='green'>Approved</td>";
                     } else {
                         echo "
                         <td>

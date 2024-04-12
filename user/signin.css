@@ -1,4 +1,9 @@
+body{
+  background-color: #f4f4f4;
+  background-image: url("../images/logo/house-cleaning.png");
+  background-size:100px;
 
+}
 .signin-container {
   text-align: center;
 }
