@@ -38,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm'])) {
                 }
             }
         } else {
-            // Update worker details in the database if other fields have changed
             if (strlen($cusername) < 3 || strlen($cusername) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $cusername)) {
                 echo "Enter a valid name!";
             } else if (strlen($clocation) < 5 || strlen($clocation) > 30) {

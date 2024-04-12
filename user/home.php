@@ -29,24 +29,38 @@ if (!isset($_SESSION['user_id'])) {
   </nav>
   <!-- ------------------- NAVIGATION BAR ---------------------------- -->";
 } 
- else {
-  echo "
-  <!-- ------------------- NAVIGATION BAR ---------------------------- -->
-  <nav>
-    <div class='logo-container'>
-      <img src='../images\logo\house-cleaning.png' alt='SkillSprint Logo' class='logo' style='z-index: 1' />
-    </div>
-    <a href='home.php' class='hovers'>Home</a>
-    <a href='service.php' class='hovers'>Services</a>
-    <a href='signout.php' class='hovers'>Sign Out</a>
-
-    <div class='profile-icon'>
-      <a href='profile.php'> <img src='../images/profile-user.png' alt='profile' class='profile' style='z-index: 1' />
-      </a>
-    </div>
-  </nav>
-  <!-- ------------------- NAVIGATION BAR ---------------------------- -->";
- }
+else {
+  $userId = $_SESSION['user_id'];
+  $userEmail = $_SESSION['semail'];
+  
+  // Check if the user is a worker
+  $checkWorkerQuery = "SELECT * FROM workers WHERE id=$userId AND email='$userEmail'";
+  $result = $con->query($checkWorkerQuery);
+  
+  if ($result && $result->num_rows > 0) {
+    // If the user is a worker, redirect to Wprofile.php
+    header("Location: Wprofile.php");
+    exit();
+  } else {
+    // If the user is not a worker, show the employer home page
+    echo "
+    <!-- ------------------- NAVIGATION BAR ---------------------------- -->
+    <nav>
+      <div class='logo-container'>
+        <img src='../images\logo\house-cleaning.png' alt='SkillSprint Logo' class='logo' style='z-index: 1' />
+      </div>
+      <a href='home.php' class='hovers'>Home</a>
+      <a href='service.php' class='hovers'>Services</a>
+      <a href='signout.php' class='hovers'>Sign Out</a>
+  
+      <div class='profile-icon'>
+        <a href='profile.php'> <img src='../images/profile-user.png' alt='profile' class='profile' style='z-index: 1' />
+        </a>
+      </div>
+    </nav>
+    <!-- ------------------- NAVIGATION BAR ---------------------------- -->";
+  }
+}
 ?>
   <img src="../images/homeImages/david-pisnoy-46juD4zY1XA-unsplash.jpg" class="img1" height="400px" />
   <img src="../images/homeImages/frames-for-your-heart-iOLHAIaxpDA-unsplash.jpg" class="img2" height="400px" />

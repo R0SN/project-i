@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
               exit();
             }
             else{
-            header("Location:home.php");
+            header("Location:Wprofile.php");
             exit();
             }
         }

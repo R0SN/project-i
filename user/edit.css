@@ -58,3 +58,8 @@ button[type="cancel"] {
 button[type="cancel"]:hover {
     background-color: #d32f2f;
 }
+textarea {
+    width: 375px;
+    height: 200px; 
+    resize: none;
+  }

@@ -1,0 +1,113 @@
+body{
+    background-color: #f4f4f4;
+    background-image: url("../images/logo/house-cleaning.png");
+    background-size:100px;
+    padding: 0;
+    margin: 0;
+}
+table {
+    border: 2px solid #333;
+    border-collapse: collapse;
+    width: 80vw;
+    text-align: center;
+}
+
+th {
+    font-size: larger;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 60px;
+    border: 3px solid black;
+}
+
+td {
+    height: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border: 2px solid black;
+
+}
+.green{
+    color: rgb(97, 213, 97);
+    font-size: larger;
+}
+.red{
+    color: rgb(255, 46, 46);
+    font-size: larger;
+
+}
+.main{
+    margin-left: 205px;
+    padding: 50px;
+
+}
+button {
+    background-color: #333;
+    color: white;
+    padding: 6px 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover{
+    color: #333;
+    background-color: #ddd;
+}
+/* sidebar__________________________________________________________________ */
+/* sidebar__________________________________________________________________ */
+.sidebar {
+    width: 200px;
+    height: 100%;
+    background-color: #747474;
+    text-align: center;
+    color: #ddd;
+    position: fixed;
+}
+
+.sidebar div {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+/* Hide radio buttons */
+.sidebar input[type="checkbox"] {
+    display: none;
+}
+.sidebar input[type="button"] {
+    display: none;
+}
+
+.sidebar label {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+}
+
+.sidebar label:hover {
+    background-color: #d4d4d4;
+    color: #333;
+}
+
+/* Style for checked radio buttons */
+.sidebar input[type="checkbox"]:checked+label {
+    background-color: #d4d4d4;
+    color: #333;
+    box-shadow:  4px 4px 4px #fcfcfc,
+    -4px -4px 4px #ffffff;
+}
+/* Style for checked radio buttons on hover */
+.sidebar input[type="checkbox"]:checked+label:hover {
+    background-color: #d4d4d4;
+}
+
+h2 {
+    color: white;
+}
+.line{
+    height: 3px;
+    width: 100%;
+    background-color: black;
+    margin-top: 170%;
+}

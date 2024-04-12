@@ -86,7 +86,7 @@ elseif ($result1->num_rows > 0) {
         }
     }
     if (isset($_POST['cancel'])) {
-        header("Location: profile.php");
+        header("Location: Wprofile.php");
         exit;
     }
 }
@@ -122,8 +122,8 @@ mysqli_close($con);
             </div>
 
             <div class='form-group'>
+            <button type='cancel' name='cancel'>Cancel</button>
                 <button type='submit' name='change'>Change Password</button>
-                <button type='cancel' name='cancel'>Cancel</button>
             </div>
     </div>
 

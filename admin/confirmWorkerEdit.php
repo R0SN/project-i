@@ -32,15 +32,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm'])) {
                 } else {
                     $updatepw = "";
                 }
-
-                // Update worker details in the database
-                $query = "UPDATE workers SET name='$cusername', email='$cemail', phone='$cphone', service_area='$carea' $updatepw WHERE id=$cid";
-                $result = mysqli_query($con, $query);
-                if ($result) {
-                    echo "<script>alert('Details updated successfully.'); window.location.href = 'workers.php';</script>";
-                    exit;
+                // Validate username and location
+                if (strlen($cusername) < 3 || strlen($cusername) > 20 || !preg_match('/^[a-zA-Z\s]+$/', $cusername)) {
+                    echo "Enter a valid name!";
                 } else {
-                    echo "<script>alert('Error updating details.');</script>" . mysqli_error($con);
+                    // Update worker details in the database
+                    $query = "UPDATE workers SET name='$cusername', email='$cemail', phone='$cphone', service_area='$carea' $updatepw WHERE id=$cid";
+                    $result = mysqli_query($con, $query);
+                    if ($result) {
+                        echo "<script>alert('Details updated successfully.'); window.location.href = 'workers.php';</script>";
+                        exit;
+                    } else {
+                        echo "<script>alert('Error updating details.');</script>" . mysqli_error($con);
+                    }
                 }
             }
         }

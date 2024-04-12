@@ -21,6 +21,11 @@ if ($result->num_rows > 0) {
         if (empty($name) || empty($email) || empty($phone) || empty($location)) {
             echo "One or more required fields are empty, Please fill in all the fields.";
         }
+        if (strlen($name) < 3 || strlen($name) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $name)) {
+            echo "Enter a valid name!";
+        } else if (strlen($location) < 5 || strlen($location) > 30) {
+            echo "Enter a valid location!";
+        } else{
         // Validate email and phone only if they have changed
         if ($email != $semail || $phone != $row['phone']) {
             if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
@@ -46,12 +51,7 @@ if ($result->num_rows > 0) {
                 }
             }
         } else {
-            // Update worker details in the database if other fields have changed
-            if (strlen($name) < 3 || strlen($name) > 20 || !preg_match('/^[a-zA-Z]+$/', $name)) {
-                echo "Enter a valid name!";
-            } else if (strlen($location) < 5 || strlen($location) > 30) {
-                echo "Enter a valid location!";
-            } else {
+            // Update user details in the database if other fields have changed
                 $query = "UPDATE users SET username='$name', location='$location' WHERE id=$userId";
                 $result0 = mysqli_query($con, $query);
                 if ($result0) {
@@ -62,10 +62,11 @@ if ($result->num_rows > 0) {
                 }
             }
         }
+    }
     } else if (isset($_POST['cancel'])) {
         header("Location: profile.php");
     }
-}
+
 
 
 // -----------------------worker-----------------------------
@@ -77,41 +78,44 @@ else if ($result1->num_rows > 0) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $location = $_POST['location'];
+        $bio = $_POST['bio'];
         if (empty($name) || empty($email) || empty($phone) || empty($location)) {
             echo "One or more required fields are empty, Please fill in all the fields.";
-        }
-        // Validate email and phone only if they have changed
-        if ($email != $semail || $phone != $row1['phone']) {
-            if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
-                echo "Invalid email format!  ";
-            } else if (!preg_match('/^(98|97)\d{8}/', $phone)) {
-                echo "Enter a valid phone number!";
-            } else {
-                // Check if the new email or phone already exists
-                $accCheck = "SELECT * FROM workers WHERE (email = '$email' OR phone='$phone') AND id != $userId";
-                $result_1 = $con->query($accCheck);
-                if ($result_1->num_rows > 0) {
-                    echo "An account with the given email or phone already exists!";
+        } else if (strlen($name) < 3 || strlen($name) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $name)) {
+            echo "Enter a valid name!";
+        } else if (strlen($location) < 5 || strlen($location) > 30) {
+            echo "Enter a valid location!";
+        } else if (!empty($bio) && (strlen($bio) < 50 || strlen($bio) > 300)){
+                echo "The length of bio should be between 50 and 300!!";
+        } else {
+            // Validate email and phone only if they have changed
+            if ($email != $semail || $phone != $row1['phone']) {
+                if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
+                    echo "Invalid email format!  ";
+                } else if (!preg_match('/^(98|97)\d{8}/', $phone)) {
+                    echo "Enter a valid phone number!";
                 } else {
-                    // Update worker details in the database
-                    $query = "UPDATE workers SET name='$name', email='$email', phone='$phone', service_area='$location' WHERE id=$userId";
-                    $result0 = mysqli_query($con, $query);
-                    if ($result0) {
-                        header("refresh:0;url=profile.php");
-                        exit;
+                    // Check if the new email or phone already exists
+                    $accCheck = "SELECT * FROM workers WHERE (email = '$email' OR phone='$phone') AND id != $userId";
+                    $result_1 = $con->query($accCheck);
+                    if ($result_1->num_rows > 0) {
+                        echo "An account with the given email or phone already exists!";
                     } else {
-                        echo "Error updating details: " . mysqli_error($con);
+                        // Update worker details in the database
+                        $query = "UPDATE workers SET name='$name', email='$email', phone='$phone', service_area='$location', bio='$bio' WHERE id=$userId";
+                        $result0 = mysqli_query($con, $query);
+                        if ($result0) {
+                            header("refresh:0;url=profile.php");
+                            exit;
+                        } else {
+                            echo "Error updating details: " . mysqli_error($con);
+                        }
                     }
                 }
-            }
-        } else {
-            // Update worker details in the database if other fields have changed
-            if (strlen($name) < 3 || strlen($name) > 20 || !preg_match('/^[a-zA-Z]+$/', $name)) {
-                echo "Enter a valid name!";
-            } else if (strlen($location) < 5 || strlen($location) > 30) {
-                echo "Enter a valid location!";
             } else {
-                $query = "UPDATE workers SET name='$name', service_area='$location' WHERE id=$userId";
+                // Update worker details in the database if other fields have changed
+
+                $query = "UPDATE workers SET name='$name', service_area='$location', bio='$bio' WHERE id=$userId";
                 $result0 = mysqli_query($con, $query);
                 if ($result0) {
                     header("refresh:0;url=profile.php");
@@ -188,6 +192,10 @@ mysqli_close($con);
                 <div class='form-group'>
                     <label for='location'>Location:</label>
                     <input type='text' id='location' name='location'  value='{$row1['service_area']}'>
+                </div>
+                <div>
+                    <label for='bio'>Bio:</label>
+                    <textarea name='bio' placeholder='Add a Bio'>{$row1['bio']}</textarea>
                 </div>
                 <div class='form-group'>
                 <button type='cancel' name='cancel'>Cancel</button>

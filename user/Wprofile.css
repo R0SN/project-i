@@ -1,0 +1,79 @@
+body{
+    background-color: #f4f4f4;
+    background-image: url("../images/logo/house-cleaning.png");
+    background-size:100px;
+}
+.details {
+    margin: 4%;
+    font-family:'Verdana';
+    max-width: 300px;
+}
+span{
+    font-weight: bold;
+    color: #393514;
+}
+h2{
+font-family:Geneva;
+}
+.name{
+    font-size: large;
+    font-weight: bold;
+}
+button {
+    background-color: #333;
+    color: white;
+    padding: 6px 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover{
+    color: #333;
+    background-color: #ddd;
+}
+.profileImage {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    z-index: 1;
+}
+.certiImg img,
+embed {
+    height: 90vh;
+    width: 420px;
+}
+
+table {
+    border: 2px solid #333;
+    border-collapse: collapse;
+    width: 700px;
+    text-align: center;
+}
+th{
+    font-size: larger;
+}
+td{
+    height: 30px;
+}
+.edit {
+    height: 20px;
+    position: relative;
+    left: 10px;
+}
+.recent_books{
+    position: absolute;
+    left: 25%;
+    top: 10%;
+}
+.accepted_books{
+    position: absolute;
+}
+.certiImg{
+    position: fixed;
+    top: 8%;
+    left: 72%;
+}
+.green{
+    color: rgb(97, 213, 97);
+}
