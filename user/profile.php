@@ -44,7 +44,6 @@ session_start();
         $result = $con->query($qry);
         $result1 = $con->query($qry1);
 
-        //===================user profile================== 
         if ($result->num_rows > 0) {
             $row = mysqli_fetch_assoc($result);
             $id = $row['id'];

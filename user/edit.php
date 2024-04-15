@@ -13,7 +13,7 @@ $result1 = $con->query($qry1);
 // -----------------------user-----------------------------
 if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc($result);
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['change'])) {
+    if (isset($_POST['change'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
@@ -43,7 +43,8 @@ if ($result->num_rows > 0) {
                     $query = "UPDATE users SET username='$name', email='$email', phone='$phone', location='$location' WHERE id=$userId";
                     $result0 = mysqli_query($con, $query);
                     if ($result0) {
-                        header("refresh:0;url=profile.php");
+                        $_SESSION['semail'] = $email;
+                        header("location:profile.php");
                         exit;
                     } else {
                         echo "Error updating details: " . mysqli_error($con);
@@ -55,17 +56,17 @@ if ($result->num_rows > 0) {
                 $query = "UPDATE users SET username='$name', location='$location' WHERE id=$userId";
                 $result0 = mysqli_query($con, $query);
                 if ($result0) {
-                    header("refresh:0;url=profile.php");
+                    header("location:profile.php");
                     exit;
                 } else {
                     echo "Error updating details: " . mysqli_error($con);
                 }
             }
         }
+    }else if (isset($_POST['cancel'])) {
+        header("location:profile.php");
     }
-    } else if (isset($_POST['cancel'])) {
-        header("Location: profile.php");
-    }
+    } 
 
 
 
@@ -105,7 +106,8 @@ else if ($result1->num_rows > 0) {
                         $query = "UPDATE workers SET name='$name', email='$email', phone='$phone', service_area='$location', bio='$bio' WHERE id=$userId";
                         $result0 = mysqli_query($con, $query);
                         if ($result0) {
-                            header("refresh:0;url=profile.php");
+                            $_SESSION['semail'] = $email;
+                            header("refresh:0;url=Wprofile.php");
                             exit;
                         } else {
                             echo "Error updating details: " . mysqli_error($con);
@@ -118,7 +120,7 @@ else if ($result1->num_rows > 0) {
                 $query = "UPDATE workers SET name='$name', service_area='$location', bio='$bio' WHERE id=$userId";
                 $result0 = mysqli_query($con, $query);
                 if ($result0) {
-                    header("refresh:0;url=profile.php");
+                    header("refresh:0;url=Wprofile.php");
                     exit;
                 } else {
                     echo "Error updating details: " . mysqli_error($con);
@@ -126,7 +128,7 @@ else if ($result1->num_rows > 0) {
             }
         }
     } else if (isset($_POST['cancel'])) {
-        header("Location: profile.php");
+        header("Location:Wprofile.php");
     }
 }
 mysqli_close($con);
