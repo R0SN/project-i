@@ -19,25 +19,25 @@ if ($result->num_rows > 0) {
         $phone = $_POST['phone'];
         $location = $_POST['location'];
         if (empty($name) || empty($email) || empty($phone) || empty($location)) {
-            echo "One or more required fields are empty, Please fill in all the fields.";
-        }
+            echo "<span class='err'>One or more required fields are empty, Please fill in all the fields.</span>";
+        }else{
         if (strlen($name) < 3 || strlen($name) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $name)) {
-            echo "Enter a valid name!";
+            echo "<span class='err'>Enter a valid name!</span>";
         } else if (strlen($location) < 5 || strlen($location) > 30) {
-            echo "Enter a valid location!";
+            echo "<span class='err'>Enter a valid location!</span>";
         } else{
         // Validate email and phone only if they have changed
         if ($email != $semail || $phone != $row['phone']) {
             if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
-                echo "Invalid email format!  ";
+                echo "<span class='err'>Invalid email format!  </span>";
             } else if (!preg_match('/^(98|97)\d{8}/', $phone)) {
-                echo "Enter a valid phone number!";
+                echo "<span class='err'>Enter a valid phone number!</span>";
             } else {
                 // Check if the new email or phone already exists
                 $accCheck = "SELECT * FROM users WHERE (email = '$email' OR phone='$phone') AND id != $userId";
                 $result_1 = $con->query($accCheck);
                 if ($result_1->num_rows > 0) {
-                    echo "An account with the given email or phone already exists!";
+                    echo "<span class='err'>An account with the given email or phone already exists!</span>";
                 } else {
                     // Update worker details in the database
                     $query = "UPDATE users SET username='$name', email='$email', phone='$phone', location='$location' WHERE id=$userId";
@@ -62,6 +62,7 @@ if ($result->num_rows > 0) {
                     echo "Error updating details: " . mysqli_error($con);
                 }
             }
+        }
         }
     }else if (isset($_POST['cancel'])) {
         header("location:profile.php");

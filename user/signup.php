@@ -10,29 +10,30 @@ if (isset($_POST['submit'])) {
 
   $accCheck = "SELECT * FROM users WHERE email = '$umail' OR phone='$uphone'";
   $result = $con->query($accCheck);
-  if (empty($uname) || empty($umail) || empty($uphone) || empty($ulocation) || empty($upw) || empty($upwc) || $upw !== $upwc) {
-    echo "One or more required fields are empty. Please fill in all the fields.";
+  if (empty($uname) || empty($umail) || empty($uphone) || empty($ulocation) || empty($upw) || empty($upwc)) {
+    echo "<span class='err'>One or more required fields are empty. Please fill in all the fields. </span>";
   } else {
     if ($result->num_rows > 0) {
-      echo "Account already exists!  ";
+      echo "<span class='err'>Account already exists on given email or phone number!!</span>";
     } else if (strlen($uname) < 3 || strlen($uname) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $uname)) {
-      echo "Enter a valid name!  ";
+      echo "<span class='err'>Enter a valid name!  </span>";
     } else if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $umail)) {
-      echo "Invalid email format!  ";
+      echo "<span class='err'>Invalid email format!  </span>";
     } else if (!preg_match('/^(98|97)\d{8}/', $uphone)) {
-      echo "Enter a valid phone number!!  ";
+      echo "<span class='err'>Enter a valid phone number!!  </span>";
     } else if (strlen($ulocation) < 5 || strlen($ulocation) > 30) {
-      echo "Enter a valid location!!  ";
+      echo "<span class='err'>Enter a valid location!!  </span>";
     } else if (strlen($upwc) < 6 || !preg_match('/[A-Z]/', $upwc) || !preg_match('/[0-9]/', $upwc)) {
-      echo "Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!  ";
+      echo "<span class='err'>Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!  </span>";
     } else if ($upw != $upwc) {
-      echo "The password and confirm password fields do not match. Please make sure they are the same.";
+      echo "<span class='err'>The password and confirm password fields do not match. Please make sure they are the same.</span>";
     } else {
       // Hash the password before storing
       $hpw = password_hash($upw, PASSWORD_DEFAULT);
       $sql = "INSERT INTO users (username, email, location, password, phone) VALUES ('$uname', '$umail', '$ulocation', '$hpw', '$uphone')";
       if ($con->query($sql) === true) {
         echo "Success";
+        header("refresh:1,url='signin.php'");
       } else {
         echo "Failure: ";
       }
@@ -75,22 +76,22 @@ if (isset($_POST['submit'])) {
     <h1>Sign Up</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <label for="username">Username:</label>
-      <input type="text" id="username" name="username">
+      <input type="text" id="username" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>">
 
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email">
+      <input type="email" id="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
 
       <label for="phone">Phone Number:</label>
-      <input type="number" id="phone" name="phone">
+      <input type="number" id="phone" name="phone" value="<?php echo isset($_POST['phone']) ? $_POST['phone'] : ''; ?>">
 
       <label for="location">Location:</label>
-      <input type="text" id="location" name="location">
+      <input type="text" id="location" name="location" value="<?php echo isset($_POST['location']) ? $_POST['location'] : ''; ?>">
 
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password">
+      <input type="password" id="password" name="password" value="<?php echo isset($_POST['password']) ? $_POST['password'] : ''; ?>">
 
       <label for="confirm-password">Confirm Password:</label>
-      <input type="password" id="confirm-password" name="confirm-password">
+      <input type="password" id="confirm-password" name="confirm-password" value="<?php echo isset($_POST['confirm-password']) ? $_POST['confirm-password'] : ''; ?>">
 
       <button type="submit" name="submit">Sign Up</button>
     </form>

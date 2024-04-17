@@ -53,7 +53,7 @@ table{
   left: 10px;
 }
 table{
-  width: 900px;
+  width: 60%;
 }
 th{
   border: 2px solid #333;
@@ -71,4 +71,14 @@ td{
 }
 .red{
   color: rgb(255, 46, 46);
+}
+.det{
+  color: #5D5746;
+  font-size: large;
+  font-weight: bold;
+font-family: Georgia, 'Times New Roman', Times, serif;
+}
+input {
+  padding: 5px;
+  width: 10%;
 }

@@ -56,10 +56,10 @@ session_start();
                 <div class='container'>
                     <div class='img_container'> </div>
                     <img src='../images/Black-profile-user.png' alt='Profile Picture' class='profileImage'><a href='edit.php'><img src='../images/editIcon.png' class='edit'></a>
-                    <p>Name: " . $name . "</p>
-                    <p>Email: " . $email . "</p>
-                    <p>Phone Number: " . $phone . " </p>
-                    <p>Location: " . $location . "</p>
+                    <p><span class='det'>Name: </span>" . $name . "</p>
+                    <p><span class='det'>Email: </span>" . $email . "</p>
+                    <p><span class='det'>Phone Number: </span>" . $phone . " </p>
+                    <p><span class='det'>Location: </span>" . $location . "</p>
 
                     <div class='books'>
                     <h2>Bookings</h2>

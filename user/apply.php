@@ -15,32 +15,32 @@
     $accCheck = "SELECT * FROM workers WHERE email = '$wmail' OR phone='$wphone'";
     $result = $con->query($accCheck);
     if (empty($wname) || empty($wmail) || empty($wphone) || empty($wskill) || empty($warea) || empty($wphoto) || empty($wc)){
-      echo "One or more required fields are empty, Please fill in all the fields.";
+      echo "<span class='err'>One or more required fields are empty, Please fill in all the fields.</span>";
     }else{
     if ($result->num_rows > 0) {
-      echo "Account already exists!";
+      echo "<span class='err'>Account already exists!</span>";
     } else if ($wskill == "Select a skill") {
-      echo "Select a skill!!";
+      echo "<span class='err'>Select a skill!!</span>";
     } else if (strlen($wname) < 3 || strlen($wname) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $wname)) {
-      echo "Enter a valid name!";
+      echo "<span class='err'>Enter a valid name!</span>";
     }else if (!preg_match('/^(98|97)\d{8}$/', $wphone)) {
-      echo "Enter a valid phone number!!";
+      echo "<span class='err'>Enter a valid phone number!!</span>";
     }else if ($wskill==null) {
-      echo "Choose a skill type!";
+      echo "<span class='err'>Choose a skill type!</span>";
     }else if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $wmail)) {
-      echo "Invalid email format!  ";
+      echo "<span class='err'>Invalid email format!  </span>";
     } else if (strlen($warea) < 5 || strlen($warea)>30) {
-      echo "Enter a valid working area!!";
+      echo "<span class='err'>Enter a valid working area!!</span>";
     }else if ($wphoto==null) {
-      echo "Choose a photo!!";
+      echo "<span class='err'>Choose a photo!!</span>";
     }else if ($wc==null) {
-      echo "Choose a certificate!!";
+      echo "<span class='err'>Choose a certificate!!</span>";
     } else {
       $sql = "INSERT INTO applications (name, phone, email, skill, service_area, photo, certificate) VALUES ('$wname', '$wphone', '$wmail', '$wskill', '$warea', '$wphoto', '$wc')";
       if ($con->query($sql) === true) {
         move_uploaded_file($wphoto_temp, $wphoto_folder);
         move_uploaded_file($wc_temp, $wc_folder);
-        echo "Success";
+        echo "Application Submitted";
       } else {
         echo "Failure: ";
       }
@@ -81,13 +81,13 @@
       <h1>Apply as Skill Worker</h1>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" >
+        <input type="text" id="name" name="name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>">
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" >
+        <input type="email" id="email" name="email"  value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
 
         <label for="phone">Phone Number:</label>
-        <input type="number" id="phone" name="phone" >
+        <input type="number" id="phone" name="phone"  value="<?php echo isset($_POST['phone']) ? $_POST['phone'] : ''; ?>">
 
         <label for="skills">Skills:</label>
         <select id="skills" name="skills">
@@ -100,10 +100,10 @@
         </select>
 
         <label for="service_area">Service Area:</label>
-        <input type="text" id="service_area" name="service_area">
+        <input type="text" id="service_area" name="service_area"  value="<?php echo isset($_POST['service_area']) ? $_POST['service_area'] : ''; ?>">
 
         <label for="photo">Upload Photo:</label>
-        <input type="file" id="photo" name="photo" accept=".jpg, .jpeg">
+        <input type="file" id="photo" name="photo" accept=".jpg, .jpeg" >
 
         <label for="certificate">Upload Certificate:</label>
         <input type="file" id="certificate" name="certificate" accept=".pdf,.png, .jpg, .jpeg">

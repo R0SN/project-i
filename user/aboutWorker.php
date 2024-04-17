@@ -46,6 +46,7 @@ session_start();
                 $location = $row['service_area'];
                 $phone = $row['phone'];
                 $skill = $row['skill'];
+                $bio = $row['bio'];
                 $photo = $row['photo'];
                 $photoImg = "../images/workers/photo/{$photo}";
                 $certificate = $row['certificate'];
@@ -56,12 +57,21 @@ session_start();
                         <center>
                         <div class='img_container'></div>
                         <img src='$photoImg' alt='Profile Picture' class='profileImage' height='100px'>
-                        <p>Name: " . $name . "</p>
-                        <p>Email: " . $email . "</p>
-                        <p>Phone Number:  " . $phone . "</p>
-                        <p>Service Area: " . $location . "</p>
-                        <p>Skill:  " . $skill . "</p>
-                            </center>";
+                        <p><span class='det'>Name: </span>" . $name . "</p>
+                        <p><span class='det'>Email: </span>" . $email . "</p>
+                        <p><span class='det'>Phone Number:  </span>" . $phone . "</p>
+                        <p><span class='det'>Service Area: </span>" . $location . "</p>
+                        <p><span class='det'>Skill:  </span>" . $skill . "</p>";
+                if (!empty($bio)) {
+                    echo "<div style=' display: flex;justify-content: space-between;max-width:350px;'>
+                    <p><span class='det'>Bio:  </span></p>
+                    <p><span style=' text-align: justify;'>" . $bio . "</span></p>
+                    </div>
+                    ";
+                }
+
+                echo "</center>";
+
                 if (in_array($certificateExtension, ['jpg', 'jpeg', 'png'])) {
                     echo "<div class='certiImg'><a href='$certiImg' target='_blank'><img src='$certiImg' alt='$name' style='height: 90vh; width:400px;'></a></div>";
                 } elseif ($certificateExtension === 'pdf') {
@@ -73,31 +83,30 @@ session_start();
                     <center>
                         <form id='bookingForm' action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "' method='post' onsubmit='return validateDateTime()'>
                             <input type='hidden' name='id' value='$id'>
-                            <label for='dateTime'>Choose Date and Time:</label>
+                            <label for='dateTime' style='font-size:large;  font-weight: bold; color:#333'>Choose Date and Time:</label>
                             <input type='datetime-local' id='dateTime' name='dateTime' required>
                             <button id='submit' name='book' onmouseover='change(this)' onmouseout='unchange(this)'>Book Now</button>
                         </form>
                     </center>
                 ";
-
             } else {
                 echo "wrorker not found";
             }
         }
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['book'])) {
             $bookingDateTime = $_POST['dateTime'];
-            $userId= $_SESSION['user_id'];
+            $userId = $_SESSION['user_id'];
             $workerId = $_POST['id'];
 
             $sql = "INSERT INTO bookings (user_id, worker_id, dateTime) 
                     VALUES ('$userId', '$workerId', '$bookingDateTime')";
-        
+
             if (mysqli_query($con, $sql)) {
                 header("refresh:0;url=profile.php");
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($con);
             }
-        
+
             // Close database connection
             mysqli_close($con);
         }
@@ -115,7 +124,7 @@ session_start();
             // Check if the selected date is in the past or too far in the future
             if (selectedDateTime < minDateTime || selectedDateTime > maxDateTime) {
                 alert('Please select a date and time within the valid range (up to 30 days in the future).');
-                return false; 
+                return false;
             }
             return true;
         }

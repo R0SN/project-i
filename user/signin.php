@@ -2,53 +2,55 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    include "../connect.php";
+  include "../connect.php";
 
-    $umail = $_POST["email"];
-    $upw = $_POST["password"];
-    $accCheck = "SELECT * FROM users WHERE email = '$umail'";
-    $accCheck1 = "SELECT * FROM workers WHERE email = '$umail'";
-    $accCheck2 = "SELECT * FROM admin WHERE email = '$umail'";
-    $result = $con->query($accCheck);
-    $result1 = $con->query($accCheck1);
-    $result2 = $con->query($accCheck2);
-
+  $umail = $_POST["email"];
+  $upw = $_POST["password"];
+  $accCheck = "SELECT * FROM users WHERE email = '$umail'";
+  $accCheck1 = "SELECT * FROM workers WHERE email = '$umail'";
+  $accCheck2 = "SELECT * FROM admin WHERE email = '$umail'";
+  $result = $con->query($accCheck);
+  $result1 = $con->query($accCheck1);
+  $result2 = $con->query($accCheck2);
+  if (empty($umail) || empty($upw)) {
+    echo "<span class='err'>One or more filed empty. Please fill all the fileds.</span>";
+  } else{ 
     if ($result && $result->num_rows > 0) {
-        $user = $result->fetch_assoc();
-        if (password_verify($upw, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['semail'] = $user['email'];
-            header("Location:home.php");
-            exit();
-        }
-    } elseif ($result1 && $result1->num_rows > 0) {
-        $worker = $result1->fetch_assoc();
-        if (password_verify($upw, $worker['password'])) {
-            $_SESSION['user_id'] = $worker['id'];
-            $_SESSION['semail'] = $worker['email'];
-            if($worker["firstLogin"]==1){
-              header("Location:changePw.php");
-              exit();
-            }
-            else{
-            header("Location:Wprofile.php");
-            exit();
-            }
-        }
-    } elseif ($result2 && $result2->num_rows > 0) {
-        $admin = $result2->fetch_assoc();
-        if (password_verify($upw, $admin['password'])) {
-            $_SESSION['user_id'] = $admin['id'];
-            $_SESSION['semail'] = $admin['email'];
-            header("Location: ../admin/dash.php");
-            exit();
-        }
+    $user = $result->fetch_assoc();
+    if (password_verify($upw, $user['password'])) {
+      $_SESSION['user_id'] = $user['id'];
+      $_SESSION['semail'] = $user['email'];
+      header("Location:home.php");
+      exit();
     }
+  } elseif ($result1 && $result1->num_rows > 0) {
+    $worker = $result1->fetch_assoc();
+    if (password_verify($upw, $worker['password'])) {
+      $_SESSION['user_id'] = $worker['id'];
+      $_SESSION['semail'] = $worker['email'];
+      if ($worker["firstLogin"] == 1) {
+        header("Location:changePw.php");
+        exit();
+      } else {
+        header("Location:Wprofile.php");
+        exit();
+      }
+    }
+  } elseif ($result2 && $result2->num_rows > 0) {
+    $admin = $result2->fetch_assoc();
+    if (password_verify($upw, $admin['password'])) {
+      $_SESSION['user_id'] = $admin['id'];
+      $_SESSION['semail'] = $admin['email'];
+      header("Location: ../admin/dash.php");
+      exit();
+    }
+  }
+}
 
-    // If none of the conditions above are met, it means the email or password is invalid
-    echo "Invalid email or password!";
+  // If none of the conditions above are met, it means the email or password is invalid
+  echo "<span class='err'>Invalid email or password!</span>";
 
-    $con->close();
+  $con->close();
 }
 ?>
 <!DOCTYPE html>
@@ -79,10 +81,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <h1>Sign In</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
 
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
+      <input type="password" id="password" name="password" value="<?php echo isset($_POST['password']) ? $_POST['password'] : ''; ?>">
 
       <button type="submit" name="submit">Sign In</button>
     </form>
