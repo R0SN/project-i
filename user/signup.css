@@ -15,9 +15,10 @@ nav a.active {
 }
 
 .signup-container {
-  text-align: center;
+  margin-left: 36.1%;
   margin-top: 50px;
 }
+
 
 .signup-container h1 {
   font-size: 36px;
@@ -37,7 +38,7 @@ label {
 input {
   padding: 10px;
   margin-bottom: 20px;
-  width: 100%;
+  width: 400px;
 }
 
 button {
