@@ -20,9 +20,8 @@ if ($result->num_rows > 0) {
         $cnpw = $_POST['cnpw'];
         $password = $row['password'];
         if (empty($cpw) || empty($npw) || empty($cnpw)) {
-            echo "One or more required fields are empty, Please fill in all the fields.";
-        }
-
+            echo "<script>alert('One or more required fields are empty, Please fill in all the fields.')</script>";
+        }else{
         if (password_verify($cpw, $password)) {
             if ($npw === $cnpw) {
                 if (strlen($npw) >= 6 && preg_match('/[A-Z]/', $npw) && preg_match('/[0-9]/', $npw)) {
@@ -30,20 +29,20 @@ if ($result->num_rows > 0) {
                     $query = "UPDATE users SET password='$hnpw' WHERE id=$userId";
                     $result2 = $con->query($query);
                     if ($result2) {
-                        echo "Password changed Successfully";
-                        header("refresh:1;url=profile.php");
+                        echo "<script>alert('Password changed Successfully');window.location.href = 'profile.php';</script>";
                         exit;
                     }
                 } else {
-                    echo "Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!";
+                    echo "<script>alert('Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!')</script>";
                 }
             } else {
-                echo "The passwords do not match";
+                echo "<script>alert('The passwords do not match')</script>";
             }
         } else {
-            echo "Sorry, the current password you entered is incorrect. Please double-check and try again.";
+            echo "<script>alert('Sorry, the current password you entered is incorrect. Please double-check and try again.')</script>";
         }
     }
+}
     if (isset($_POST['cancel'])) {
         header("Location: profile.php");
         exit;
@@ -58,10 +57,9 @@ elseif ($result1->num_rows > 0) {
         $cnpw = $_POST['cnpw'];
         $password = $row['password'];
         if (empty($cpw) || empty($npw) || empty($cnpw)) {
-            echo "One or more required fields are empty, Please fill in all the fields.";
+            echo "<script>alert('One or more required fields are empty, Please fill in all the fields.')</script>";
         }
-
-
+        else{
         if (password_verify($cpw, $password)) {
             if ($npw === $cnpw) {
                 if (strlen($npw) >= 6 && preg_match('/[A-Z]/', $npw) && preg_match('/[0-9]/', $npw)) {
@@ -69,22 +67,23 @@ elseif ($result1->num_rows > 0) {
                     $query = "UPDATE workers SET password='$hnpw' WHERE id=$userId";
                     $result2 = $con->query($query);
                     if ($result2) {
-                        echo "Password changed Successfully";
+                        echo "<script>alert('Password changed Successfully');window.location.href = 'profile.php';</script>";
                         $firstLoginFalse = 2;
                         mysqli_query($con, "UPDATE workers SET firstLogin='$firstLoginFalse' WHERE id='$userId'") or die(mysqli_error($con));
                         header("refresh:1;url=profile.php");
                         exit;
                     }
                 } else {
-                    echo "Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!";
+                    echo "<script>alert('Password must be at least 6 characters long, contain at least one capital letter, and at least one number!!')</script>";
                 }
             } else {
-                echo "The passwords do not match";
+                echo "<script>alert('The passwords do not match')</script>";
             }
         } else {
-            echo "Sorry, the current password you entered is incorrect. Please double-check and try again.";
+            echo "<script>alert('Sorry, the current password you entered is incorrect. Please double-check and try again.')</script>";
         }
     }
+}
     if (isset($_POST['cancel'])) {
         header("Location: Wprofile.php");
         exit;

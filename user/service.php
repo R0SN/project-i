@@ -52,7 +52,7 @@ session_start();
   <div class="sidebar">
     <h2>Filters</h2>
     <div>
-      <input type="checkbox" id="plumber" name="filter" value="plumber" onclick="filterskill()">
+      <input type="checkbox" id="plumber" name="filter" value="Plumber" onclick="filterskill()">
       <label for="plumber">Plumber</label>
     </div>
     <div>

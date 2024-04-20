@@ -19,31 +19,43 @@ if ($result->num_rows > 0) {
         $phone = $_POST['phone'];
         $location = $_POST['location'];
         if (empty($name) || empty($email) || empty($phone) || empty($location)) {
-            echo "<span class='err'>One or more required fields are empty, Please fill in all the fields.</span>";
-        }else{
-        if (strlen($name) < 3 || strlen($name) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $name)) {
-            echo "<span class='err'>Enter a valid name!</span>";
-        } else if (strlen($location) < 5 || strlen($location) > 30) {
-            echo "<span class='err'>Enter a valid location!</span>";
-        } else{
-        // Validate email and phone only if they have changed
-        if ($email != $semail || $phone != $row['phone']) {
-            if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
-                echo "<span class='err'>Invalid email format!  </span>";
-            } else if (!preg_match('/^(98|97)\d{8}/', $phone)) {
-                echo "<span class='err'>Enter a valid phone number!</span>";
+            echo "<script>alert('Please fill in all the fileds')</script>";
+        } else {
+            if (strlen($name) < 3 || strlen($name) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $name)) {
+                echo "<script>alert('Please enter a valid name.')</script>";
+            } else if (strlen($location) < 5 || strlen($location) > 30) {
+                echo "<script>alert('Please enter a valid location')</script>";
             } else {
-                // Check if the new email or phone already exists
-                $accCheck = "SELECT * FROM users WHERE (email = '$email' OR phone='$phone') AND id != $userId";
-                $result_1 = $con->query($accCheck);
-                if ($result_1->num_rows > 0) {
-                    echo "<span class='err'>An account with the given email or phone already exists!</span>";
+                // Validate email and phone only if they have changed
+                if ($email != $semail || $phone != $row['phone']) {
+                    if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
+                        echo "<script>alert('Invalid email format.')</script>";
+                    } else if (!preg_match('/^(98|97)\d{8}/', $phone)) {
+                        echo "<script>alert('Please enter a valid phone number.')</script>";
+                    } else {
+                        // Check if the new email or phone already exists
+                        $accCheck = "SELECT * FROM users WHERE (email = '$email' OR phone='$phone') AND id != $userId";
+                        $result_1 = $con->query($accCheck);
+                        if ($result_1->num_rows > 0) {
+                            echo "<script>alert('An accout with given email or phone already exists.')</script>";
+                        } else {
+                            // Update worker details in the database
+                            $query = "UPDATE users SET username='$name', email='$email', phone='$phone', location='$location' WHERE id=$userId";
+                            $result0 = mysqli_query($con, $query);
+                            if ($result0) {
+                                $_SESSION['semail'] = $email;
+                                header("location:profile.php");
+                                exit;
+                            } else {
+                                echo "Error updating details: " . mysqli_error($con);
+                            }
+                        }
+                    }
                 } else {
-                    // Update worker details in the database
-                    $query = "UPDATE users SET username='$name', email='$email', phone='$phone', location='$location' WHERE id=$userId";
+                    // Update user details in the database if other fields have changed
+                    $query = "UPDATE users SET username='$name', location='$location' WHERE id=$userId";
                     $result0 = mysqli_query($con, $query);
                     if ($result0) {
-                        $_SESSION['semail'] = $email;
                         header("location:profile.php");
                         exit;
                     } else {
@@ -51,23 +63,11 @@ if ($result->num_rows > 0) {
                     }
                 }
             }
-        } else {
-            // Update user details in the database if other fields have changed
-                $query = "UPDATE users SET username='$name', location='$location' WHERE id=$userId";
-                $result0 = mysqli_query($con, $query);
-                if ($result0) {
-                    header("location:profile.php");
-                    exit;
-                } else {
-                    echo "Error updating details: " . mysqli_error($con);
-                }
-            }
         }
-        }
-    }else if (isset($_POST['cancel'])) {
+    } else if (isset($_POST['cancel'])) {
         header("location:profile.php");
     }
-    } 
+}
 
 
 
@@ -82,26 +82,27 @@ else if ($result1->num_rows > 0) {
         $location = $_POST['location'];
         $bio = $_POST['bio'];
         if (empty($name) || empty($email) || empty($phone) || empty($location)) {
-            echo "One or more required fields are empty, Please fill in all the fields.";
-        } else if (strlen($name) < 3 || strlen($name) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $name)) {
-            echo "Enter a valid name!";
+            echo "<script>alert('Please fill in all the fileds')</script>";
+        } else{ 
+            if (strlen($name) < 3 || strlen($name) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $name)) {
+            echo "<script>alert('Please enter a valid name.')</script>";
         } else if (strlen($location) < 5 || strlen($location) > 30) {
-            echo "Enter a valid location!";
-        } else if (!empty($bio) && (strlen($bio) < 50 || strlen($bio) > 300)){
-                echo "The length of bio should be between 50 and 300!!";
+            echo "<script>alert('Please enter a valid location.')</script>";
+        } else if (!empty($bio) && (strlen($bio) < 50 || strlen($bio) > 300)) {
+            echo "<script>alert('Length of bio should be between 50 and 300 characters.')</script>";
         } else {
             // Validate email and phone only if they have changed
             if ($email != $semail || $phone != $row1['phone']) {
                 if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
-                    echo "Invalid email format!  ";
+                    echo "<script>alert('Invalid email format.')</script>";
                 } else if (!preg_match('/^(98|97)\d{8}/', $phone)) {
-                    echo "Enter a valid phone number!";
+                    echo "<script>alert('Please enter a valid phone number.')</script>";
                 } else {
                     // Check if the new email or phone already exists
                     $accCheck = "SELECT * FROM workers WHERE (email = '$email' OR phone='$phone') AND id != $userId";
                     $result_1 = $con->query($accCheck);
                     if ($result_1->num_rows > 0) {
-                        echo "An account with the given email or phone already exists!";
+                        echo "<script>alert('An accout with given email or phone already exists.')</script>";
                     } else {
                         // Update worker details in the database
                         $query = "UPDATE workers SET name='$name', email='$email', phone='$phone', service_area='$location', bio='$bio' WHERE id=$userId";
@@ -128,7 +129,8 @@ else if ($result1->num_rows > 0) {
                 }
             }
         }
-    } else if (isset($_POST['cancel'])) {
+    } 
+}else if (isset($_POST['cancel'])) {
         header("Location:Wprofile.php");
     }
 }

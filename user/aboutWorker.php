@@ -53,9 +53,10 @@ session_start();
                 $certiImg = "../images/workers/certificates/{$certificate}";
                 $certificateExtension = pathinfo($certiImg, PATHINFO_EXTENSION);
 
-                echo "
-                        <center>
-                        <div class='img_container'></div>
+                echo "<div class='nNb'><div class='notice'>Note that service providers and customers should directly discuss prices and costs. Users can talk to the service provider about more specifics during the scheduled session.</div>
+                <button onclick='backToServicePg()' onmouseover='change(this)' onmouseout='unchange(this)' style='margin:20px 130px' >Back</button></div>
+                        <center style='margin-top:10px;'>
+                        <div class='img_container' ></div>
                         <img src='$photoImg' alt='Profile Picture' class='profileImage' height='100px'>
                         <p><span class='det'>Name: </span>" . $name . "</p>
                         <p><span class='det'>Email: </span>" . $email . "</p>
@@ -137,6 +138,9 @@ session_start();
         function unchange(element) {
             element.style.backgroundColor = "#333";
             element.style.color = "white";
+        }
+        function backToServicePg(){
+            window.location.href="service.php";
         }
     </script>
 

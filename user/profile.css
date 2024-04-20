@@ -82,3 +82,19 @@ input {
   padding: 5px;
   width: 10%;
 }
+.notice{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  border: 2px solid red;
+  height: 200px;
+  width: 300px;
+  padding: 30px;
+}
+.nNb{
+  position: absolute;
+  left: 3%;
+  top: 30%;
+}
