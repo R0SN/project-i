@@ -108,7 +108,7 @@ session_start();
                         echo "<td class='green'>Approved</td>";
                     } else {
                         echo "
-                        <td>
+                        <td class='cancel'>
                             <form action='profile.php' method='post'>
                             <input type='hidden' name='bid' value='$bid'>
                             <button type='submit' name='cancel'>Cancel</button>
@@ -119,7 +119,7 @@ session_start();
                 echo "</tr></table></div>";
             } else {
                 // No data found in the database
-                echo "<tr><td colspan='7'>No Bookings</td></tr>";
+                echo "<tr><td colspan='7' style='padding:10px;'>---No Bookings---</td></tr>";
             }
         }
         // =============worker profile=================
@@ -127,6 +127,15 @@ session_start();
             header("Location:Wprofile.php");
     }
 }
+
+if(isset($_POST['cancel'])){
+    $bid = $_POST['bid']; // Assuming bid is coming from a form submission
+    echo "<script>if(confirm('Are you sure you want to cancel the Booking?')) {";
+    echo "  window.location.href = 'cancelB.php?bid=$bid';"; // Redirect to another script for actual deletion
+    echo "}";
+    echo "</script>";
+}
+
     ?>
 </body>
 

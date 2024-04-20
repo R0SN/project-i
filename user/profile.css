@@ -1,10 +1,16 @@
 body{
+  margin: 0;
+  padding: 0;
   background-color: #f4f4f4;
   background-image: url("../images/logo/house-cleaning.png");
   background-size:100px;
 
 }
+.cancel{
+  padding: 8px 2px;
+}
   button {
+    border-radius: 5px;
     background-color: #333;
     color: white;
     padding: 10px 20px;
@@ -19,7 +25,7 @@ body{
     background-size: 150px;
     filter: blur(2%);
     height: 150px;
-    width: 100vw;
+    width: 100%;
     position: absolute;
     margin-top: -5px;
     z-index: -1;
@@ -43,6 +49,7 @@ body{
 table{
   border: 1px solid #333;
   border-collapse: collapse;
+  width: 60vw;
 }
 .books{
   margin: 10px;
@@ -52,25 +59,25 @@ table{
   position: relative;
   left: 10px;
 }
-table{
-  width: 60%;
-}
 th{
   border: 2px solid #333;
   font-size: larger;
-  padding: 10px 15px;
   text-align: center; 
+  padding: 15px 25px;
 }
 td{
   border: 2px solid #333;
   text-align: center;
-  padding: 3px 0px;
 }
 .green{
   color: rgb(97, 213, 97);
+  padding: 20px 5px;
+
 }
 .red{
   color: rgb(255, 46, 46);
+  padding: 20px 5px;
+
 }
 .det{
   color: #5D5746;
@@ -98,3 +105,4 @@ input {
   left: 3%;
   top: 30%;
 }
+
