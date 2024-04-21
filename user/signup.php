@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
       $emailErr = "Invalid email format!";
       $valid = false;
   }
-    if (!preg_match('/^(98|97)\d{8}/', $uphone)) {
+    if (!preg_match('/^(98|97)\d{8}$/', $uphone)) {
       $phoneErr = "Enter a valid phone number!! ";
       $valid = false;
     }  if (strlen($ulocation) < 5 || strlen($ulocation) > 30) {

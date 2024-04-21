@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm'])) {
                     window.location.href = 'users.php';
                 }
             </script>";
-            } else if (!preg_match('/^(98|97)\d{8}/', $cphone)) {
+            } else if (!preg_match('/^(98|97)\d{8}$/', $cphone)) {
                 echo "<script>
                 if (confirm('Enter a valid phone number.')) {
                     document.getElementById('editButton').click(); 

@@ -74,7 +74,7 @@
                     window.location.href = 'workers.php';
                 }
             </script>";
-                } else if (!preg_match('/^(98|97)\d{8}/', $cphone)) {
+                } else if (!preg_match('/^(98|97)\d{8}$/', $cphone)) {
                     echo "<script>
                     if (confirm('Enter a valid phone number!')) {
                         document.getElementById('editButton').click(); // Click the edit button
