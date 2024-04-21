@@ -21,10 +21,11 @@ if (isset($_POST['submit'])) {
  else{
     if ($result->num_rows > 0) {
       $accCheckErr = "Account already exists on given email or phone number!!";
+      exit;
     }  if (strlen($uname) < 3 || strlen($uname) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $uname)) {
       $nameErr = "Enter a valid name!";
       $valid = false;
-    }if (!preg_match('/^[a-zA-Z][a-zA-Z0-9.]+@(?:gmail|yahoo|outlook|protonmail|icloud|aol|hotmail|mail|yandex|zoho).(com|me)$/', $umail)) {
+    }if (!preg_match('/^[a-zA-Z][a-zA-Z0-9.]+@(?:gmail|yahoo|outlook).(com|me)$/', $umail)) {
       $emailErr = "Invalid email format!";
       $valid = false;
   }
@@ -45,8 +46,13 @@ if (isset($_POST['submit'])) {
       $hpw = password_hash($upw, PASSWORD_DEFAULT);
       $sql = "INSERT INTO users (username, email, location, password, phone) VALUES ('$uname', '$umail', '$ulocation', '$hpw', '$uphone')";
       if ($con->query($sql) === true) {
-        echo "Success";
-        header("refresh:1,url='signin.php'");
+        $getId = "SELECT * FROM users WHERE email='$umail'";
+        $runGetId = mysqli_query($con,$getId);
+        $fetchDetail = mysqli_fetch_assoc($runGetId);
+        session_start();
+        $_SESSION['user_id']=$fetchDetail['id'];
+        $_SESSION['semail']=$fetchDetail['email'];
+        header("Location:services.php");
       } else {
         echo "Failure: ";
       }

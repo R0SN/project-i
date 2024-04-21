@@ -38,7 +38,7 @@
         $phoneErr = "Enter a valid phone number!!";
         $valid = false;
       }
-      if (!preg_match('/^[a-zA-Z][a-zA-Z0-9.]+@(?:gmail|yahoo|outlook|protonmail|icloud|aol|hotmail|mail|yandex|zoho).(com|me)$/', $wmail)) {
+      if (!preg_match('/^[a-zA-Z][a-zA-Z0-9.]+@(?:gmail|yahoo|outlook).(com|me)$/', $wmail)) {
         $mailErr = "Invalid email format!";
         $valid = false;
       }
@@ -58,7 +58,7 @@
         if ($con->query($sql) === true) {
           move_uploaded_file($wphoto_temp, $wphoto_folder);
           move_uploaded_file($wc_temp, $wc_folder);
-          echo "Application Submitted";
+          echo "<script>alert('Your application has been successfully received. We will contact you soon.Thank you!');window.location.href='apply.php';</script>";
         } else {
           echo "Failure: ";
         }
@@ -112,16 +112,19 @@
 
         <label for="phone">Phone Number:</label>
         <input type="number" id="phone" name="phone" value="<?php echo isset($_POST['phone']) ? $_POST['phone'] : ''; ?>">
-        <span class="err"><?php echo isset($pnoneErr) ? $phoneErr : ''; ?></span>
+        <span class="err"><?php echo isset($phoneErr) ? $phoneErr : ''; ?></span>
 
         <label for="skills">Skills:</label>
         <select id="skills" name="skills">
           <option value="">Select a skill</option>
           <option value="Plumber">Plumber</option>
           <option value="Electrician">Electrician</option>
-          <option value="Interior_design">Interior Design</option>
+          <option value="Interior designer">Interior Designer</option>
           <option value="Painter">Painter</option>
           <option value="Carpenter">Carpenter</option>
+          <option value="Locksmith">Locksmith</option>
+          <option value="Pest Control Operator">Pest Control Operator</option>
+          <option value="Home Inspector">Home Inspector</option>
         </select>
 
         <label for="service_area">Service Area:</label>

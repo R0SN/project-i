@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     if (password_verify($upw, $user['password'])) {
       $_SESSION['user_id'] = $user['id'];
       $_SESSION['semail'] = $user['email'];
-      header("Location:home.php");
+      header("Location:profile.php");
       exit();
     }
   } elseif ($result1 && $result1->num_rows > 0) {

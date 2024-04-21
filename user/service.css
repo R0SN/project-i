@@ -1,15 +1,17 @@
-body{
+body {
   background-color: #f4f4f4;
   background-image: url("../images/logo/house-cleaning.png");
-  background-size:100px;
+  background-size: 100px;
 
 }
+
 .main {
   display: flex;
   flex-wrap: wrap;
   padding: 50px;
   margin-left: 200px;
 }
+
 .card {
   max-width: 300px;
   border-radius: 0.5rem;
@@ -27,14 +29,15 @@ body{
   background-color: #ddd;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-  overflow: hidden;
 }
 
 .card .image img {
+  width: 150px;
   height: 150px;
   border-radius: 50%;
 }
-button{
+
+button {
   border: 0;
   text-decoration: none;
   background: transparent;
@@ -43,6 +46,7 @@ button{
   color: rgb(43, 43, 165);
   cursor: pointer;
 }
+
 .sidebar {
   width: 200px;
   height: 100%;
@@ -55,7 +59,7 @@ button{
 
 
 .sidebar div {
-  margin-right: 10px; 
+  margin-right: 10px;
   margin-bottom: 10px;
 }
 
@@ -78,16 +82,16 @@ button{
 }
 
 /* Style for checked checkboxes */
-.sidebar input[type="checkbox"]:checked + label {
+.sidebar input[type="checkbox"]:checked+label {
   background-color: #d4d4d4;
   color: white;
 }
 
 /* Style for checked checkboxes on hover */
-.sidebar input[type="checkbox"]:checked + label:hover {
+.sidebar input[type="checkbox"]:checked+label:hover {
   background-color: #d4d4d4;
 }
 
-h2{
+h2 {
   color: white;
 }

@@ -61,15 +61,27 @@ session_start();
     </div>
     <div>
       <input type="checkbox" id="carpenter" name="filter" value="Carpenter" onclick="filterskill()">
-      <label for="carpenter">carpenter</label>
+      <label for="carpenter">Carpenter</label>
     </div>
     <div>
       <input type="checkbox" id="electrician" name="filter" value="Electrician" onclick="filterskill()">
-      <label for="electrician">electrician</label>
+      <label for="electrician">Electrician</label>
     </div>
     <div>
-      <input type="checkbox" id="interior design" name="filter" value="Interior_design" onclick="filterskill()">
-      <label for="interior design">interior design</label>
+      <input type="checkbox" id="interior design" name="filter" value="Interior designer" onclick="filterskill()">
+      <label for="interior design">Interior Designer</label>
+    </div>
+    <div>
+      <input type="checkbox" id="locksmith" name="filter" value="Locksmith" onclick="filterskill()">
+      <label for="locksmith">Locksmith</label>
+    </div>
+    <div>
+      <input type="checkbox" id="pest control operator" name="filter" value="Pest Control Operator" onclick="filterskill()">
+      <label for="pest control operator">Pest control operator</label>
+    </div>
+    <div>
+      <input type="checkbox" id="home inspector" name="filter" value="Home Inspector" onclick="filterskill()">
+      <label for="home inspector">Home Inspector</label>
     </div>
   </div>
   <!-- ------------------- SIDEBAR ---------------------------- -->

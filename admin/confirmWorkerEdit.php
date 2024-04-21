@@ -64,7 +64,7 @@
             </script>";
             } else {
                 // Validate email and phone
-                if (!preg_match('/^[a-zA-Z][a-zA-Z0-9.]+@(?:gmail|yahoo|outlook|protonmail|icloud|aol|hotmail|mail|yandex|zoho).(com|me)$/', $cemail)) {
+                if (!preg_match('/^[a-zA-Z][a-zA-Z0-9.]+@(?:gmail|yahoo|outlook).(com|me)$/', $cemail)) {
                     echo "<script>
                 if (confirm('Invalid email format!')) {
                     document.getElementById('editButton').click(); // Click the edit button

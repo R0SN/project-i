@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm'])) {
     } else {
         // Validate email and phone only if they have changed
         if ($cemail != $row['email'] || $cphone != $row['phone']) {
-            if (!preg_match('/^[a-zA-Z][a-zA-Z0-9.]+@(?:gmail|yahoo|outlook|protonmail|icloud|aol|hotmail|mail|yandex|zoho).(com|me)$/', $cemail)) {
+            if (!preg_match('/^[a-zA-Z][a-zA-Z0-9.]+@(?:gmail|yahoo|outlook).(com|me)$/', $cemail)) {
                 echo "<script>
                 if (confirm('Invalid email format.')) {
                     document.getElementById('editButton').click(); 
