@@ -17,7 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="editUser.css" />
-    <title>Edit</title>
+    <title>Admin(SkillSprint) - Edit User</title>
+    <link rel="icon" href="../images/logo/house-cleaning.png" type="image/icon type">
+
 </head>
 
 <body>

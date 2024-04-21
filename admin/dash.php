@@ -17,8 +17,10 @@ $totalApplications = mysqli_num_rows($res3);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Home Service Booking System</title>
+    <title>Admin(SkillSprint)</title>
     <link rel="stylesheet" href="dash.css">
+    <link rel="icon" href="../images/logo/house-cleaning.png" type="image/icon type">
+
 </head>
 
 <body>

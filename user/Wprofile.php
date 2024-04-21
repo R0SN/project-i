@@ -9,8 +9,10 @@ include "../connect.php"; // Include your database connection script
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>User Profile</title>
+    <title>SkillSprint - Profile</title>
     <link rel="stylesheet" href="Wprofile.css" />
+    <link rel="icon" href="../images/logo/house-cleaning.png" type="image/icon type">
+
 </head>
 
 <body>

@@ -144,8 +144,10 @@ mysqli_close($con);
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Edit</title>
+    <title>SkillSprint - Edit Profile</title>
     <link rel='stylesheet' href='edit.css' />
+    <link rel="icon" href="../images/logo/house-cleaning.png" type="image/icon type">
+
 
 </head>
 

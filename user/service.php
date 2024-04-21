@@ -7,8 +7,9 @@ session_start();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Skill workers</title>
+  <title>SkillSprint - Skill Workers</title>
   <link rel="stylesheet" href="nav.css" />
+  <link rel="icon" href="../images/logo/house-cleaning.png" type="image/icon type">
   <link rel="stylesheet" href="service.css" />
 </head>
 

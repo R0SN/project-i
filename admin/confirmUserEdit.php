@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin(SkillSprint) - Confirm Edit</title>
+    <link rel="icon" href="../images/logo/house-cleaning.png" type="image/icon type">
+
 </head>
 <body>
 <?php

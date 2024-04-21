@@ -7,9 +7,11 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skill workers</title>
+    <title>SkillSprint - Skill Worker</title>
     <link rel="stylesheet" href="nav.css" />
-    <link rel="stylesheet" href="profile.css" />
+    <link rel="stylesheet" href="profile.css" />  
+    <link rel="icon" href="../images/logo/house-cleaning.png" type="image/icon type">
+
 </head>
 
 <body>

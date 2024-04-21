@@ -8,6 +8,7 @@ session_start();
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SkillSprint</title>
+  <link rel="icon" href="../images/logo/house-cleaning.png" type="image/icon type">
   <link rel="stylesheet" href="nav.css" />
   <link rel="stylesheet" href="home.css" />
 </head>

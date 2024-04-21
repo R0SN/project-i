@@ -75,6 +75,8 @@ if (isset($_POST['submit'])) {
   <title>SkillSprint - Sign Up</title>
   <link rel="stylesheet" href="nav.css">
   <link rel="stylesheet" href="signup.css" />
+  <link rel="icon" href="../images/logo/house-cleaning.png" type="image/icon type">
+
  
 </head>
 

@@ -62,7 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkillSprint</title>
+  <title>SkillSprint - Sign in</title>
+  <link rel="icon" href="../images/logo/house-cleaning.png" type="image/icon type">
   <link rel="stylesheet" href="nav.css">
   <link rel="stylesheet" href="signin.css">
 </head>
