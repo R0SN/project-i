@@ -33,10 +33,12 @@ $photoImg = "../images/workers/photo/{$photo}";
 $certificate = $row1['certificate'];
 $certiImg = "../images/workers/certificates/{$certificate}";
 $certificateExtension = pathinfo($certiImg, PATHINFO_EXTENSION);
+
+
 echo "<div class='details'>
 <img src='$photoImg' alt='Profile Picture' class='profileImage' height='100px'>
 <a href='edit.php'><img src='../images/editIcon.png' class='edit'></a>
-<p class='name'><span>Welcome</span> $name</p>
+<p class='name'><span>Welcome<br></span> $name</p>
 <p><span>Email:</span> $email</p>
 <p><span>Phone Number:</span> $phone</p>
 <p><span>Service Area:</span> $location</p>

@@ -43,6 +43,7 @@
     </thead>
     <tbody>
       <?php
+      include "../connect.php";
       $query = "SELECT * FROM applications";
       $result = mysqli_query($con, $query);
 

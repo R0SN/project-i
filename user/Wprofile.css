@@ -77,7 +77,7 @@ table tr:nth-of-type(even){
 .recent_books{
     position: absolute;
     left: 25%;
-    top: 10%;
+    top: 5%;
 }
 .accepted_books{
     position: absolute;
