@@ -32,7 +32,7 @@ $totalApplications = mysqli_num_rows($res3);
 </head>
 
 <body>
-<button class="lbtn">Sign Out</button>
+<button class="lbtn" onclick="out()">Sign Out</button>
     <center> 
     <img src="../images/logo/house-cleaning.png" alt="logo" height="250">
     </center>
@@ -59,6 +59,12 @@ $totalApplications = mysqli_num_rows($res3);
             <a href="workers.php" class="button">Manage Skill Workers</a>
         </div>
     </div>
+
+    <script>
+    out = ()=>{
+        window.location.href="signout.php";
+        }
+    </script>
 </body>
 
 </html>
