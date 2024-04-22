@@ -1,6 +1,14 @@
 <?php
 session_start();
 include "../connect.php";
+
+$currentDateTime = date("Y-m-d H:i:s"); // Current time
+// Calculate the time 3 hours ago
+$threeHoursAgo = date("Y-m-d H:i:s", strtotime("-3 hours"));
+$delBook = "DELETE FROM bookings WHERE dateTime < '$threeHoursAgo'";
+mysqli_query($con, $delBook);
+
+
 $qry1 = "SELECT * FROM users";
 $qry2 = "SELECT * FROM workers";
 $qry3 = "SELECT * FROM applications";

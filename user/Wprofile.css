@@ -45,17 +45,30 @@ embed {
 }
 
 table {
-    border: 2px solid #333;
+    /* border: 2px solid #333; */
     border-collapse: collapse;
     width: 700px;
     text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
 }
 th{
     font-size: larger;
+    background-color: #8a8a8a61;
+    border: none;
 }
 td{
     height: 30px;
 }
+table tr:nth-of-type(even){
+    background-color: #8a8a8a24;
+  }
+  tbody tr:last-of-type{
+    border-bottom: 3px solid #333;
+  }
+  tbody{
+    border: 1px solid #333;
+  }
 .edit {
     height: 20px;
     position: relative;

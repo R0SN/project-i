@@ -47,9 +47,20 @@ body{
   width: 420px;
 }
 table{
-  border: 1px solid #333;
+  /* border: 1px solid #333; */
   border-collapse: collapse;
   width: 60vw;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+thead{
+  background-color: #8a8a8a61;
+}
+table tr:nth-of-type(even){
+  background-color: #8a8a8a24;
+}
+tbody tr:last-of-type{
+  border-bottom: 8px solid #333;
 }
 .books{
   margin: 10px;
@@ -60,13 +71,14 @@ table{
   left: 10px;
 }
 th{
-  border: 2px solid #333;
+  /* border: 2px solid #333; */
+  border-bottom: 3px solid #333;
   font-size: larger;
   text-align: center; 
   padding: 15px 25px;
 }
 td{
-  border: 2px solid #333;
+  /* border: 2px solid #333; */
   text-align: center;
 }
 .green{
@@ -105,4 +117,3 @@ input {
   left: 3%;
   top: 30%;
 }
-

@@ -55,7 +55,7 @@
             session_start();
             include "../connect.php"; // Include your database connection script
             $userId = $_SESSION['user_id'];
-            $getBooking = "SELECT * FROM bookings WHERE worker_id=$userId AND status=2 ORDER BY dateTime DESC";
+            $getBooking = "SELECT * FROM bookings WHERE worker_id=$userId AND status=2 ORDER BY dateTime ASC";
             $result2 = $con->query($getBooking);
 
             if (mysqli_num_rows($result2) > 0) {

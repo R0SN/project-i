@@ -43,13 +43,6 @@
     </thead>
     <tbody>
       <?php
-      include "../connect.php";
-      $currentDateTime = date("Y-m-d H:i:s");
-      // ----------------------- expired booking deletion ---------------------
-      $sql = "DELETE FROM bookings WHERE dateTime < '$currentDateTime'";
-      mysqli_query($con, $sql);
-      // ----------------------- expired booking deletion ---------------------
-
       $query = "SELECT * FROM applications";
       $result = mysqli_query($con, $query);
 
