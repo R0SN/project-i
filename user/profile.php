@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(!isset($_SESSION["user_id"])){
+    header("Location:signin.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -99,8 +102,8 @@ session_start();
                     $wskill = $row3['skill'];
                     echo "<tr>
                         <td> $wname </td>
+                        <td>$wphone</td>
                         <td>$wmail</td>
-                        <td>$wphone </td>
                         <td>$wlocation </td>
                         <td>$wskill </td>
                         <td>$dnt </td>";

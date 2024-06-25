@@ -1,4 +1,5 @@
   <?php
+
   $nameErr = $mailErr = $phoneErr = $areaErr = $emptyErr = $accCheckErr = "";
   if (isset($_POST['submit'])) {
     include_once "../connect.php";

@@ -1,4 +1,5 @@
 <?php
+
 include "../connect.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['approve'])) {
                 $bid = $_POST['bid'];

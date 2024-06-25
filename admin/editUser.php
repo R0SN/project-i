@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+  header("Location: ../user/signin.php");
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit'])) {
         include "../connect.php";
 

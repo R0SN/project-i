@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if(!isset($_SESSION['user_id'])){
+    header("Location: ../user/signin.php");
+}
+    
 include "../connect.php";
 
 $currentDateTime = date("Y-m-d H:i:s"); // Current time
@@ -19,6 +24,8 @@ $totalUsers = mysqli_num_rows($res1);
 $totalWorkers = mysqli_num_rows($res2);
 $totalApplications = mysqli_num_rows($res3);
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,3 +75,4 @@ $totalApplications = mysqli_num_rows($res3);
 </body>
 
 </html>
+}

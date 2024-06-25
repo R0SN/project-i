@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
         session_start();
         $_SESSION['user_id']=$fetchDetail['id'];
         $_SESSION['semail']=$fetchDetail['email'];
-        header("Location:services.php");
+        header("Location:profile.php");
       } else {
         echo "Failure: ";
       }

@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+  header("Location: ../user/signin.php");
+}
+
 include "../connect.php"; // Include your database connection file
 
 $query = "SELECT * FROM users"; // Query to fetch users from the database

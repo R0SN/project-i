@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION["user_id"])){
+    header("Location:signin.php");
+}
+?>
 <!DOCTYPE html>
 <html lang='en'>
 
@@ -52,7 +58,6 @@
                 </tr>
             </thead>
             <?php
-            session_start();
             include "../connect.php"; // Include your database connection script
             $userId = $_SESSION['user_id'];
             $getBooking = "SELECT * FROM bookings WHERE worker_id=$userId && status=1";

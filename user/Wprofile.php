@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(!isset($_SESSION["user_id"])){
+    header("Location:signin.php");
+}
+
 $userId = $_SESSION['user_id'];
 include "../connect.php"; // Include your database connection script
 ?>

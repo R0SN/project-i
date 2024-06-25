@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+  header("Location: ../user/signin.php");
+}
 include "../connect.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
