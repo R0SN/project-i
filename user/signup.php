@@ -18,11 +18,11 @@ if (isset($_POST['submit'])) {
     $emptyErr = "All fields are required";
     $valid = false;
   }
+  if ($result->num_rows > 0) {
+    $accCheckErr = "Account already exists on given email or phone number!!";
+  }
  else{
-    if ($result->num_rows > 0) {
-      $accCheckErr = "Account already exists on given email or phone number!!";
-      exit;
-    }  if (strlen($uname) < 3 || strlen($uname) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $uname)) {
+     if (strlen($uname) < 3 || strlen($uname) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $uname)) {
       $nameErr = "Enter a valid name!";
       $valid = false;
     }if (!preg_match('/^[a-zA-Z][a-zA-Z0-9.]+@(?:gmail|yahoo|outlook).(com|me)$/', $umail)) {
