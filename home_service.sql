@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 30, 2024 at 03:37 PM
+-- Generation Time: Oct 31, 2024 at 02:57 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `applications` (
   `photo` blob NOT NULL,
   `certificate` blob NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -109,13 +109,20 @@ CREATE TABLE IF NOT EXISTS `workers` (
   `phone` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `skill` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `bio` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
+  `bio` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `service_area` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `photo` blob NOT NULL,
   `certificate` blob NOT NULL,
   `password` char(60) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `workers`
+--
+
+INSERT INTO `workers` (`id`, `name`, `phone`, `email`, `skill`, `bio`, `service_area`, `photo`, `certificate`, `password`) VALUES
+(49, 'The Worker', '9865858544', 'work@gmail.com', 'Plumber', 'Learning new skills can be both exciting and challenging. It encourages growth, fosters creativity, and builds resilience. Taking small steps consistently allows one to gradually improve and reach personal goals. Embracing change and staying curious opens doors to endless possibilities.', 'Kathmandu', 0x74656e67656e352e6a7067, 0x74656e67656e362e6a7067, '$2y$10$pLtJPDT3TChe.vxbg8BD6Oivpg2n7Ul4n.oyDWUt/TaDPB6Xu4Aba');
 
 --
 -- Constraints for dumped tables
