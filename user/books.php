@@ -1,9 +1,10 @@
 <?php
 session_start();
-if(!isset($_SESSION["user_id"])){
+if (!isset($_SESSION["user_id"])) {
     header("Location:signin.php");
 }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang='en'>
 
 <head>
@@ -17,19 +18,19 @@ if(!isset($_SESSION["user_id"])){
 </head>
 
 <body>
-    <!-- ------------------- SIDEBAR ---------------------------- -->
+    <!-- ------------------- SIDEBAR ------------------------------>
     <div class="sidebar">
         <h2>Filters</h2>
         <div>
-            <input type="checkbox" id="pending" name="filter" value="0" onclick="handlePending()">
+            <input type="checkbox" id="pending" name="filter" value="0" onclick="filterPending()">
             <label for="pending">Pending Bookings</label>
         </div>
         <div>
-            <input type="checkbox" id="accepted" name="filter" value="2" onclick="handleAccepted()">
+            <input type="checkbox" id="accepted" name="filter" value="2" onclick="filterAccepted()">
             <label for="accepted">Accepted Bookings</label>
         </div>
         <div>
-            <input type="checkbox" id="declined" name="filter" value="1" onclick="handleDeclined()">
+            <input type="checkbox" id="declined" name="filter" value="1" onclick="filterDeclined()">
             <label for="declined">Declined Bookings</label>
         </div>
 
@@ -43,14 +44,14 @@ if(!isset($_SESSION["user_id"])){
             <label for="signout">Sign Out</label>
         </div>
     </div>
-    <!-- ------------------- SIDEBAR ---------------------------- -->
+    <!--------------------- SIDEBAR ------------------------------>
     <div class="main">
         <table border='1' id="bookingsTable">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Phone</th>
                     <th>Email</th>
+                    <th>Phone</th>
                     <th>Location</th>
                     <th>Date and Time</th>
                     <th colspan='2'>Status</th>
@@ -59,7 +60,7 @@ if(!isset($_SESSION["user_id"])){
             <?php
             include "../connect.php"; // Include your database connection script
             $userId = $_SESSION['user_id'];
-            $getBooking = "SELECT * FROM bookings WHERE worker_id=$userId ORDER BY dateTime ASC";
+            $getBooking = "SELECT * FROM bookings WHERE worker_id=$userId ORDER BY bookings.status ASC";
             $result2 = $con->query($getBooking);
 
             if (mysqli_num_rows($result2) > 0) {
@@ -95,17 +96,11 @@ if(!isset($_SESSION["user_id"])){
                         echo "<td colspan='2' class='green'>Approved</td>";
                     } else {
                         echo "<td>
-                                <form action='books.php' method='post'>
-                                    <input type='hidden' name='bid' value='$bid'>
-                                    <button type='submit' name='approve'>Approve</button>
-                                </form>
+                                <button id=approve type='button' onclick='approveB($bid, this.id, this.parentElement)'>Approve</button>
                             </td>
                             <td>
-                                <form action='books.php' method='post'>
-                                    <input type='hidden' name='bid' value='$bid'>
-                                    <button type='submit' name='decline'>Decline</button>
-                                </form>
-                            </td>";
+                                <button id=decline type='button' onclick='declineB($bid, this.id, this.parentElement)'>Decline</button>
+                            </td>>";
                     }
                     echo "</tr>";
                 }
@@ -115,38 +110,76 @@ if(!isset($_SESSION["user_id"])){
                 // No data found in the database
                 echo "<tr><td colspan='6'>No Bookings</td></tr>";
             }
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['approve'])) {
-                $bid = $_POST['bid'];
-                $q = "UPDATE bookings SET status=2 WHERE id=$bid";
-                $con->query($q);
-                header("location:books.php");
-            }
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['decline'])) {
-                $bid = $_POST['bid'];
-                $q1 = "UPDATE bookings SET status=1 WHERE  id=$bid";
-                $con->query($q1);
-                header("location:books.php");
-            }
+
             ?>
     </div>
     <script>
-    function handlePending() {
-        window.location.href="pendingB.php";
+        function back() {
+            window.location.href = 'Wprofile.php';
         }
-    function handleAccepted() {
-        window.location.href="acceptedB.php";
-        }
-    function handleDeclined() {
-        window.location.href="declinedB.php";
-        }
-    function back() {
-        window.location.href = 'Wprofile.php';
-    }
 
-    function signout() {
-        window.location.href = 'signout.php';
-    }
-</script>
+        function signout() {
+            window.location.href = 'signout.php';
+        }
+
+        function filterPending() {
+            window.location.href = "pendingB.php";
+        }
+
+        function filterAccepted() {
+            window.location.href = "acceptedB.php";
+        }
+
+        function filterDeclined() {
+            window.location.href = "declinedB.php";
+        }
+
+        function approveB(bid, action, tdElement) {
+            if (confirm("Are you sure you want to approve the booking?")) {
+                let actionToDo = action;
+                let ajax = new XMLHttpRequest();
+                ajax.open("POST", "booksA_D.php", true);
+                ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState === 4) {
+                        if (ajax.status == 200) {
+                            let declineBtn = document.getElementById("decline");
+                            declineBtn.parentElement.remove();
+                            tdElement.innerHTML = "Approved";
+                            tdElement.setAttribute("colspan", "2");
+                            tdElement.setAttribute("class", "green");
+                        } else {
+                            alert("An error occurred while accepting the booking.");
+                        }
+                    }
+                };
+                ajax.send("bid=" + encodeURIComponent(bid) + "&action=" + encodeURIComponent(actionToDo));
+            }
+        }
+
+        function declineB(bid, action, tdElement) {
+            if (confirm("Are you sure you want to decline the booking?")) {
+                let actionToDo = action;
+                let ajax = new XMLHttpRequest();
+                ajax.open("POST", "booksA_D.php", true);
+                ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState === 4) {
+                        if (ajax.status == 200) {
+                            let acceptBtn = document.getElementById("approve");
+                            acceptBtn.parentElement.remove();
+                            tdElement.innerHTML = "Declined";
+                            tdElement.setAttribute("colspan", "2");
+                            tdElement.setAttribute("class", "red");
+                        } else {
+                            alert("An error occurred while declining the booking.");
+                        }
+                    }
+                };
+                ajax.send("bid=" + encodeURIComponent(bid) + "&action=" + encodeURIComponent(actionToDo));
+            }
+        }
+    </script>
 
 </body>
 

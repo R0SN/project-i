@@ -50,8 +50,8 @@ if (!isset($_SESSION["user_id"])) {
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Phone</th>
                     <th>Email</th>
+                    <th>Phone</th>
                     <th>Location</th>
                     <th>Date and Time</th>
                     <th colspan='2'>Status</th>

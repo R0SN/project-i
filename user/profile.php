@@ -81,7 +81,7 @@ if (!isset($_SESSION["user_id"])) {
                       </tr>
                     </thead>
             </center>";
-            $getBooking = "SELECT * FROM bookings WHERE user_id=$id ORDER BY dateTime ASC";
+            $getBooking = "SELECT * FROM bookings WHERE user_id=$id ORDER BY bookings.id DESC";
             $result2 = $con->query($getBooking);
 
             if (mysqli_num_rows($result2) > 0) {
