@@ -118,23 +118,9 @@ session_start();
         </div>
       </div>";
         } else {
-          $sid = $_SESSION['user_id'];
-          $semail = $_SESSION['semail'];
-          $check = "SELECT * FROM users WHERE id=$sid AND email='$semail'";
-          $qry = $con->query($check);
-          if (mysqli_num_rows($qry) > 0) {
-            echo "<a href='aboutWorker.php'><form action='aboutWorker.php' method='post'>
-          <input type='hidden' name='id' value='$id'>
-         <button type='submit' name='about'>more</button>
-        </form></a>
+            echo "<a href='aboutWorker.php?id=$id'><form action='aboutWorker.php' method='post'>More</a>
           </div>
         </div>";
-          } else {
-            echo "
-       <button type='submit' name='about'>more</button>
-        </div>
-      </div>";
-          }
         }
       }
     } else {

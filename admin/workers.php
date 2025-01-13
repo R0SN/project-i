@@ -3,6 +3,10 @@ session_start();
 if(!isset($_SESSION['user_id'])){
   header("Location: ../user/signin.php");
 }
+include "../connect.php"; // Include your database connection file
+
+$query = "SELECT * FROM workers"; // Query to fetch workers from the database
+$result = mysqli_query($con, $query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +33,7 @@ if(!isset($_SESSION['user_id'])){
   </nav>
   <!-- End Navigation Bar -->
   <div class="main">
-    <h3>Workers</h3>
+    <h3>Total Workers  <?php $count = mysqli_num_rows($result);echo "($count)" ?></h3>
     <!-- Table for Workers -->
     <table>
         <thead>
@@ -47,12 +51,7 @@ if(!isset($_SESSION['user_id'])){
             </tr>
         </thead>
         <tbody>
-            <?php
-            include "../connect.php"; // Include your database connection file
-
-            $query = "SELECT * FROM workers"; // Query to fetch workers from the database
-            $result = mysqli_query($con, $query);
-            
+            <?php           
             if (mysqli_num_rows($result) > 0) {
                 // Loop through each row of data
                 while ($row = mysqli_fetch_assoc($result)) {

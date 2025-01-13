@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION["user_id"])){
+if (!isset($_SESSION["user_id"])) {
     header("Location:signin.php");
 }
 ?>
@@ -101,7 +101,7 @@ if(!isset($_SESSION["user_id"])){
                     $wlocation = $row3['service_area'];
                     $wskill = $row3['skill'];
                     echo "<tr>
-                        <td> $wname </td>
+                        <td> <a href='aboutWorker.php?id=$workerId'>$wname</a> </td>
                         <td>$wphone</td>
                         <td>$wmail</td>
                         <td>$wlocation </td>
@@ -113,12 +113,9 @@ if(!isset($_SESSION["user_id"])){
                         echo "<td class='green'>Approved</td>";
                     } else {
                         echo "
-                        <td class='cancel'>
-                            <form action='profile.php' method='post'>
-                            <input type='hidden' name='bid' value='$bid'>
-                            <button type='submit' name='cancel'>Cancel</button>
-                            </form>
-                        </td>";
+                            <td class='cancel'>
+                            <button type='button' onclick='cancelB($bid, this.closest(\"tr\"))'>Cancel</button>
+                            </td>";
                     }
                 }
                 echo "</tr></table></div>";
@@ -130,18 +127,39 @@ if(!isset($_SESSION["user_id"])){
         // =============worker profile=================
         else if ($result1->num_rows > 0) {
             header("Location:Wprofile.php");
+        }
     }
-}
-
-if(isset($_POST['cancel'])){
-    $bid = $_POST['bid']; // Assuming bid is coming from a form submission
-    echo "<script>if(confirm('Are you sure you want to cancel the Booking?')) {";
-    echo "  window.location.href = 'cancelB.php?bid=$bid';"; // Redirect to another script for actual deletion
-    echo "}";
-    echo "</script>";
-}
 
     ?>
+    <script>
+        function cancelB(bid, rowElement) {
+            if (confirm("Are you sure you want to cancel the booking?")) {
+                let ajax = new XMLHttpRequest();
+                ajax.open("POST", "cancelB.php", true);
+                ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState === 4) {
+                        if (ajax.status == 200) {
+                            rowElement.remove();
+                            let table = document.querySelector('table tbody');
+                            if (table.rows.length === 0) {
+                                let noBookingsRow = document.createElement('tr');
+                                let noBookingsCell = document.createElement('td');
+                                noBookingsCell.setAttribute('colspan', '7');
+                                noBookingsCell.style.padding = '10px';
+                                noBookingsCell.textContent = "---No Bookings---";
+                                noBookingsRow.appendChild(noBookingsCell);
+                                table.appendChild(noBookingsRow);
+                            }
+                        } else {
+                            alert("An error occurred while cancelling the booking.");
+                        }
+                    }
+                };
+                ajax.send("bid=" + encodeURIComponent(bid));
+            }
+        }
+    </script>
 </body>
 
 </html>

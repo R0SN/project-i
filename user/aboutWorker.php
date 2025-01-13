@@ -37,8 +37,8 @@ if(!isset($_SESSION["user_id"])){
         <!-- Table for Applications -->
         <?php
         include "../connect.php";
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['about'])) {
-            $id = $_POST['id'];
+        if ($_GET['id']) {
+            $id = $_GET['id'];
             $query = "SELECT * FROM workers where id=$id";
             $result = mysqli_query($con, $query);
 

@@ -34,7 +34,7 @@ $result = mysqli_query($con, $query);
     <a href="signout.php" class="hover">Sign Out</a>
   </nav>
   <!-- End Navigation Bar -->    <div class="main">
-    <h3>Users</h3>  
+    <h3> Total Users <?php $count = mysqli_num_rows($result);echo "($count)" ?></h3>  
     <!-- Table for Users -->
     <table>
         <thead>

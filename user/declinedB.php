@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION["user_id"])){
+if (!isset($_SESSION["user_id"])) {
     header("Location:signin.php");
 }
 ?>
@@ -22,11 +22,11 @@ if(!isset($_SESSION["user_id"])){
     <div class="sidebar">
         <h2>Filters</h2>
         <div>
-            <input type="checkbox" id="pending" name="filter" value="0" onclick="handlePending()" >
+            <input type="checkbox" id="pending" name="filter" value="0" onclick="handlePending()">
             <label for="pending">Pending Bookings</label>
         </div>
         <div>
-            <input type="checkbox" id="accepted" name="filter" value="2" onclick="handleAccepted()" >
+            <input type="checkbox" id="accepted" name="filter" value="2" onclick="handleAccepted()">
             <label for="accepted">Accepted Bookings</label>
         </div>
         <div>
@@ -119,23 +119,26 @@ if(!isset($_SESSION["user_id"])){
             ?>
     </div>
     <script>
-    function handlePending() {
-        window.location.href="pendingB.php";
+        function handlePending() {
+            window.location.href = "pendingB.php";
         }
-    function handleAccepted() {
-        window.location.href="acceptedB.php";
-        }
-    function handleDeclined() {
-        window.location.href="books.php";
-        }
-    function back() {
-        window.location.href = 'Wprofile.php';
-    }
 
-    function signout() {
-        window.location.href = 'signout.php';
-    }
-</script>
+        function handleAccepted() {
+            window.location.href = "acceptedB.php";
+        }
+
+        function handleDeclined() {
+            window.location.href = "books.php";
+        }
+
+        function back() {
+            window.location.href = 'Wprofile.php';
+        }
+
+        function signout() {
+            window.location.href = 'signout.php';
+        }
+    </script>
 
 </body>
 
