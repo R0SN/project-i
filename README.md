@@ -1,2 +1,1 @@
-this is first college project. 
-BCA 4th semester
+4th semester project
