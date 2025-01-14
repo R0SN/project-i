@@ -4,6 +4,8 @@ body{
   background-color: #f4f4f4;
   background-image: url("../images/logo/house-cleaning.png");
   background-size:100px;
+  margin-top: 60px; /* Adjust this value based on the height of your nav */
+
 
 }
 .cancel{

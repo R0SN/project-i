@@ -42,20 +42,20 @@ img {
 
 .img1 {
   transform: rotate(30deg);
-  margin:0 0 0 50px;
+  margin: 90px 0 0 60px;
 }
 
 .img2 {
-  margin: 200px 0 0 350px;
+  margin: 300px 0 0 400px;
   transform: rotate(-10deg);
 }
 
 .img3 {
-  margin: 175px 0 0 750px;
+  margin: 175px 0 0 800px;
   transform: rotate(30deg);
 }
 
 .img4 {
-  margin: 300px 0 0 1150px;
+  margin: 300px 0 0 1300px;
   transform: rotate(-30deg);
 }

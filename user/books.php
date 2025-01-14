@@ -100,7 +100,7 @@ if (!isset($_SESSION["user_id"])) {
                             </td>
                             <td>
                                 <button id=decline type='button' onclick='declineB($bid, this.id, this.parentElement)'>Decline</button>
-                            </td>>";
+                            </td>";
                     }
                     echo "</tr>";
                 }

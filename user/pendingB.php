@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION["user_id"])){
+if (!isset($_SESSION["user_id"])) {
     header("Location:signin.php");
 }
 ?>
@@ -96,17 +96,11 @@ if(!isset($_SESSION["user_id"])){
                         echo "<td colspan='2' class='green'>Approved</td>";
                     } else {
                         echo "<td>
-                                <form action='pendingB.php' method='post'>
-                                    <input type='hidden' name='bid' value='$bid'>
-                                    <button type='submit' name='approve'>Approve</button>
-                                </form>
-                            </td>
-                            <td>
-                                <form action='pendingB.php' method='post'>
-                                    <input type='hidden' name='bid' value='$bid'>
-                                    <button type='submit' name='decline'>Decline</button>
-                                </form>
-                            </td>";
+                        <button id=approve type='button' onclick='approveB($bid, this.id, this.parentElement)'>Approve</button>
+                    </td>
+                    <td>
+                        <button id=decline type='button' onclick='declineB($bid, this.id, this.parentElement)'>Decline</button>
+                    </td>";
                     }
                     echo "</tr>";
                 }
@@ -116,39 +110,75 @@ if(!isset($_SESSION["user_id"])){
                 // No data found in the database
                 echo "<tr><td colspan='6'>No Bookings</td></tr>";
             }
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['approve'])) {
-                $bid = $_POST['bid'];
-                $q = "UPDATE bookings SET status=2 WHERE id=$bid";
-                $con->query($q);
-                header("location:pendingB.php");
-            }
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['decline'])) {
-                $bid = $_POST['bid'];
-                $q1 = "UPDATE bookings SET status=1 WHERE  id=$bid";
-                $con->query($q1);
-                header("location:pendingB.php");
-            }
-        
             ?>
     </div>
     <script>
-    function handlePending() {
-        window.location.href="books.php";
+        function handlePending() {
+            window.location.href = "books.php";
         }
-    function handleAccepted() {
-        window.location.href="acceptedB.php";
-        }
-    function handleDeclined() {
-        window.location.href="declinedB.php";
-        }
-    function back() {
-        window.location.href = 'Wprofile.php';
-    }
 
-    function signout() {
-        window.location.href = 'signout.php';
-    }
-</script>
+        function handleAccepted() {
+            window.location.href = "acceptedB.php";
+        }
+
+        function handleDeclined() {
+            window.location.href = "declinedB.php";
+        }
+
+        function approveB(bid, action, tdElement) {
+            if (confirm("Are you sure you want to approve the booking?")) {
+                let actionToDo = action;
+                let ajax = new XMLHttpRequest();
+                ajax.open("POST", "booksA_D.php", true);
+                ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState === 4) {
+                        if (ajax.status == 200) {
+                            let declineBtn = document.getElementById("decline");
+                            declineBtn.parentElement.remove();
+                            tdElement.innerHTML = "Approved";
+                            tdElement.setAttribute("colspan", "2");
+                            tdElement.setAttribute("class", "green");
+                        } else {
+                            alert("An error occurred while accepting the booking.");
+                        }
+                    }
+                };
+                ajax.send("bid=" + encodeURIComponent(bid) + "&action=" + encodeURIComponent(actionToDo));
+            }
+        }
+
+        function declineB(bid, action, tdElement) {
+            if (confirm("Are you sure you want to decline the booking?")) {
+                let actionToDo = action;
+                let ajax = new XMLHttpRequest();
+                ajax.open("POST", "booksA_D.php", true);
+                ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState === 4) {
+                        if (ajax.status == 200) {
+                            let acceptBtn = document.getElementById("approve");
+                            acceptBtn.parentElement.remove();
+                            tdElement.innerHTML = "Declined";
+                            tdElement.setAttribute("colspan", "2");
+                            tdElement.setAttribute("class", "red");
+                        } else {
+                            alert("An error occurred while declining the booking.");
+                        }
+                    }
+                };
+                ajax.send("bid=" + encodeURIComponent(bid) + "&action=" + encodeURIComponent(actionToDo));
+            }
+        }
+
+        function back() {
+            window.location.href = 'Wprofile.php';
+        }
+
+        function signout() {
+            window.location.href = 'signout.php';
+        }
+    </script>
 
 </body>
 

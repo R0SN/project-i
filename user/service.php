@@ -86,10 +86,27 @@ session_start();
     </div>
   </div>
   <!-- ------------------- SIDEBAR ---------------------------- -->
+
+
+  <div class="search-bar">
+    <form method="GET" action="" id="searchForm">
+      <input type="text" name="search" id="searchInput" placeholder="Search services...">
+      <button type="submit" class="searchButton" id="searchButton">
+      </button>
+    </form>
+  </div>
+
   <div class="main">
     <?php
     include "../connect.php";
+    $searchQuery = "";
+    if (isset($_GET['search'])) {
+      $searchQuery = mysqli_real_escape_string($con, $_GET['search']);
+    }
     $query = "SELECT * FROM workers";
+    if (!empty($searchQuery)) {
+      $query .= " WHERE name LIKE '%$searchQuery%' OR skill LIKE '%$searchQuery%' OR service_area LIKE '%$searchQuery%'";
+    }
     $result = mysqli_query($con, $query);
 
 
@@ -118,7 +135,7 @@ session_start();
         </div>
       </div>";
         } else {
-            echo "<a href='aboutWorker.php?id=$id'><form action='aboutWorker.php' method='post'>More</a>
+          echo "<a href='aboutWorker.php?id=$id'><form action='aboutWorker.php' method='post'>More</a>
           </div>
         </div>";
         }

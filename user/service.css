@@ -2,7 +2,6 @@ body {
   background-color: #f4f4f4;
   background-image: url("../images/logo/house-cleaning.png");
   background-size: 100px;
-
 }
 
 .main {
@@ -21,6 +20,7 @@ body {
   padding: 20px;
   margin-top: 50px;
   margin-left: 50px;
+  border: 2px solid gray;
 }
 
 .card .image {
@@ -92,6 +92,46 @@ button {
   background-color: #d4d4d4;
 }
 
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 600px; 
+  height: 50px;
+  background: #ffffff;
+  border: 2px solid gray;
+  border-radius: 50px;
+  margin: 0 auto; 
+  position: relative;
+  top: 60px; 
+}
+
+.searchButton {
+  top: 15%;
+  position: absolute;
+  right: 10px;
+  width: 35px;
+  height: 35px;
+  border: 0;
+  cursor: pointer;
+  background: url('../images/search.png') no-repeat center center;
+  background-size: contain;
+}
+
+.search-bar input {
+  width: calc(100% - 50px); /* Adjust width to account for the button */
+  border: none;
+  background: none;
+  outline: none;
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  padding: 12px 10px 10px 15px; /* Adjust padding to avoid overlap with the search icon */
+  height: 100%;
+  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+}
+#searchForm{
+  width: 100%;
+}
 h2 {
   color: white;
 }
