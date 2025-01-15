@@ -140,10 +140,7 @@ session_start();
         </div>";
         }
       }
-    } else {
-      // No data found in the database
-      echo "<p>No workers found</p>";
-    }
+    } 
 
     // Close the database connection
     mysqli_close($con);
