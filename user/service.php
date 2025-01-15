@@ -90,7 +90,7 @@ session_start();
 
   <div class="search-bar">
     <form method="GET" action="" id="searchForm">
-      <input type="text" name="search" id="searchInput" placeholder="Search services...">
+      <input type="text" name="search" id="searchInput" placeholder="Search services..." value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
       <button type="submit" class="searchButton" id="searchButton">
       </button>
     </form>
@@ -142,7 +142,7 @@ session_start();
       }
     } else {
       // No data found in the database
-      echo "No workers found";
+      echo "<p>No workers found</p>";
     }
 
     // Close the database connection

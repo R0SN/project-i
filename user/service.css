@@ -16,7 +16,6 @@ body {
   border-radius: 0.5rem;
   background-color: #ddd;
   box-shadow: none;
-  border: none;
   padding: 20px;
   margin-top: 50px;
   margin-left: 50px;
@@ -35,6 +34,10 @@ body {
   width: 150px;
   height: 150px;
   border-radius: 50%;
+}
+
+.content {
+  margin-top: 10px;
 }
 
 button {
@@ -96,14 +99,14 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 600px; 
+  max-width: 600px;
   height: 50px;
   background: #ffffff;
   border: 2px solid gray;
   border-radius: 50px;
-  margin: 0 auto; 
+  margin: 0 auto;
   position: relative;
-  top: 60px; 
+  top: 60px;
 }
 
 .searchButton {
@@ -119,19 +122,22 @@ button {
 }
 
 .search-bar input {
-  width: calc(100% - 50px); /* Adjust width to account for the button */
+  width: calc(100% - 45px);
   border: none;
   background: none;
   outline: none;
   color: rgb(0, 0, 0);
   font-size: 18px;
-  padding: 12px 10px 10px 15px; /* Adjust padding to avoid overlap with the search icon */
+  padding: 12px 10px 10px 15px;
   height: 100%;
-  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+  box-sizing: border-box;
+  border-radius: 50px;
 }
-#searchForm{
+
+#searchForm {
   width: 100%;
 }
+
 h2 {
   color: white;
 }

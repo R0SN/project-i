@@ -2,7 +2,7 @@ body{
   background-color: #f4f4f4;
   background-image: url("../images/logo/house-cleaning.png");
   background-size:100px;
-
+  margin-top: 60px;
 }
 .apply-container {
   margin-left: 36.1%;
